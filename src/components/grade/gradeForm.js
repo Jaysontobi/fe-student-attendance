@@ -111,7 +111,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   <>      
                     <Row gutter={16}>
                      {
-                     (selectedTeacherAssignedGrade.subjects[0].teacher && selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+                     (selectedTeacherAssignedGrade && selectedTeacherAssignedGrade.subjects && selectedTeacherAssignedGrade.subjects[0].teacher && selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                      ?                      
                      <Col span={12}>
                      <Card title="English" disabled = {true} style={{ width: 300 }}>

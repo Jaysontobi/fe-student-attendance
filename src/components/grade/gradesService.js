@@ -16,8 +16,8 @@ class GradesService extends BaseService {
     return this.axiosInstance.get('/edit-grades/' + id);
   };
 
-  findAllGrades = () => {
-    return this.axiosInstance.get('/');
+  findAllGrades = (level ='') => {
+    return (level !== '') ? this.axiosInstance.get('/' + level) : this.axiosInstance.get('/');
   };
 
 }

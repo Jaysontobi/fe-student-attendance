@@ -580,7 +580,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   }
 
 const loadGrades1 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('1');
+    console.log('1  ', response);
     let result = response.data.filter(user => user.gradeLevel === "1" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -604,7 +605,8 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades2 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('2');
+    console.log('2  ', response);
     let result = response.data.filter(user => user.gradeLevel === "2" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -628,7 +630,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades3 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('3');
     let result = response.data.filter(user => user.gradeLevel === "3" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -652,7 +654,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades4 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('4');
     let result = response.data.filter(user => user.gradeLevel === "4" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -676,7 +678,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades5 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('5');
     let result = response.data.filter(user => user.gradeLevel === "5" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -700,7 +702,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades6 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('6');
     let result = response.data.filter(user => user.gradeLevel === "6" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -724,7 +726,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades7 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('7');
     let result = response.data.filter(user => user.gradeLevel === "7" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -748,7 +750,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades8 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('8');
     let result = response.data.filter(user => user.gradeLevel === "8" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -772,7 +774,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades9 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('9');
     let result = response.data.filter(user => user.gradeLevel === "9" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -796,7 +798,7 @@ const loadGrades1 = async () => {
   }
 
   const loadGrades10 = async () => {
-    let response = await gradesService.findAllGrades();
+    let response = await gradesService.findAllGrades('10');
     let result = response.data.filter(user => user.gradeLevel === "10" && user.status)
         let newArray = result.map((user ) => {
             return {
