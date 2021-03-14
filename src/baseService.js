@@ -1,9 +1,14 @@
 import axios from 'axios';
+import { ENVIRONMENT, LOCAL_BE, PRODUCTION_BE } from './config';
 class BaseService {
   constructor(moduleUrl) {
-    this.URL = "http://165.232.166.12:14000" + "/" + moduleUrl;
+    this.URL = (ENVIRONMENT === 'PRODUCTION') ?
+      PRODUCTION_BE + "/" + moduleUrl :
+      LOCAL_BE + "/" + moduleUrl;
     this.axiosInstance = axios.create({
-      baseURL: "http://165.232.166.12:14000" + "/" + moduleUrl
+      baseURL: (ENVIRONMENT === 'PRODUCTION') ?
+        PRODUCTION_BE + "/" + moduleUrl :
+        LOCAL_BE + "/" + moduleUrl
     })
     
     // this.axiosInstance.interceptors.request.use(function (config) {

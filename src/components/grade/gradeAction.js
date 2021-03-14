@@ -557,7 +557,6 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       })
     })
     let newArray = finalOffspring.map((user) => {
-      console.log(user)
         return {
           key: user._id,
           id: user._id,
@@ -581,7 +580,6 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
 const loadGrades1 = async () => {
     let response = await gradesService.findAllGrades('1');
-    console.log('1  ', response);
     let result = response.data.filter(user => user.gradeLevel === "1" && user.status)
         let newArray = result.map((user ) => {
             return {
@@ -606,7 +604,6 @@ const loadGrades1 = async () => {
 
   const loadGrades2 = async () => {
     let response = await gradesService.findAllGrades('2');
-    console.log('2  ', response);
     let result = response.data.filter(user => user.gradeLevel === "2" && user.status)
         let newArray = result.map((user ) => {
             return {
