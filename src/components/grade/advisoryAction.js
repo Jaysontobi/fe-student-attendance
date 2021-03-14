@@ -41,7 +41,6 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   const getListOfAssignedTeacherGrade1 = async () => {
     let response = await advisoryService.findAllAdvisory();
     let result = response.data.filter(user => user.gradeLevel === "1");
-    console.log(result[0])
     setselectedAdvisoryAssignedGrade1(result[0])
   };
 

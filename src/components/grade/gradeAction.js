@@ -401,8 +401,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     setShowGradeVisible(true)
   };
 
-  const loadGrade = (gradeObj, idNumber) => {
-    getCurrentGradeUser(idNumber)
+  const loadGrade = (gradeObj, idNumber, level = '') => {
+    getCurrentGradeUser(idNumber, level)
     setSelectedGrade({...gradeObj});
     setShowGradeVisible(true);
   };
@@ -507,11 +507,11 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
   }
 
-  const getCurrentGradeUser = async (idNumber) => {
-    let response = await gradesService.findAllGrades();
-    let result = response.data.filter(user => user.student.idNumber === idNumber)
+  const getCurrentGradeUser = async (idNumber, level = '') => {
+    let response = await gradesService.findAllGrades(level);
+    let result = response.data.filter(user => user.student.idNumber === idNumber);
     if(result.length >=1 && result[0].subjects && result[0].subjects.length >= 1) {
-      setSelectedUser(result[0].student)
+      setSelectedUser(result[0].student);
       let newArray = result[0].subjects.map((subject) => {
         let remarks = "";
         if((subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4 >=75){
@@ -530,7 +530,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
           FinalGrade: (subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4,
           Remarks : remarks
         }
-      })
+      });
       setSelectedGradeUser(newArray);
    
     } else {
@@ -548,15 +548,16 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let response = await gradesService.findAllGrades();
     let parent = await userService.findAllUser();
     let result = parent.data.filter(user => user.parent);
+    let newArray = [];
     let offspring = result.filter(user => user.parent._id === JSON.parse(sessionStorage.user).id);
-    response.data.map((user) => {
+    await response.data.map((user) => {
       offspring.map((off) => {
         if(user.student.idNumber === off.idNumber){
           finalOffspring.push(user)
         }
-      })
-    })
-    let newArray = finalOffspring.map((user) => {
+      });
+    });
+    newArray = finalOffspring.map((user) => {
         return {
           key: user._id,
           id: user._id,
@@ -593,7 +594,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '1')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -617,7 +618,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '2')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -641,7 +642,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '3')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -665,7 +666,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '4')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -689,7 +690,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '5')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -713,7 +714,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '6')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -737,7 +738,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '7')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -761,7 +762,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '8')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -785,7 +786,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '9')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
@@ -809,7 +810,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '10')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
           })
       
