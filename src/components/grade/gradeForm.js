@@ -5,7 +5,6 @@ import { Row, Col, Button, message, Spin, Card } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 const { Option } = Select;
 
-
 const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeacher, selectedTeacherAssignedGrade, gradeLevel   }) => {
 
    let [loading, setLoading] = useState(false);
@@ -15,8 +14,6 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
          initialValues={selectedGrade}
          enableReinitialize={true}
          onSubmit={async (values) => {
-
-
          
             let newValues = {
                _id : values._id
@@ -86,7 +83,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
          render={({ values, touched, setFieldValue }) => (
              
             <Spin spinning={loading} delay={500}>
-               <Form className="p-30">
+               <Form className="p-30" >
                <Row gutter={16}>
                      <Col span={16}>
                         <Form.Item label="ID Number" name="idNumber">
@@ -253,24 +250,24 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                      <Row gutter={16}>
                      <Col span={12}>
                      <Form.Item label="1st Q" name="values">
-                        <Input disabled={sessionStorage.quarter !== "1"} name="Mapeh1" defaultValue={values.subjects[4].subjectGrade.firstQuarter}/>
+                        <Input disabled={sessionStorage.quarter !== "1"} name="MAPEH1" defaultValue={values.subjects[4].subjectGrade.firstQuarter} />
                      </Form.Item>
                      </Col>
                      <Col span={12}>
                      <Form.Item label="2nd Q" name="values">
-                        <Input disabled={sessionStorage.quarter !== "2"} defaultValue={values.subjects[4].subjectGrade.secondQuarter} name="Mapeh2"/>
+                        <Input disabled={sessionStorage.quarter !== "2"} defaultValue={values.subjects[4].subjectGrade.secondQuarter} name="MAPEH2"/>
                      </Form.Item>
                      </Col>
                      </Row>
                      <Row gutter={16}>
                      <Col span={12}>
                      <Form.Item label="3rd Q" name="values">
-                        <Input disabled={sessionStorage.quarter !== "3"} defaultValue={values.subjects[4].subjectGrade.thirdQuarter} name="Mapeh3"/>
+                        <Input disabled={sessionStorage.quarter !== "3"} defaultValue={values.subjects[4].subjectGrade.thirdQuarter} name="MAPEH3"/>
                      </Form.Item>
                      </Col>
                      <Col span={12}>
                      <Form.Item label="4th Q" name="values">
-                        <Input disabled={sessionStorage.quarter !== "4"} defaultValue={values.subjects[4].subjectGrade.fourthQuarter} name="Mapeh4"/>
+                        <Input disabled={sessionStorage.quarter !== "4"} defaultValue={values.subjects[4].subjectGrade.fourthQuarter} name="MAPEH4"/>
                      </Form.Item>
                      </Col>
                      </Row>
