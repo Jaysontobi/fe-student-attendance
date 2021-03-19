@@ -6,6 +6,6 @@
 const ENVIRONMENT = 'PRODUCTION';
 
 const LOCAL_BE = 'http://localhost:14000';
-const PRODUCTION_BE = 'http://165.232.166.12:14000';
+const PRODUCTION_BE = 'https://record.capstone2proj.com';
 
-module.exports = { ENVIRONMENT , LOCAL_BE, PRODUCTION_BE};
+module.exports = { ENVIRONMENT , LOCAL_BE, PRODUCTION_BE };
