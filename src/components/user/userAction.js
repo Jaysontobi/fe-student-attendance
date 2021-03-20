@@ -172,7 +172,9 @@ const UserAction = (initial = { searchRequest: {} }) => {
 
   const loadQuarter = async () => {
     let response = await quarterService.findAllQuarter();
-    setQuarter({quarter: response.data[0].quarter , _id: response.data[0]._id})
+    if (response.data && response.data.length > 0) {
+      setQuarter({quarter: response.data[0].quarter , _id: response.data[0]._id})
+    };
   }
 
   const login = (credentials) => {
