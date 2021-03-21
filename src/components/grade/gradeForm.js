@@ -108,7 +108,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   <>      
                     <Row gutter={16}>
                      {
-                     (selectedTeacherAssignedGrade && selectedTeacherAssignedGrade.subjects && selectedTeacherAssignedGrade.subjects[0].teacher && selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+                     (selectedTeacherAssignedGrade && selectedTeacherAssignedGrade.subjects && selectedTeacherAssignedGrade.subjects != undefined && selectedTeacherAssignedGrade.subjects[0] && selectedTeacherAssignedGrade.subjects[0].teacher && selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                      ?                      
                      <Col span={12}>
                      <Card title="English" disabled = {true} style={{ width: 300 }}>
@@ -140,7 +140,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                </Col>:
                      null}
                   {
-                (selectedTeacherAssignedGrade.subjects[1].teacher && selectedTeacherAssignedGrade.subjects[1].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+                (selectedTeacherAssignedGrade.subjects[1] && selectedTeacherAssignedGrade.subjects[1].teacher && selectedTeacherAssignedGrade.subjects[1].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                   ? 
                      <Col span={12}>
                      <Card title="Filipino" disabled = {true} style={{ width: 300 }}>
@@ -176,7 +176,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   </Row>    
                      <Row gutter={16}>
                      {
-(selectedTeacherAssignedGrade.subjects[2].teacher && selectedTeacherAssignedGrade.subjects[2].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+(selectedTeacherAssignedGrade && selectedTeacherAssignedGrade.subjects && selectedTeacherAssignedGrade.subjects != undefined && selectedTeacherAssignedGrade.subjects.length !==0 && selectedTeacherAssignedGrade.subjects[2] && selectedTeacherAssignedGrade.subjects[2] && selectedTeacherAssignedGrade.subjects[2].teacher && selectedTeacherAssignedGrade.subjects[2].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                      ?                      
                      <Col span={12}>
                      <Card title="Science" disabled = {true} style={{ width: 300 }}>
@@ -208,7 +208,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                </Col>:
                      null}
                   {
-  (selectedTeacherAssignedGrade.subjects[3].teacher && selectedTeacherAssignedGrade.subjects[3].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+  (selectedTeacherAssignedGrade.subjects[3] && selectedTeacherAssignedGrade.subjects[3].teacher && selectedTeacherAssignedGrade.subjects[3].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                   ? 
                      <Col span={12}>
                      <Card title="Math" disabled = {true} style={{ width: 300 }}>
@@ -243,7 +243,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   </Row>    
                   <Row gutter={16}>
                      {
-  (selectedTeacherAssignedGrade.subjects[4].teacher && selectedTeacherAssignedGrade.subjects[4].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+  (selectedTeacherAssignedGrade.subjects[4] && selectedTeacherAssignedGrade.subjects[4].teacher && selectedTeacherAssignedGrade.subjects[4].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                      ?                      
                      <Col span={12}>
                      <Card title="MAPEH" disabled = {true} style={{ width: 300 }}>
@@ -275,7 +275,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                </Col>:
                      null}
                   {
-              (selectedTeacherAssignedGrade.subjects[5].teacher && selectedTeacherAssignedGrade.subjects[5].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+              (selectedTeacherAssignedGrade.subjects[5] && selectedTeacherAssignedGrade.subjects[5].teacher && selectedTeacherAssignedGrade.subjects[5].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                   ? 
                      <Col span={12}>
                      <Card title="Values" disabled = {true} style={{ width: 300 }}>
