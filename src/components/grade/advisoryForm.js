@@ -23,7 +23,6 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
                <Form className="p-30">
          <Row gutter={16}>
          <Col span={24}>
-            {console.log(selectedTeacherAssgined)}
             <Form.Item label="Advisor" name="advisor">
                <Select name="advisor" defaultValue={selectedTeacherAssgined ? selectedTeacherAssgined.teacher.firstName + " " + selectedTeacherAssgined.teacher.lastName : null}>
                   {selectedTeacher.map(teacher => {
