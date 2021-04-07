@@ -392,7 +392,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       activity: 'Teacher has updated student grades',
       date: loggedDate
     };
-    await auditTrailService.add(details);
+    await auditTrailService.add(userDetails);
     window.location.reload();
   };
 
