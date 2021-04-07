@@ -4,6 +4,7 @@ import gradesService from '../grade/gradesService';
 import quarterService from '../quarter/quarterService'
 import { Button} from 'antd';
 import moment from 'moment';
+import auditTrailService from '../auditTrail/auditTrailService';
 const UserAction = (initial = { searchRequest: {} }) => {
   let [userDetails, setUserDetails] = useState( {list : [],credentials: []});
   let [adminList, setAdminList] = useState([])
@@ -177,7 +178,7 @@ const UserAction = (initial = { searchRequest: {} }) => {
     };
   }
 
-  const login = (credentials) => {
+  const login = async (credentials) => {
     let ctr = 0;
     let loggedInUser = {};
     userDetails.list.map((user) => {
@@ -189,11 +190,22 @@ const UserAction = (initial = { searchRequest: {} }) => {
     if(ctr === 0) {
         setLoginCounter(false)
     } else {
+         //if user is parent log in audit trail
+        if (loggedInUser && loggedInUser.role === "Parent") {
+          let loggedDate =  new Date().toISOString();
+          let details = {
+            user: loggedInUser,
+            activity: 'Parent logged in',
+            date: loggedDate
+          };
+          await auditTrailService.add(details);
+        };
+    
         sessionStorage.setItem("user", JSON.stringify(loggedInUser));
         sessionStorage.setItem("quarter", quarter.quarter)
         sessionStorage.setItem("_id", quarter._id)
         window.location.reload(false);
-        setLoginCounter(true)
+        setLoginCounter(true);
     }
   };
 
