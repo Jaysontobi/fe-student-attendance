@@ -5,7 +5,6 @@ import advisoryService from '../grade/advisoryService';
 import auditTrailService from '../auditTrail/auditTrailService';
 import { Button} from 'antd';
 import moment from 'moment';
-import auditTrailService from '../auditTrail/auditTrailService';
 
 const Grade1Action = (initial = { searchRequest: {} }) => {
   let [studentAdvisor, setStudentAdvisor] = useState({});
