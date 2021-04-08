@@ -11,7 +11,7 @@ const AuditTrailPage = () => {
   return (
     <Card className="h-82 p-70">
       <Row className="mt-15">
-	<Col lg={{ span: 12 }}>
+	<Col lg={{ span: 14 }}>
           <Typography.Title level={3} className="ml-15">
             Audit Trail
           </Typography.Title>
