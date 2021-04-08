@@ -1,23 +1,27 @@
 import React from 'react';
 import { Drawer, Card, Button, Typography, Icon, Row, Col, Select, DatePicker } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
-
-
-
 import AuditTrailTable from './auditTrailTable'
 import AuditTrailAction from './auditTrailAction'
 const {Option} = Select;
 
 const AuditTrailPage = () => {
-    let{
-        auditTrailDetails,
-    } = AuditTrailAction({});
+  let { auditTrailDetails, filterAudit } = AuditTrailAction({});
   
   return (
     <Card className="h-82 p-70">
       <Row className="mt-15">
-        <Col lg={{ span: 12 }}>
-          <Typography.Title level={3} className="ml-15">Audit Trail</Typography.Title>
+	<Col lg={{ span: 12 }}>
+          <Typography.Title level={3} className="ml-15">
+            Audit Trail
+          </Typography.Title>
+        </Col>
+        <Col lg={{ span: 6 }}>
+          <DatePicker
+            className="w-100P"
+            placeholder={"Input Date Here"}
+            onChange={(date, dateString) => filterAudit(date)}
+          />
         </Col>
         {/* <Col lg={{ span: 24 }}>
           <Button className="right" type="danger " onClick={() => console.log("lol")}>
