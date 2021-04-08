@@ -28,6 +28,33 @@ const AuditTrailAction = (initial = { searchRequest: {} }) => {
       setAuditTrailDetails({list: newArray})
     };
 
+    const filterAudit = async (date) => {
+      let datas = [];
+      if (date) {
+        let response = await auditTrailService.findAllAudit();
+        datas = await response.data.filter(
+          (user) =>
+            moment(user.date).format("MMMM Do YYYY") ===
+            moment(date).format("MMMM Do YYYY")
+        );
+      } else {
+        let response = await auditTrailService.findAllAudit();
+        datas = response.data;
+      };
+
+      let newArray = await datas.map((user) => {
+        return {
+          key: user._id,
+          id: user._id,
+          name: user.user.firstName + " " + user.user.lastName,
+          date: moment(user.date).format("MMMM Do YYYY"),
+          activity: user.activity
+        };
+      });
+
+    setAuditTrailDetails({ list: newArray });
+  };
+  
   useEffect(() => {
     getListOfAudit();
   }, []);
@@ -35,7 +62,8 @@ const AuditTrailAction = (initial = { searchRequest: {} }) => {
 
   return {
     addAudit,
-    auditTrailDetails
+    auditTrailDetails,
+    filterAudit
   }
 };
 
