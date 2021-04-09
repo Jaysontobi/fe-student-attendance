@@ -109,7 +109,7 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
                         </Form.Item>
                      </Col>
                      <Col span={12}>
-                     <Form.Item label="Parent" name="parentId">
+                     <Form.Item label="Guardian" name="parentId">
                      <Select value={values.parent ? values.parent.firstName + " " + values.parent.lastName : ""} name="parentId" disabled={values.role != "Student" || JSON.parse(sessionStorage.user).role === "Teacher"}>
                         {selectedParent.map(parent => {
                                  return <Option value={parent._id}>{parent.firstName + " " + parent.lastName}</Option>
