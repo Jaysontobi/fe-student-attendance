@@ -67,29 +67,45 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
                         </Form.Item>
                      </Col>
                   </Row>
-                  <Row gutter={16}>
-                     <Col span={12}>
-                        <Form.Item  label="Grade Level" name="gradeLevel">
-                        <Select disabled={values.role != "Student" || JSON.parse(sessionStorage.user).role === "Teacher"} name="gradeLevel">
-                              <Option value="1">1</Option>
-                              <Option value="2">2</Option>
-                              <Option value="3">3</Option>
-                              <Option value="4">4</Option>
-                              <Option value="5">5</Option>
-                              <Option value="6">6</Option>
-                              <Option value="7">7</Option>
-                              <Option value="8">8</Option>
-                              <Option value="9">9</Option>
-                              <Option value="10">10</Option>
-                           </Select>
-                        </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                        <Form.Item label="Section" name="section">
-                           <Input disabled={values.role != "Student" || JSON.parse(sessionStorage.user).role === "Teacher"} name="section" />
-                        </Form.Item>
-                     </Col>
-                  </Row>
+                  {selectedUser.role === "Student" ? (
+                     <Row gutter={16}>
+                        <Col span={12}>
+                           <Form.Item label="Grade Level" name="gradeLevel">
+                              <Select
+                                 disabled={
+                                   values.role != "Student" ||
+                                   JSON.parse(sessionStorage.user).role === "Teacher"
+                                 }
+                                 name="gradeLevel"
+                              >
+                                 <Option value="1">1</Option>
+                                 <Option value="2">2</Option>
+                                 <Option value="3">3</Option>
+                                 <Option value="4">4</Option>
+                                 <Option value="5">5</Option>
+                                 <Option value="6">6</Option>
+                                 <Option value="7">7</Option>
+                                 <Option value="8">8</Option>
+                                 <Option value="9">9</Option>
+                                 <Option value="10">10</Option>
+                              </Select>
+                           </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                        {/* <Form.Item label="Section" name="section">
+                           <Input
+                              disabled={
+                                 values.role != "Student" ||
+                                 JSON.parse(sessionStorage.user).role === "Teacher"
+                              }
+                              name="section"
+                           />
+                        </Form.Item> */}
+                        </Col>
+                     </Row>
+                  ) : (
+                    ""
+                  )}
                   <Row gutter={16}>
                      <Col span={12}>
                         <Form.Item label="Birth Day" name="birthDate">
@@ -109,13 +125,34 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
                         </Form.Item>
                      </Col>
                      <Col span={12}>
-                     <Form.Item label="Guardian" name="parentId">
-                     <Select value={values.parent ? values.parent.firstName + " " + values.parent.lastName : ""} name="parentId" disabled={values.role != "Student" || JSON.parse(sessionStorage.user).role === "Teacher"}>
-                        {selectedParent.map(parent => {
-                                 return <Option value={parent._id}>{parent.firstName + " " + parent.lastName}</Option>
-                        })}
-                     </Select>
-                     </Form.Item>
+                        {selectedUser.role === "Student" ? (
+                           <Form.Item label="Guardian" name="parentId">
+                              <Select
+                                 value={
+                                    values.parent
+                                    ? values.parent.firstName +
+                                    " " +
+                                    values.parent.lastName
+                                    : ""
+                                    }
+                                 name="parentId"
+                                 disabled={
+                                    values.role != "Student" ||
+                                    JSON.parse(sessionStorage.user).role === "Teacher"
+                                 }
+                              >
+                                 {selectedParent.map((parent) => {
+                                    return (
+                                       <Option value={parent._id}>
+                                          {parent.firstName + " " + parent.lastName}
+                                       </Option>
+                                    );
+                                 })}
+                             </Select>
+                           </Form.Item>
+                        ) : (
+                           ""
+                        )}
                      </Col>
                   </Row>
                   <Row gutter={16}>
