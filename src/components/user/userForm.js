@@ -168,16 +168,21 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
                      </Col>
                   </Row>
                   <Row gutter={16}>
-                     <Col span={12}>
-                        <Form.Item label="Role" name="role">
-                           <Select disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="role">
-                              <Option value="Admin">Admin</Option>
-                              <Option value="Student">Student</Option>
-                              <Option value="Parent">Parent</Option>
-                              <Option value="Teacher">Teacher</Option>
-                           </Select>
-                        </Form.Item>
-                     </Col>
+                     {/* <Col span={12}>
+                     <Form.Item label="Role" name="role">
+                        <Select
+                           disabled={
+                              JSON.parse(sessionStorage.user).role === "Teacher"
+                           }
+                           name="role"
+                        >
+                           <Option value="Admin">Admin</Option>
+                           <Option value="Student">Student</Option>
+                           <Option value="Parent">Parent</Option>
+                           <Option value="Teacher">Teacher</Option>
+                        </Select>
+                     </Form.Item>
+                   </Col> */}
                      <Col span={12}>
                         <Form.Item label="Password" name="password">
                            <Input.Password disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="password" />
