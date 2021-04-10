@@ -126,7 +126,7 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role }) => {
                         </Form.Item>
                      </Col>
                      <Col span={12}>
-                        {selectedUser.role === "Student" ? (
+                        {role === "Student" ? (
                            <Form.Item label="Guardian" name="parentId">
                               <Select
                                  value={
@@ -137,10 +137,6 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role }) => {
                                     : ""
                                     }
                                  name="parentId"
-                                 disabled={
-                                    values.role != "Student" ||
-                                    JSON.parse(sessionStorage.user).role === "Teacher"
-                                 }
                               >
                                  {selectedParent.map((parent) => {
                                     return (
