@@ -6,7 +6,7 @@ import { CheckCircleFilled } from '@ant-design/icons';
 const { Option } = Select;
 
 
-const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
+const UserEditForm = ({ add,update, selectedUser, selectedParent, role }) => {
 
    let [loading, setLoading] = useState(false);
    let [gradeLevelVisible, setGradeLevelVisible] = useState(false);
@@ -20,6 +20,7 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent }) => {
                console.log(values)
                update(values)
             } else {
+               values.role = role;
                add(values)
       
                // window.location.reload(false);
