@@ -20,6 +20,9 @@ class UserService extends BaseService {
     return this.axiosInstance.get('/edit-user/' + id);
   };
 
+  getIdNumber = (role) => {
+     return this.axiosInstance.get('/generate-user-id/' + role);
+  };
 }
 
 export default new UserService();
