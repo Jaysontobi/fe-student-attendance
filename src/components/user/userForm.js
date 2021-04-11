@@ -12,7 +12,8 @@ const { Option } = Select;
 const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewData = true}) => {
 
    let getId = async role => {
-      selectedUser.idNumber = await UserIdService.getGenIdNumber(role);
+      let response = await UserIdService.getGenIdNumber(role);
+      selectedUser.idNumber = respone.data;
       console.log(selectedUser.idNumber);
    };
    
