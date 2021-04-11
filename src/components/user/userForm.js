@@ -11,7 +11,6 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewDat
    let getId = async role => {
       let response = await UserIdService.getGenIdNumber(role);
       selectedUser.idNumber = response.data;
-      console.log(selectedUser.idNumber);
    };
    
    let newGenId = '';
