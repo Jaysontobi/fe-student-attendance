@@ -600,6 +600,11 @@ const UserAction = (initial = { searchRequest: {} }) => {
     setAdminList(newArray)
 
   }
+  
+const getNewGenId = async (role) => {
+      let response = await userService.getGenIdNumber(role);
+      return response;
+    }
 
 const loadUsers = async () => {
     let response = await userService.findAllUser();
@@ -640,10 +645,7 @@ const loadUsers = async () => {
       credentials: newArrayCredentials
     })
   
-    getNewGenId(role) {
-      let response = await userService.getGenIdNumber(role);
-      return response;
-    }
+    
 
   }
 
@@ -678,6 +680,7 @@ const loadUsers = async () => {
     studentList,
     parentList,
     teacherList,
+    getNewGenId
   }
 };
 

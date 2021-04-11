@@ -64,7 +64,7 @@ const EmployeePage = () => {
               onClose={()=> { setShowUserVisible(false)}}
               bodyStyle={{ paddingBottom: 80 }}
           >
-             <UserForm add={addUser} update={editUser} selectedUser={selectedUser} selectedParent={selectedParent} role='Student' isNewData=false/>
+             <UserForm add={addUser} update={editUser} selectedUser={selectedUser} selectedParent={selectedParent} role='Student' isNewData="false"/>
           </Drawer>
     
   </Card>
