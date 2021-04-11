@@ -4,9 +4,19 @@ import { Formik } from 'formik';
 import { Row, Col, Button, message, Spin } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 const { Option } = Select;
+import userService from './userService';
 
 
-const UserEditForm = ({ add,update, selectedUser, selectedParent, role }) => {
+const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewData = true}) => {
+   let getId = async role => {
+      selectedUser.idNumber = await userService.getGenIdNumber(role);
+   };
+   
+   let newGenId = '';
+  
+   if (isNewData) {
+      getId(role);
+   };
 
    let [loading, setLoading] = useState(false);
    let [gradeLevelVisible, setGradeLevelVisible] = useState(false);
@@ -32,7 +42,7 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role }) => {
                <Row gutter={16}>
                      <Col span={12}>
                         <Form.Item label="ID Number" name="idNumber">
-                           <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="idNumber" />
+                           <Input disabled="true" name="idNumber" />
                         </Form.Item>
                      </Col>
                      <Col span={12}>
