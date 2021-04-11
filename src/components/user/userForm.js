@@ -6,9 +6,6 @@ import { CheckCircleFilled } from '@ant-design/icons';
 import UserIdService from './userIdService';
 const { Option } = Select;
 
-
-
-
 const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewData = true}) => {
 
    let getId = async role => {
