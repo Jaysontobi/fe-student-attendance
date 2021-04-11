@@ -639,6 +639,11 @@ const loadUsers = async () => {
       list: newArray,
       credentials: newArrayCredentials
     })
+  
+    getNewGenId(role) {
+      let response = await userService.getGenIdNumber(role);
+      return response;
+    }
 
   }
 
