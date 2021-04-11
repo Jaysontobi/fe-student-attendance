@@ -4,12 +4,16 @@ import { Formik } from 'formik';
 import { Row, Col, Button, message, Spin } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 const { Option } = Select;
-import userService from './userService';
+import UserAction from './userAction'
 
 
 const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewData = true}) => {
+   let {
+      getNewGenId
+   } = UserAction({});
+  
    let getId = async role => {
-      selectedUser.idNumber = await userService.getGenIdNumber(role);
+      selectedUser.idNumber = await getNewGenId(role);
    };
    
    let newGenId = '';
