@@ -41,7 +41,7 @@ const EmployeePage = ({isAdvisory}) => {
        };
        //let advisory = await AdditionalService.getAdvisory(userData);
        //let newList = list.filter(student => student.gradeLevel === advisory.gradeLevel);
-       console.log(newList);
+       //console.log(newList);
      } else {
      	
      };
