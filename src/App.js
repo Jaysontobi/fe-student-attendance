@@ -138,7 +138,7 @@ const App = () => {
                        />}
  
                             <Route path="/admin" component={User} />
-                            <Route path="/student" component={Student} />
+                            <Route path="/student/:isadvisory" component={ Student } />
                             <Route path="/advisoryclass" component={Student} />
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
