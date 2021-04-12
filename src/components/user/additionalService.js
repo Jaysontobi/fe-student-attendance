@@ -1,5 +1,5 @@
 import BaseService from '../../baseService';
-class UserIdService extends BaseService {
+class AdditionalService extends BaseService {
   constructor() {
     super('');
   };
@@ -9,4 +9,4 @@ class UserIdService extends BaseService {
   };
 }
 
-export default new UserIdService();
+export default new AdditionalService();
