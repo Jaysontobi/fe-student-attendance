@@ -27,7 +27,7 @@ const EmployeePage = ({isAdvisory}) => {
     today
   } = TimeKeepingAction({});
   
-  const filterStudents = async list => {
+  const filterStudents = list => {
 
      if (!list || list.length === 0) return [];
 	  return list;
