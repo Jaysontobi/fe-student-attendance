@@ -35,7 +35,8 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   const getListOfTeacher = async () => {
     let response = await userService.findAllUser();
     let result = response.data.filter(user => user.role === "Teacher");
-    setSelectedTeacher(result)
+    setSelectedTeacher(result);
+    userService.loadAdvisoryStudents();
   };
 
   const getListOfAssignedTeacherGrade1 = async () => {
