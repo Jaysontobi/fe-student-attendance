@@ -671,6 +671,7 @@ const loadUsers = async () => {
     loadTeacher();
     loadParent();
     loadQuarter();
+    loadAdvisoryStudents();
   }, []);
 
 
