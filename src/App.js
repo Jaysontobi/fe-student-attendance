@@ -54,7 +54,11 @@ const App = () => {
     window.location.reload(false)
     // console.log(sessionStorage._id)
     // console.log(sessionStorage.quarter)
-  }
+  };
+  
+  const renderStudents = () => {
+    return <Student />
+  };
 
   return (
     <UserContext.Provider value={providerValue}>
@@ -134,8 +138,7 @@ const App = () => {
                        />}
  
                             <Route path="/admin" component={User} />
-                            <Route path="/student" component={Student} />
-                            <Route path="/advisoryclass" component={Student} />
+                            <Route path="/student" component={this.renderStudents()} />
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
