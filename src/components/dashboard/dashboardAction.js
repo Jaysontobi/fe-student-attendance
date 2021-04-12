@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../user/userService';
-const UserAction = (initial = { searchRequest: {} }) => {
+const UserAction = ({initial = { searchRequest: {} }, isAdvisory}) => {
+  console.log('___________________',isAdvisory);
   let [userDetails, setUserDetails] = useState( 
       {numberOfStudents : 0, 
       numberOfTeachers: 0,
