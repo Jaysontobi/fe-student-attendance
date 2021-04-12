@@ -127,12 +127,17 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
      const userData = {
        idNumber: user.idNumber
      };
-    const advisory = await AdditionalService.getAdvisory(userData);
+     try {
+       let advisory = await AdditionalService.getAdvisory(userData);
      
-    if (!advisory || advisory && advisory.length === 0) return;
+       if (!advisory || advisory && advisory.length === 0) return;
      
-    const students = await AdditionalService.getAdvisoryStudents(advisory[0].gradeLevel);
-    setAdvisoryStudents(students);
+       const students = await AdditionalService.getAdvisoryStudents(advisory[0].gradeLevel);
+       setAdvisoryStudents(students);
+     } catch (error) {
+       console.log(error);
+     };
+    
   };
 
   useEffect(() => {
