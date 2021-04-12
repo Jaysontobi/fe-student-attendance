@@ -3,13 +3,13 @@ import { Form, Input, DatePicker, Select } from 'formik-antd'
 import { Formik } from 'formik';
 import { Row, Col, Button, message, Spin } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
-import UserIdService from './userIdService';
+import AdditionalService from './userIdService';
 const { Option } = Select;
 
 const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewData = true}) => {
 
    let getId = async role => {
-      let response = await UserIdService.getGenIdNumber(role);
+      let response = await AdditionalService.getGenIdNumber(role);
       selectedUser.idNumber = response.data;
    };
    
