@@ -695,7 +695,7 @@ const loadUsers = async () => {
     parentList,
     teacherList,
     getNewGenId,
-`   loadAdvisoryStudents,
+    loadAdvisoryStudents,
     advisoryStudents
   }
 };
