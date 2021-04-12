@@ -8,7 +8,7 @@ import TimeKeepingAction from '../timeKeeping/timeKeepingAction'
 
 import UserTable from './userTable'
 
-const EmployeePage = () => {
+const EmployeePage = ({isAdvisory = false}) => {
 
 
   let {
