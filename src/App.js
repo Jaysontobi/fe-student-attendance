@@ -33,6 +33,10 @@ import { UserContext } from './components/userContext'
 
 const { Option } = Select;
 
+const renderStudents = isAdvisory => {
+  return (<Student />);
+};
+
 const App = () => {
   const { Content, Sider, Header } = Layout;
   let [loggedUser, setLoggedUser] = useState(null);
@@ -54,10 +58,6 @@ const App = () => {
     window.location.reload(false)
     // console.log(sessionStorage._id)
     // console.log(sessionStorage.quarter)
-  };
-  
-  const renderStudents = isAdvisory => {
-    return (<Student />);
   };
 
   return (
