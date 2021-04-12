@@ -15,7 +15,7 @@ const SiderMenu = ({theme, collapsed}) => {
         <Menu theme={theme} mode="inline" className="pointer bg-greenSideBar" >
              {JSON.parse(sessionStorage.user).role === "Teacher" ?  
                 <Menu.Item key="advisoryClass" className="menus">
-                   <AuditOutlined />
+                   <UserOutlined/>
                     <span className="fs-13">Advisory Class</span>
                     <Link to={'/auditTrail'} className="nav-link" />
                </Menu.Item>  : null}
