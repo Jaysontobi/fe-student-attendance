@@ -13,12 +13,6 @@ import {
 const SiderMenu = ({theme, collapsed}) => {
     return ( 
         <Menu theme={theme} mode="inline" className="pointer bg-greenSideBar" >
-             {JSON.parse(sessionStorage.user).role === "Teacher" ?  
-                <Menu.Item key="advisoryClass" className="menus">
-                   <UserOutlined/>
-                    <span className="fs-13">Advisory Class</span>
-                    <Link to={'/auditTrail'} className="nav-link" />
-               </Menu.Item>  : null}
              {JSON.parse(sessionStorage.user).role === "Admin" || JSON.parse(sessionStorage.user).role === "Teacher" ?  
              <SubMenu key="grade/level" icon={<BarChartOutlined />} title="Grade And Level">
             {JSON.parse(sessionStorage.user).role === "Admin" || JSON.parse(sessionStorage.user).role === "Teacher" ?  
@@ -139,6 +133,14 @@ const SiderMenu = ({theme, collapsed}) => {
                     <span className="fs-13">Audit Trail</span>
                     <Link to={'/auditTrail'} className="nav-link" />
                 </Menu.Item>  : null}
+    
+                {JSON.parse(sessionStorage.user).role === "Teacher" ?  
+                    <Menu.Item key="advisoryClass" className="menus">
+                        <UserOutlined/>
+                        <span className="fs-13">Advisory Class</span>
+                        <Link to={'/auditTrail'} className="nav-link" />
+                    </Menu.Item>  :
+                null}
             </Menu>
     );
 }
