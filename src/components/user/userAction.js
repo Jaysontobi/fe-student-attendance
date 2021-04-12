@@ -5,6 +5,7 @@ import quarterService from '../quarter/quarterService'
 import { Button} from 'antd';
 import moment from 'moment';
 import auditTrailService from '../auditTrail/auditTrailService';
+import AdditionalService from './additionalService';
 const UserAction = (initial = { searchRequest: {} }) => {
   let [userDetails, setUserDetails] = useState( {list : [],credentials: []});
   let [adminList, setAdminList] = useState([])
@@ -15,6 +16,7 @@ const UserAction = (initial = { searchRequest: {} }) => {
   let [showUserVisible, setShowUserVisible] = useState(false);
   let [selectedUser, setSelectedUser] = useState({});
   let [selectedParent, setSelectedParent] = useState([]);
+  let [advisoryStudents, setAdvisoryStudents] = useState([]);
 
   let [loginCounter, setLoginCounter] = useState(false);
 
@@ -647,8 +649,18 @@ const loadUsers = async () => {
   
     
 
-  }
-
+  };
+  
+  const loadAdvisoryStudent = async () => {
+     let user = JSON.parse(sessionStorage.user);
+     const userData = {
+       firstName: user.firstName,
+	     middleName: user.middleName,
+	     lastName: user.lastName
+     };
+    const advisory = await AdditionalService.getAdvisory(userData);
+  };
+  
   useEffect(() => {
     loadUsers();
     getListOfParent();
