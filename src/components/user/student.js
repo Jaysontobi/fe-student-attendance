@@ -27,6 +27,7 @@ const EmployeePage = ({isAdvisory}) => {
   } = TimeKeepingAction({});
   
   const filterStudents = list => {
+     if (!list || list.length === 0) return [];
      let newList = list.filter(student => student.gradeLevel === '2');
      return newList;
   };	
