@@ -8,8 +8,8 @@ import TimeKeepingAction from '../timeKeeping/timeKeepingAction'
 
 import UserTable from './userTable'
 
-const EmployeePage = () => {
-
+const EmployeePage = ({isAdvisory}) => {
+console.log('___________________',isAdvisory);
 
   let {
     addUser,
