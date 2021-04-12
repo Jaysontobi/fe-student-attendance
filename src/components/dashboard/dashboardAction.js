@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../user/userService';
 const UserAction = ({initial = { searchRequest: {} }, isAdvisory}) => {
-  console.log('___________________',isAdvisory);
   let [userDetails, setUserDetails] = useState( 
       {numberOfStudents : 0, 
       numberOfTeachers: 0,
@@ -9,6 +8,7 @@ const UserAction = ({initial = { searchRequest: {} }, isAdvisory}) => {
       );
 
   const getListOfUsers = async () => {
+    console.log('___________________',isAdvisory);
     let response = await userService.findAllUser();
     let parent = response.data.filter(user => user.role === "Parent");
     let student = response.data.filter(user => user.role === "Student");
