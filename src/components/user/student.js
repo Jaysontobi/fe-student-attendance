@@ -21,36 +21,12 @@ const EmployeePage = ({isAdvisory}) => {
     editUser,
     selectedParent,
     filterStudent,
-    loadAdvisoryStudents,
     advisoryStudents
   } = UserAction({});
-  loadAdvisoryStudents();
 
   let{
     today
-  } = TimeKeepingAction({});
-  
-  const filterStudents = list => {
-
-     if (!list || list.length === 0) return [];
-	  return list;
-	  
-     if (isAdvisory) {
-       let user = JSON.parse(sessionStorage.user);
-       const userData = {
-       	 firstName: user.firstName,
-	 middleName: user.middleName,
-	 lastName: user.lastName
-       };
-       //let advisory = await AdditionalService.getAdvisory(userData);
-       //let newList = list.filter(student => student.gradeLevel === advisory.gradeLevel);
-       //console.log(newList);
-     } else {
-     	
-     };
-	  
-     return list;
-  };	
+  } = TimeKeepingAction({});	
 
   return (
     <Card className="h-82 p-70">
