@@ -10,7 +10,7 @@ const UserAction = ({initial = { searchRequest: {} }, isAdvisory}) => {
   const getListOfUsers = async () => {
     let response = await userService.findAllUser();
     let parent = response.data.filter(user => user.role === "Parent");
-    let student = response.data.filter(user => user.role === "Student");
+    let student = response.data.filter(user => user.role === "Student" && user.gender = "Male");
     let teacher = response.data.filter(user => user.role === "Teacher");
     setUserDetails({
         numberOfParents: parent.length,
