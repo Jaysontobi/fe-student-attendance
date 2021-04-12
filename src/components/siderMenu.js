@@ -138,7 +138,7 @@ const SiderMenu = ({theme, collapsed}) => {
                     <Menu.Item key="advisoryClass" className="menus">
                         <UserOutlined/>
                         <span className="fs-13">Advisory Class</span>
-                        <Link to={'/auditTrail'} className="nav-link" />
+                        <Link to={'/student'} className="nav-link" />
                     </Menu.Item>  :
                 null}
             </Menu>
