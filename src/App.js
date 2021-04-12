@@ -138,8 +138,8 @@ const App = () => {
                        />}
  
                             <Route path="/admin" component={User} />
-                            <Route path="/student" render={ (props) => { <Student /> }} />
-                            <Route path="/advisoryclass" render={ (props) => { <Student /> }} />
+                            <Route path="/student" component={Student} />
+                            <Route path="/advisoryclass" component={Student} />
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
