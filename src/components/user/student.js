@@ -25,6 +25,11 @@ const EmployeePage = ({isAdvisory}) => {
   let{
     today
   } = TimeKeepingAction({});
+  
+  const filterStudents = list => {
+     let newList = list.filter(student => student.gradeLevel === '2');
+     return newList;
+  };	
 
   return (
     <Card className="h-82 p-70">
