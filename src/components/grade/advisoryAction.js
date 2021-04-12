@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../user/userService';
+import AdditionalService from '../user/additionalService';
 import advisoryService from '../grade/advisoryService';
 import auditTrailService from '../auditTrail/auditTrailService';
 const TeacherAction = (initial = { searchRequest: {} }) => {
@@ -17,6 +18,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   let [selectedAdvisoryAssignedGrade10, setselectedAdvisoryAssignedGrade10] = useState([]);
   let [showAdvisorVisible, setshowAdvisorVisible] = useState(false);
   let [studentAdvisor, setStudentAdvisor] = useState({});
+  let [advisoryStudents, setAdvisoryStudents] = useState([]);
 
   const addAdvisor = async (values, gradeLevel) => {
     let auditTrailObj = {
@@ -36,7 +38,6 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     let response = await userService.findAllUser();
     let result = response.data.filter(user => user.role === "Teacher");
     setSelectedTeacher(result);
-    userService.loadAdvisoryStudents();
   };
 
   const getListOfAssignedTeacherGrade1 = async () => {
@@ -115,9 +116,21 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   };
 
   const getStudentAdvisor = async () => {
-    let response = await advisoryService.findAllAdvisory()
+    let response = await advisoryService.findAllAdvisory();
     let result = response.data.filter(user => user.gradeLevel === JSON.parse(sessionStorage.user).gradeLevel);
     setStudentAdvisor(result[0])
+  };
+  
+   const loadAdvisoryStudents = async () => {
+     let user = JSON.parse(sessionStorage.user);
+     const userData = {
+       firstName: user.firstName,
+	     middleName: user.middleName,
+	     lastName: user.lastName
+     };
+    const advisory = await AdditionalService.getAdvisory(userData);
+    const students = await AdditionalService.getAdvisoryStudents(advisory.gradeLevel);
+    setAdvisoryStudents(students);
   };
 
   useEffect(() => {
@@ -133,6 +146,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     getListOfAssignedTeacherGrade8();
     getListOfAssignedTeacherGrade9();
     getListOfAssignedTeacherGrade10();
+    loadAdvisoryStudents();
   }, []);
 
 
