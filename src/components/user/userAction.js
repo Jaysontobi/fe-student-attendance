@@ -206,7 +206,6 @@ const UserAction = (initial = { searchRequest: {} }) => {
         sessionStorage.setItem("user", JSON.stringify(loggedInUser));
         sessionStorage.setItem("quarter", quarter.quarter)
         sessionStorage.setItem("_id", quarter._id);
-	loadAdvisoryStudents();
         window.location.reload(false);
         setLoginCounter(true);
     }
