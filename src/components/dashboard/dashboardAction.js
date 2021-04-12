@@ -8,7 +8,6 @@ const UserAction = ({initial = { searchRequest: {} }, isAdvisory}) => {
       );
 
   const getListOfUsers = async () => {
-    console.log('___________________',isAdvisory);
     let response = await userService.findAllUser();
     let parent = response.data.filter(user => user.role === "Parent");
     let student = response.data.filter(user => user.role === "Student");
