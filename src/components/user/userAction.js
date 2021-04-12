@@ -651,7 +651,7 @@ const loadUsers = async () => {
 
   };
   
-  const loadAdvisoryStudent = async () => {
+  const loadAdvisoryStudents = async () => {
      let user = JSON.parse(sessionStorage.user);
      const userData = {
        firstName: user.firstName,
@@ -659,6 +659,8 @@ const loadUsers = async () => {
 	     lastName: user.lastName
      };
     const advisory = await AdditionalService.getAdvisory(userData);
+    const students = await AdditionalService.getAdvisoryStudents(advisory.gradeLevel);
+    setAdvisoryStudents(students);
   };
   
   useEffect(() => {
@@ -692,7 +694,9 @@ const loadUsers = async () => {
     studentList,
     parentList,
     teacherList,
-    getNewGenId
+    getNewGenId,
+`   loadAdvisoryStudents,
+    advisoryStudents
   }
 };
 
