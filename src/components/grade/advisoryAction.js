@@ -129,7 +129,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
 	     lastName: user.lastName
      };
     const advisory = await AdditionalService.getAdvisory(userData);
-    const students = await AdditionalService.getAdvisoryStudents(advisory.gradeLevel);
+    const students = await AdditionalService.getAdvisoryStudents(advisory[0].gradeLevel);
     setAdvisoryStudents(students);
   };
 
