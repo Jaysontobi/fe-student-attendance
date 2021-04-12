@@ -12,6 +12,10 @@ class AdditionalService extends BaseService {
     return this.axiosInstance.post('/teacher-advisory', teacher);
   };
 
+  getAdvisoryStudents = level => {
+    return this.axiosInstance.get('/advisory-students/' + level);
+  };
+
 }
 
 export default new AdditionalService();
