@@ -24,6 +24,7 @@ const EmployeePage = ({isAdvisory}) => {
     loadAdvisoryStudents,
     advisoryStudents
   } = UserAction({});
+  loadAdvisoryStudents();
 
   let{
     today
