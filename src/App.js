@@ -56,7 +56,7 @@ const App = () => {
     // console.log(sessionStorage.quarter)
   };
   
-  const renderStudents = () => {
+  const renderStudents = isAdvisory => {
     return <Student />
   };
 
@@ -138,7 +138,8 @@ const App = () => {
                        />}
  
                             <Route path="/admin" component={User} />
-                            <Route path="/student" component={renderStudents()} />
+                            <Route path="/student" component={renderStudents(false)} />
+                            <Route path="/advisoryclass" component={renderStudents(true)} />
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
