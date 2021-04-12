@@ -38,6 +38,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     let response = await userService.findAllUser();
     let result = response.data.filter(user => user.role === "Teacher");
     setSelectedTeacher(result);
+    loadAdvisoryStudents();
   };
 
   const getListOfAssignedTeacherGrade1 = async () => {
@@ -118,7 +119,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   const getStudentAdvisor = async () => {
     let response = await advisoryService.findAllAdvisory();
     let result = response.data.filter(user => user.gradeLevel === JSON.parse(sessionStorage.user).gradeLevel);
-    setStudentAdvisor(result[0])
+    setStudentAdvisor(result[0]);
   };
   
    const loadAdvisoryStudents = async () => {
@@ -144,7 +145,6 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     getListOfAssignedTeacherGrade8();
     getListOfAssignedTeacherGrade9();
     getListOfAssignedTeacherGrade10();
-    loadAdvisoryStudents();
   }, []);
 
 
