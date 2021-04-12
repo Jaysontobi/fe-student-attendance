@@ -21,7 +21,7 @@ const EmployeePage = ({isAdvisory}) => {
     editUser,
     selectedParent,
     filterStudent
-  } = UserAction({isAdvisory});
+  } = UserAction({});
 
   let{
     today
@@ -32,19 +32,19 @@ const EmployeePage = ({isAdvisory}) => {
      if (!list || list.length === 0) return [];
 	  return list;
 	  
-//      if (isAdvisory) {
-//        let user = JSON.parse(sessionStorage.user);
-//        const userData = {
-//        	 firstName: user.firstName,
-// 	 middleName: user.middleName,
-// 	 lastName: user.lastName
-//        };
-//        let advisory = await AdditionalService.getAdvisory(userData);
-//        let newList = list.filter(student => student.gradeLevel === advisory.gradeLevel);
-//        return newList;
-//      } else {
-//      	return list;
-//      };
+     if (isAdvisory) {
+       let user = JSON.parse(sessionStorage.user);
+       const userData = {
+       	 firstName: user.firstName,
+	 middleName: user.middleName,
+	 lastName: user.lastName
+       };
+       let advisory = await AdditionalService.getAdvisory(userData);
+       let newList = list.filter(student => student.gradeLevel === advisory.gradeLevel);
+       return newList;
+     } else {
+     	return list;
+     };
   };	
 
   return (
