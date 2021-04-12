@@ -40,18 +40,23 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewDat
          render={({ values, touched, setFieldValue }) => (
             <Spin spinning={loading} delay={500}>
                <Form className="p-30">
-               <Row gutter={16}>
+                  
+                  <Row gutter={16}>
                      <Col span={12}>
-                        <Form.Item label="ID Number" name="idNumber">
+                        <Form.Item label="User ID" name="idNumber">
                            <Input disabled="true" name="idNumber" />
                         </Form.Item>
                      </Col>
-                     <Col span={12}>
-                        <Form.Item label="School Year" name="schoolYear">
-                           <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="schoolYear" />
-                        </Form.Item>
-                     </Col>
+                     { role==="Student" ? (
+                        <Col span={12}>
+                           <Form.Item label="School Year" name="schoolYear">
+                              <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="schoolYear" />
+                           </Form.Item>
+                        </Col>
+                     ) :("")}
+                     
                   </Row>
+               
                   <Row gutter={16}>
                      <Col span={12}>
                         <Form.Item label="First Name" name="firstName">
