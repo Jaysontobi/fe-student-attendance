@@ -57,7 +57,7 @@ const App = () => {
   };
   
   const renderStudents = isAdvisory => {
-    return <Student />
+    return (<Student />);
   };
 
   return (
@@ -138,8 +138,8 @@ const App = () => {
                        />}
  
                             <Route path="/admin" component={User} />
-                            <Route path="/student" component={renderStudents(false)} />
-                            <Route path="/advisoryclass" component={renderStudents(true)} />
+                            <Route path="/student" render={renderStudents(false)} />
+                            <Route path="/advisoryclass" render={renderStudents(true)} />
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
