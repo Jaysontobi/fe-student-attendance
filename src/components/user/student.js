@@ -3,10 +3,11 @@ import { Drawer, Card, Button, Typography, Icon, Row, Col, Input } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import UserForm from './userForm'
 
-import UserAction from './userAction'
+import UserAction from './userAction';
+import AdditionalService from './additionalService';
 import TimeKeepingAction from '../timeKeeping/timeKeepingAction'
 
-import UserTable from './userTable'
+import UserTable from './userTable';
 
 const EmployeePage = ({isAdvisory}) => {
 
@@ -26,10 +27,23 @@ const EmployeePage = ({isAdvisory}) => {
     today
   } = TimeKeepingAction({});
   
-  const filterStudents = list => {
+  const filterStudents = async list => {
+
      if (!list || list.length === 0) return [];
-     //let newList = list.filter(student => student.gradeLevel === '2');
-     return list;
+	  
+     if (isAdvisory) {
+       let user = JSON.parse(sessionStorage.user);
+       const userData = {
+       	 firstName: user.firstName,
+	 middleName: user.middleName,
+	 lastName: user.lastName
+       };
+       let advisory = await AdditionalService.getAdvisory(userData);
+       let newList = list.filter(student => student.gradeLevel === advisory.gradeLevel);
+       return newList;
+     } else {
+     	return list;
+     };
   };	
 
   return (
