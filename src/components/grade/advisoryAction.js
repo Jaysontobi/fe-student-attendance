@@ -125,7 +125,9 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
    const loadAdvisoryStudents = async () => {
      let user = JSON.parse(sessionStorage.user);
      const userData = {
-       idNumber: user.idNumber
+       firstName: user.firstName,
+       lastName: user.lastName,
+       middleName: user.middleName
      };
      try {
        let advisory = await AdditionalService.getAdvisory(JSON.stringify(userData));
