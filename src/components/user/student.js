@@ -9,7 +9,6 @@ import TimeKeepingAction from '../timeKeeping/timeKeepingAction'
 import UserTable from './userTable'
 
 const EmployeePage = ({isAdvisory}) => {
-console.log('___________________',isAdvisory);
 
   let {
     addUser,
@@ -21,7 +20,7 @@ console.log('___________________',isAdvisory);
     editUser,
     selectedParent,
     filterStudent
-  } = UserAction({});
+  } = UserAction({isAdvisory});
 
   let{
     today
