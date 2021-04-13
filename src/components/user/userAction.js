@@ -650,7 +650,7 @@ const loadUsers = async () => {
 
   };
   
-  const buildAdvisoryStudentList = (list) => {
+  const buildStudentList = (list) => {
     let list = list.map((user) => {
       return {
         key: user._id,
@@ -708,7 +708,7 @@ const loadUsers = async () => {
     parentList,
     teacherList,
     getNewGenId,
-    buildAdvisoryStudentList
+    buildStudentList
   }
 };
 
