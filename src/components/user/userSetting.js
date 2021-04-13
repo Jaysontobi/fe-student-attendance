@@ -7,8 +7,6 @@ const Settings = () => {
   let password = '';
   let newPassword = '';
   let confirmPassword = '';
-  let error = false;
-  let success = false;
   
   const changePassword = async () => {
     if (password === '' || newPassword === '' || confirmPassword === '') {
@@ -23,6 +21,9 @@ const Settings = () => {
     };
     let response = await userService.updatePassword(body);
     if (response && response.status === 200) {
+      password = '';
+      newPassword = '';
+      confirmPassword = '';
       return message.success('Password updated', 3);
     } else {
       return message.error('Unable to update password', 3);
