@@ -145,6 +145,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        await setAdvisoryStudents(list);
        console.log('YHVH is great', students.data);
        console.log(advisoryStudents);
+       useEffect(() => console.log(advisoryStudents), advisoryStudents);
      } catch (error) {
        console.log(error);
      };
