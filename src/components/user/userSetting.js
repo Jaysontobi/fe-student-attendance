@@ -18,6 +18,7 @@ const Settings = () => {
   
   
   return (
+   <React.Fragment>
     <Card className="h-82 p-70" style={{textAlign: 'center'}}>
      <Row className="mt-15">
        <Col lg={{ span: 6, offset: 9 }}>
@@ -78,7 +79,8 @@ const Settings = () => {
 //         </Row>
 //       </React.Fragment>
 //       ) : ("")}
-   </Card>     
+    </Card>
+   </React.Fragment>
   );
 }
 
