@@ -37,7 +37,7 @@ const Settings = () => {
          <Button  className="addUser btn-add" onClick={()=> changePassword()}>
            Change Password
         </Button>
-        <Button  className="addUser btn-add" onClick={()=> ()}>
+        <Button  className="addUser btn-add" onClick={()=> reset()}>
            Cancel
         </Button>
       </Row>
