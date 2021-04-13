@@ -660,7 +660,28 @@ const loadUsers = async () => {
      };
     const advisory = await AdditionalService.getAdvisory(userData);
     const students = await AdditionalService.getAdvisoryStudents(advisory.gradeLevel);
-    setAdvisoryStudents(students);
+    let newList = students.map((user) => {
+      return {
+        key: user._id,
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        middleName: user.middleName,
+        idNumber: user.idNumber,
+        gender: user.gender,
+        birthDate: user.birthDate,
+        birthPlace: user.birthPlace,
+        age: user.age,
+        contactNumber: user.contactNumber,
+        email: user.email,
+        role: user.role,
+        password: user.password,
+        gradeLevel: user.gradeLevel,
+        section: user.section,
+        action: 
+          <Button onClick={() => loadUser(user)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+      }
+    setAdvisoryStudents(newList);
   };
   
   useEffect(() => {
