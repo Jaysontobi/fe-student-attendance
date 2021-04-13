@@ -14,7 +14,7 @@ const Settings = () => {
   return (
     <Card className="h-82 p-70" style={{textAlign: 'center'}}>
      <Row className="mt-15">
-       <Col lg={{ span: 14 }}>
+       <Col lg={{ span: 6, offset: 9 }}>
          <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
        </Col>
      </Row>
@@ -34,7 +34,7 @@ const Settings = () => {
           <Input placeholder="Confirm Password"/>
         </Col>
       </Row>
-      <Row>
+      <Row style={{marginTop: '15px'}}>
        <Col lg={{ span: 6, offset: 9 }}>
         <Space align="center">
           <Button  className="addUser btn-add" onClick={()=> changePassword()}>
