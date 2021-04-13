@@ -23,17 +23,17 @@ const Settings = () => {
      <form onSubmit={() => changePassword()}>
        <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="Old Password" value={password} onChange={(e) => password = e.target.value}/>
+          <Input placeholder="Old Password" onChange={(e) => password = e.target.value}/>
         </Col>
       </Row>
       <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="New Password" value={newPassword} onChange={(e) => newPassword = e.target.value}/>
+          <Input placeholder="New Password" onChange={(e) => newPassword = e.target.value}/>
         </Col>
       </Row>
       <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="Confirm Password" value={confirmPassword} onChange={(e) => confirmPassword = e.target.value}/>
+          <Input placeholder="Confirm Password" onChange={(e) => confirmPassword = e.target.value}/>
         </Col>
       </Row>
       <Row style={{marginTop: '15px'}}>
