@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space } from 'antd';
+import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space, Alert } from 'antd';
 
 import UserAction from './userAction';
 
@@ -7,9 +7,12 @@ const Settings = () => {
   let password = '';
   let newPassword = '';
   let confirmPassword = '';
+  let error = false;
+  let success = false;
   
   const changePassword = () => {
-    console.log('new val', password, newPassword, confirmPassword);
+    if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
+    return success = true;
   };
   
   
@@ -46,6 +49,30 @@ const Settings = () => {
        </Col>
       </Row>
      </form>
+     { error ? (
+         <Row style={{marginTop: '15px'}}>
+           <Col lg={{ span: 6, offset: 9 }}>
+             <Alert
+               message="Error"
+               description="Please fill all fields."
+               type="error"
+               showIcon
+            />
+          </Col>
+        </Row>
+      ) : ("")}
+        { success ? (
+         <Row style={{marginTop: '15px'}}>
+           <Col lg={{ span: 6, offset: 9 }}>
+             <Alert
+               message="Success"
+               description="Password changed successfully."
+               type="success"
+               showIcon
+            />
+          </Col>
+        </Row>
+      ) : ("")}
    </Card>     
   );
 }
