@@ -5,6 +5,12 @@ import UserAction from './userAction';
 
 const Settings = () => {
   
+  const changePassword = value => {
+  
+  };
+  
+  const reset = () => {};
+  
   return (
     <Card className="h-82 p-70">
      <Row className="mt-15">
@@ -12,11 +18,30 @@ const Settings = () => {
          <Typography.Title level={3} className="ml-15">Setting</Typography.Title>
        </Col>
      </Row>
-     <Row>
-       <Col lg={{ span: "24" }}>
-          dgdfgdfgdfgdfgd
-       </Col>
+     <form>
+       <Row className="mt-15">
+        <Col lg={{ span:  }}>
+        </Col>
+        <Col lg={{ span: 6 }}>
+          <Input placeholder="Old Password"/>
+        </Col>
       </Row>
+      <Row className="mt-15">
+        <Col lg={{ span:  }}>
+        </Col>
+        <Col lg={{ span: 6 }}>
+          <Input placeholder="New Password"/>
+        </Col>
+      </Row>
+      <Row>
+         <Button  className="addUser btn-add" onClick={()=> changePassword()}>
+           Change Password
+        </Button>
+        <Button  className="addUser btn-add" onClick={()=> ()}>
+           Cancel
+        </Button>
+      </Row>
+    <form>
     </Card>     
   );
 }
