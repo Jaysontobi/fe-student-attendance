@@ -20,9 +20,7 @@ const Settings = () => {
      </Row>
      <form>
        <Row className="mt-15">
-        <Col lg={{ span: 6 }}>
-        </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 12 }}  offset={{6}}>
           <Input placeholder="Old Password"/>
         </Col>
       </Row>
