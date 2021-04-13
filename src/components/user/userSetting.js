@@ -12,8 +12,8 @@ const Settings = () => {
   
   const changePassword = () => {
     console.log('________');
-    if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
-    return success = true;
+//     if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
+//     return success = true;
   };
   
   
