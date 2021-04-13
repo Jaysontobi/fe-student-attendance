@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space, message } from 'antd';
 
-import UserAction from './userAction';
+import userService from './userService';
 
 const Settings = () => {
   let password = '';
@@ -10,11 +10,23 @@ const Settings = () => {
   let error = false;
   let success = false;
   
-  const changePassword = () => {
+  const changePassword = async () => {
     if (password === '' || newPassword === '' || confirmPassword === '') {
       return message.error('All fields are required.', 3);
     };
-    return message.success('Password updated', 3);;
+    
+    user: JSON.parse(sessionStorage.user);
+    let body = {
+      idNumber: user.idNumber,
+      currentPassword: password,
+      newPassword: newPassword
+    };
+    let response = await userService.updatePassword(body);
+    if (response && response.status === 200) {
+      return message.success('Password updated', 3);
+    } else {
+      return message.error('Unable to update password', 3);
+    };
   };
   
   
