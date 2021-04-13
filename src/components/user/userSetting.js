@@ -20,31 +20,26 @@ const Settings = () => {
      </Row>
      <form>
        <Row className="mt-15">
-        <Col lg={{ span: 12, offset: 6 }}>
+        <Col lg={{ span: 6, offset: 9 }}>
           <Input placeholder="Old Password"/>
         </Col>
       </Row>
       <Row className="mt-15">
-        <Col lg={{ span: 6 }}>
-        </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6, offset: 9 }}>
           <Input placeholder="New Password"/>
         </Col>
       </Row>
       <Row className="mt-15">
-        <Col lg={{ span: 6 }}>
-        </Col>
-        <Col lg={{ span: 6 }}>
+        <Col lg={{ span: 6, offset: 9 }}>
           <Input placeholder="Confirm Password"/>
         </Col>
       </Row>
       <Row>
+       <Col lg={{ span: 6, offset: 9 }}>
          <Button  className="addUser btn-add" onClick={()=> changePassword()}>
-           Change Password
-        </Button>
-        <Button  className="addUser btn-add" onClick={()=> reset()}>
-           Cancel
-        </Button>
+            Change Password
+         </Button>
+       </Col>
       </Row>
      </form>
    </Card>     
