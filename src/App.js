@@ -137,7 +137,7 @@ const App = () => {
                        from="/login"
                        to="/"
                        />}
- 
+                            <Route path="/settings" component={UserSetting} />
                             <Route path="/admin" component={User} />
                             <Route path="/student" component={ Student } />
                             <Route path="/advisoryclass" render={(props) => { return (<Student isAdvisory="true"/>)}} />
@@ -158,7 +158,6 @@ const App = () => {
                             <Route path="/timekeeping" component={Timekeeping}/>
                             <Route path="/auditTrail" component={AuditTrail}/>
                             <Route path="/" component={UserDetail} />
-                            <Route path="/settings" component={UserSetting} />
                       </Switch>
                     </Content>
                   </Layout>
