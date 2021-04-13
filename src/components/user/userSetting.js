@@ -13,6 +13,10 @@ const Settings = () => {
       return message.error('All fields are required.', 3);
     };
     
+     if (newPassword !== confirmPassword) {
+      return message.error('New password and confirm must match.', 3);
+    };
+    
     let user = JSON.parse(sessionStorage.user);
     let body = {
       idNumber: user.idNumber,
@@ -41,17 +45,17 @@ const Settings = () => {
       <form onSubmit={() => changePassword()}>
         <Row className="mt-15">
           <Col lg={{ span: 6, offset: 9 }}>
-            <Input placeholder="Old Password" onChange={(e) => password = e.target.value}/>
+            <Input placeholder="Old Password" type="password" onChange={(e) => password = e.target.value}/>
           </Col>
         </Row>
         <Row className="mt-15">
          <Col lg={{ span: 6, offset: 9 }}>
-           <Input placeholder="New Password" onChange={(e) => newPassword = e.target.value}/>
+           <Input placeholder="New Password" type="password" onChange={(e) => newPassword = e.target.value}/>
          </Col>
        </Row>
        <Row className="mt-15">
          <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="Confirm Password" onChange={(e) => confirmPassword = e.target.value}/>
+          <Input placeholder="Confirm Password" type="password" onChange={(e) => confirmPassword = e.target.value}/>
          </Col>
        </Row>
        <Row style={{marginTop: '15px'}}>
