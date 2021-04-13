@@ -130,7 +130,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        middleName: user.middleName
      };
      try {
-       let advisory = await AdditionalService.getAdvisory(JSON.stringify(userData));
+       let advisory = await AdditionalService.getAdvisory(userData);
      
 //        if (!advisory || advisory && advisory.length === 0) return;
      
