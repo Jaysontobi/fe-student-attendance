@@ -23,17 +23,18 @@ const Settings = () => {
       currentPassword: password,
       newPassword: newPassword
     };
-    let response = await userService.updatePassword(body);
-    if (response && response.status === 200) {
-      password = '';
-      newPassword = '';
-      confirmPassword = '';
-      return message.success('Password updated', 3);
-    } else {
+    try {
+      let response = await userService.updatePassword(body);
+      if (response && response.status === 200) {
+        password = '';
+        newPassword = '';
+        confirmPassword = '';
+        return message.success('Password updated', 3);
+      }
+    } catch (error) {
       return message.error('Unable to update password', 3);
     };
   };
-  
   
   return (
     <Card className="h-82 p-70" style={{textAlign: 'center'}}>
