@@ -24,6 +24,9 @@ const UserMenu = () => {
          <Menu.Item onClick={()=>logout()} className="dropdown-item">
             <LogoutOutlined />Logout
          </Menu.Item>
+         <Menu.Item className="dropdown-item">
+            Settings
+         </Menu.Item>
       </Menu>
    );
 }
