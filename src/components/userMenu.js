@@ -3,7 +3,8 @@ import {  Menu } from 'antd';
 import { UserContext } from './userContext';
 
 import {
-    LogoutOutlined
+    LogoutOutlined,
+    SettingOutlined
   } from '@ant-design/icons';
 
 
@@ -25,7 +26,7 @@ const UserMenu = () => {
             <LogoutOutlined />Logout
          </Menu.Item>
          <Menu.Item className="dropdown-item">
-            Settings
+            <SettingOutlined /> Settings
          </Menu.Item>
       </Menu>
    );
