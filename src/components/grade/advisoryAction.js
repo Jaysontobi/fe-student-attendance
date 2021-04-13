@@ -144,7 +144,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        let list = buildStudentList(students.data);
        setAdvisoryStudents(list);
        console.log('YHVH is great', students.data);
-       console.log(advisoryStudents);
+       console.log(list);
      } catch (error) {
        console.log(error);
      };
