@@ -1,7 +1,8 @@
 import React from 'react';
 import { Drawer, Card, Button, Typography, Icon, Row, Col, Input } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
-import UserForm from './userForm'
+import UserForm from './userForm';
+import AdvisoryAction from '../grade/advisoryAction';
 
 import UserAction from './userAction';
 import AdditionalService from './additionalService';
@@ -20,9 +21,13 @@ const EmployeePage = ({isAdvisory}) => {
     selectedUser,
     editUser,
     selectedParent,
-    filterStudent,
-    advisoryStudents
+    filterStudent
   } = UserAction({});
+	
+  let {
+    advisoryStudents,
+    loadAdvisoryStudents
+  } = AdvisoryAction({});
 
   let{
     today
