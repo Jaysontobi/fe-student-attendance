@@ -14,7 +14,7 @@ const Settings = () => {
     if (password === '' || newPassword === '' || confirmPassword === '') {
       return message.error('All fields are required.', 3);
     };
-    return message.success('Password updated', 10);;
+    return message.success('Password updated', 3);;
   };
   
   
