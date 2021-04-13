@@ -681,7 +681,7 @@ const loadUsers = async () => {
         action: 
           <Button onClick={() => loadUser(user)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
       }
-    };
+    });
     setAdvisoryStudents(newList);
   };
   
