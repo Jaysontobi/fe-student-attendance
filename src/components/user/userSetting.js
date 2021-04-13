@@ -26,11 +26,8 @@ const Settings = () => {
     try {
       let response = await userService.updatePassword(body);
       if (response && response.status === 200) {
-        password = '';
-        newPassword = '';
-        confirmPassword = '';
         return message.success('Password updated', 3);
-      }
+      };
     } catch (error) {
       return message.error('Unable to update password', 3);
     };
