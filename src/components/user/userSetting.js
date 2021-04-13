@@ -51,7 +51,8 @@ const Settings = () => {
       </Row>
      </form>
 //      { error ? (
-         <Row style={{marginTop: '15px'}}>
+      <React.Fragment>
+         <Row className="mt-15">
            <Col lg={{ span: 6, offset: 9 }}>
              <Alert
                message="Error"
@@ -61,9 +62,11 @@ const Settings = () => {
             />
           </Col>
         </Row>
+      </React.Fragment>
 //       ) : ("")}
 //         { success ? (
-         <Row style={{marginTop: '15px'}}>
+       <React.Fragment>
+         <Row className="mt-15">
            <Col lg={{ span: 6, offset: 9 }}>
              <Alert
                message="Success"
@@ -73,6 +76,7 @@ const Settings = () => {
             />
           </Col>
         </Row>
+      </React.Fragment>
 //       ) : ("")}
    </Card>     
   );
