@@ -9,6 +9,7 @@ import User from "./components/user/user.js";
 import Student from "./components/user/student.js";
 import Parent from "./components/user/parent.js";
 import Teacher from "./components/user/teacher.js";
+import UserSetting from "./components/user/userSetting.js";
 import UserDetail from "./components/userDetails/userDetails.js";
 import Grade1 from "./components/grade/grade1";
 import Grade2 from "./components/grade/grade2";
@@ -157,6 +158,7 @@ const App = () => {
                             <Route path="/timekeeping" component={Timekeeping}/>
                             <Route path="/auditTrail" component={AuditTrail}/>
                             <Route path="/" component={UserDetail} />
+                            <Route path="/settings" component={UserSetting} />
                       </Switch>
                     </Content>
                   </Layout>
