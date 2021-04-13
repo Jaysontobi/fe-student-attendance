@@ -24,7 +24,6 @@ const Settings = () => {
          <Typography.Title level={3} className="ml-15">Setting</Typography.Title>
        </Col>
      </Row>
-     <Row>
       <form onSubmit={() => changePassword()}>
         <Row className="mt-15">
           <Col lg={{ span: 6, offset: 9 }}>
@@ -51,7 +50,6 @@ const Settings = () => {
         </Col>
        </Row>
       </form>
-     </Row>
     </Card>     
   );
 }
