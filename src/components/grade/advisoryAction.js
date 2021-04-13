@@ -147,7 +147,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        return list;
      } catch (error) {
        console.log(error);
-       reurn [];
+       return [];
      };
     
   };
