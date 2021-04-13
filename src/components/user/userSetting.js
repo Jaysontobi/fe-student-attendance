@@ -12,7 +12,7 @@ const Settings = () => {
   const reset = () => {};
   
   return (
-    <Card className="h-82 p-70">
+    <Card className="h-82 p-70" style={{textAlign: 'center'}}>
      <Row className="mt-15">
        <Col lg={{ span: 14 }}>
          <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
