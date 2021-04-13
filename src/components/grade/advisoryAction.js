@@ -131,6 +131,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
      };
      try {
        let advisory = await AdditionalService.getAdvisory(userData);
+       console.log(advisory);
      
 //        if (!advisory || advisory && advisory.length === 0) return;
      
