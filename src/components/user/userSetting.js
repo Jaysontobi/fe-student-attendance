@@ -3,7 +3,7 @@ import { Drawer, Card, Button, Typography, Icon, Row, Col, Input } from 'antd';
 
 import UserAction from './userAction';
 
-const password = () => {
+const Settings = () => {
   
   return (
     <Card className="h-82 p-70">
@@ -14,11 +14,11 @@ const password = () => {
      </Row>
      <Row>
        <Col lg={{ span: "24" }}>
-         <UserTable details={adminList} />
+          dgdfgdfgdfgdfgd
        </Col>
       </Row>
     </Card>     
   );
 }
 
-export default EmployeePage;
+export default Settings;
