@@ -11,6 +11,7 @@ const Settings = () => {
   let success = false;
   
   const changePassword = () => {
+    console.log('________');
     if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
     return success = true;
   };
@@ -49,7 +50,7 @@ const Settings = () => {
        </Col>
       </Row>
      </form>
-     { error ? (
+//      { error ? (
          <Row style={{marginTop: '15px'}}>
            <Col lg={{ span: 6, offset: 9 }}>
              <Alert
@@ -60,8 +61,8 @@ const Settings = () => {
             />
           </Col>
         </Row>
-      ) : ("")}
-        { success ? (
+//       ) : ("")}
+//         { success ? (
          <Row style={{marginTop: '15px'}}>
            <Col lg={{ span: 6, offset: 9 }}>
              <Alert
@@ -72,7 +73,7 @@ const Settings = () => {
             />
           </Col>
         </Row>
-      ) : ("")}
+//       ) : ("")}
    </Card>     
   );
 }
