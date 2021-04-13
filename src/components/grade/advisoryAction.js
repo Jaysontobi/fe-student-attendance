@@ -131,11 +131,10 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
      };
      try {
        let advisory = await AdditionalService.getAdvisory(userData);
-       console.log(advisory);
+   
+       if (!advisory) return;
      
-//        if (!advisory || advisory && advisory.length === 0) return;
-     
-       const students = await AdditionalService.getAdvisoryStudents(advisory[0].gradeLevel);
+       const students = await AdditionalService.getAdvisoryStudents(advisory.data.gradeLevel);
        setAdvisoryStudents(students);
      } catch (error) {
        console.log(error);
