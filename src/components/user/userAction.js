@@ -651,7 +651,7 @@ const loadUsers = async () => {
   };
   
   const buildStudentList = (list) => {
-    let list = list.map((user) => {
+    let newlist = list.map((user) => {
       return {
         key: user._id,
         id: user._id,
@@ -673,7 +673,7 @@ const loadUsers = async () => {
           <Button onClick={() => loadUser(user)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
       }
     });
-    return list;
+    return newlist;
   };
   
   useEffect(() => {
