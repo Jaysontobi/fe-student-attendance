@@ -5,8 +5,6 @@ import UserAction from './userAction';
 
 const password = () => {
   
-
-
   return (
     <Card className="h-82 p-70">
      <Row className="mt-15">
