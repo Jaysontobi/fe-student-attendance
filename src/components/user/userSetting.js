@@ -20,14 +20,14 @@ const Settings = () => {
      </Row>
      <form>
        <Row className="mt-15">
-        <Col lg={{ span:  }}>
+        <Col lg={{ span: 6 }}>
         </Col>
         <Col lg={{ span: 6 }}>
           <Input placeholder="Old Password"/>
         </Col>
       </Row>
       <Row className="mt-15">
-        <Col lg={{ span:  }}>
+        <Col lg={{ span: 6 }}>
         </Col>
         <Col lg={{ span: 6 }}>
           <Input placeholder="New Password"/>
