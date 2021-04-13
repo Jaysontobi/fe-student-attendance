@@ -78,7 +78,7 @@ const Settings = () => {
 //         </Row>
 //       </React.Fragment>
 //       ) : ("")}
-   </Card>     
+//    </Card>     
   );
 }
 
