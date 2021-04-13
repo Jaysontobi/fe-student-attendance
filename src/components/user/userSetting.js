@@ -4,11 +4,11 @@ import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space, Alert }
 import UserAction from './userAction';
 
 const Settings = () => {
-  let password = '';
-  let newPassword = '';
-  let confirmPassword = '';
-  let error = false;
-  let success = false;
+//   let password = '';
+//   let newPassword = '';
+//   let confirmPassword = '';
+//   let error = false;
+//   let success = false;
   
 //   const changePassword = () => {
 //     console.log('________');
@@ -78,7 +78,7 @@ const Settings = () => {
 //         </Row>
 //       </React.Fragment>
 //       ) : ("")}
-//    </Card>     
+   </Card>     
   );
 }
 
