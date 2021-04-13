@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Card, Button, Typography, Icon, Row, Col, Input } from 'antd';
+import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space } from 'antd';
 
 import UserAction from './userAction';
 
@@ -15,7 +15,7 @@ const Settings = () => {
     <Card className="h-82 p-70">
      <Row className="mt-15">
        <Col lg={{ span: 14 }}>
-         <Typography.Title level={3} className="ml-15">Setting</Typography.Title>
+         <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
        </Col>
      </Row>
      <form>
@@ -36,9 +36,11 @@ const Settings = () => {
       </Row>
       <Row>
        <Col lg={{ span: 6, offset: 9 }}>
-         <Button  className="addUser btn-add" onClick={()=> changePassword()}>
+        <Space align="center">
+          <Button  className="addUser btn-add" onClick={()=> changePassword()}>
             Change Password
-         </Button>
+          </Button>
+        </Space>
        </Col>
       </Row>
      </form>
