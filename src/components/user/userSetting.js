@@ -25,10 +25,33 @@ const Settings = () => {
        </Col>
      </Row>
      <Row>
-       <Col lg={{ span: "24" }}>
-          dgdfgdfgdfgdfgd
-       </Col>
-      </Row>
+      <form onSubmit={() => changePassword()}>
+        <Row className="mt-15">
+          <Col lg={{ span: 6, offset: 9 }}>
+            <Input placeholder="Old Password" onChange={(e) => password = e.target.value}/>
+          </Col>
+        </Row>
+        <Row className="mt-15">
+         <Col lg={{ span: 6, offset: 9 }}>
+           <Input placeholder="New Password" onChange={(e) => newPassword = e.target.value}/>
+         </Col>
+       </Row>
+       <Row className="mt-15">
+         <Col lg={{ span: 6, offset: 9 }}>
+          <Input placeholder="Confirm Password" onChange={(e) => confirmPassword = e.target.value}/>
+         </Col>
+       </Row>
+       <Row style={{marginTop: '15px'}}>
+        <Col lg={{ span: 6, offset: 9 }}>
+         <Space align="center">
+           <Button  className="addUser btn-add" onClick={()=> changePassword()}>
+            Change Password
+          </Button>
+         </Space>
+        </Col>
+       </Row>
+      </form>
+     </Row>
     </Card>     
   );
 }
