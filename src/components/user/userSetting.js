@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space, Alert } from 'antd';
+import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space, message } from 'antd';
 
 import UserAction from './userAction';
 
@@ -11,9 +11,10 @@ const Settings = () => {
   let success = false;
   
   const changePassword = () => {
-    console.log('________');
-    if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
-    return success = true;
+    if (password === '' || newPassword === '' || confirmPassword === '') {
+      return message.error('All fields are required.', 3);
+    };
+    return message.success('Password updated', 10);;
   };
   
   
