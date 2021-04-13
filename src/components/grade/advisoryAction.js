@@ -3,6 +3,8 @@ import userService from '../user/userService';
 import AdditionalService from '../user/additionalService';
 import advisoryService from '../grade/advisoryService';
 import auditTrailService from '../auditTrail/auditTrailService';
+import UserAction from '../user/userAction';
+
 const TeacherAction = (initial = { searchRequest: {} }) => {
   let [selectedTeacher, setSelectedTeacher] = useState([]);
   let [selectedAdvisoryAssgined, setselectedAdvisoryAssgined] = useState({});
@@ -19,6 +21,10 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   let [showAdvisorVisible, setshowAdvisorVisible] = useState(false);
   let [studentAdvisor, setStudentAdvisor] = useState({});
   let [advisoryStudents, setAdvisoryStudents] = useState([]);
+  
+  let {
+    buildAdvisoryStudentList
+  } = UserAction({});
 
   const addAdvisor = async (values, gradeLevel) => {
     let auditTrailObj = {
@@ -135,8 +141,10 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        if (!advisory) return;
      
        const students = await AdditionalService.getAdvisoryStudents(advisory.data.gradeLevel);
-       setAdvisoryStudents(students.data);
+       let list = buildAdvisoryStudentList(students.data);
+       setAdvisoryStudents(list);
        console.log('YHVH is great', students.data);
+       console.log(advisoryStudents);
      } catch (error) {
        console.log(error);
      };
