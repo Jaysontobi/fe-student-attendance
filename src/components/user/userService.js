@@ -23,6 +23,10 @@ class UserService extends BaseService {
   getGenIdNumber = (role) => {
      return this.axiosInstance.get('/generate-user-id/' + role);
   };
+
+  updatePassword = (obj) => {
+    return this.axiosInstance.post('/update-password', obj);
+  };
 }
 
 export default new UserService();
