@@ -33,6 +33,13 @@ const Settings = () => {
           <Input placeholder="New Password"/>
         </Col>
       </Row>
+      <Row className="mt-15">
+        <Col lg={{ span: 6 }}>
+        </Col>
+        <Col lg={{ span: 6 }}>
+          <Input placeholder="Confirm Password"/>
+        </Col>
+      </Row>
       <Row>
          <Button  className="addUser btn-add" onClick={()=> changePassword()}>
            Change Password
@@ -41,8 +48,8 @@ const Settings = () => {
            Cancel
         </Button>
       </Row>
-    <form>
-    </Card>     
+     </form>
+   </Card>     
   );
 }
 
