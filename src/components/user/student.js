@@ -24,10 +24,10 @@ const EmployeePage = ({isAdvisory}) => {
     filterStudent
   } = UserAction({});
 	
-  let {
-    advisoryStudents,
-    loadAdvisoryStudents
-  } = AdvisoryAction({});
+//   let {
+//     advisoryStudents,
+//     loadAdvisoryStudents
+//   } = AdvisoryAction({});
 
   let{
     today
@@ -56,7 +56,7 @@ const EmployeePage = ({isAdvisory}) => {
     </Row>
     <Row>
       <Col lg={{ span: "24" }}>
-        <UserTable details={ isAdvisory ? advisoryStudents : studentList } />
+        <UserTable details={ isAdvisory ? studentList : studentList } />
       </Col>
     </Row>
     <Drawer
