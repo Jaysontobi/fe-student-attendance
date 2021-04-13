@@ -51,32 +51,32 @@ const Settings = () => {
       </Row>
      </form>
 //      { error ? (
-      <React.Fragment>
-         <Row className="mt-15">
-           <Col lg={{ span: 6, offset: 9 }}>
-             <Alert
-               message="Error"
-               description="Please fill all fields."
-               type="error"
-               showIcon
-            />
-          </Col>
-        </Row>
-      </React.Fragment>
+//       <React.Fragment>
+//          <Row className="mt-15">
+//            <Col lg={{ span: 6, offset: 9 }}>
+//              <Alert
+//                message="Error"
+//                description="Please fill all fields."
+//                type="error"
+//                showIcon
+//             />
+//           </Col>
+//         </Row>
+//       </React.Fragment>
 //       ) : ("")}
 //         { success ? (
-       <React.Fragment>
-         <Row className="mt-15">
-           <Col lg={{ span: 6, offset: 9 }}>
-             <Alert
-               message="Success"
-               description="Password changed successfully."
-               type="success"
-               showIcon
-            />
-          </Col>
-        </Row>
-      </React.Fragment>
+//        <React.Fragment>
+//          <Row className="mt-15">
+//            <Col lg={{ span: 6, offset: 9 }}>
+//              <Alert
+//                message="Success"
+//                description="Password changed successfully."
+//                type="success"
+//                showIcon
+//             />
+//           </Col>
+//         </Row>
+//       </React.Fragment>
 //       ) : ("")}
    </Card>     
   );
