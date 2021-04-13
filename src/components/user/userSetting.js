@@ -4,12 +4,14 @@ import { Drawer, Card, Button, Typography, Icon, Row, Col, Input, Space } from '
 import UserAction from './userAction';
 
 const Settings = () => {
+  let password = '';
+  let newPassword = '';
+  let confirmPassword = '';
   
-  const changePassword = value => {
-  
+  const changePassword = () => {
+    console.log('new val', password, newPassword, confirmPassword);
   };
   
-  const reset = () => {};
   
   return (
     <Card className="h-82 p-70" style={{textAlign: 'center'}}>
@@ -18,20 +20,20 @@ const Settings = () => {
          <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
        </Col>
      </Row>
-     <form>
+     <form onSubmit={() => changePassword()}>
        <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="Old Password"/>
+          <Input placeholder="Old Password" value={password} onChange={(e) => password = e.target.value}/>
         </Col>
       </Row>
       <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="New Password"/>
+          <Input placeholder="New Password" value={newPassword} onChange={(e) => newPassword = e.target.value}/>
         </Col>
       </Row>
       <Row className="mt-15">
         <Col lg={{ span: 6, offset: 9 }}>
-          <Input placeholder="Confirm Password"/>
+          <Input placeholder="Confirm Password" value={confirmPassword} onChange={(e) => confirmPassword = e.target.value}/>
         </Col>
       </Row>
       <Row style={{marginTop: '15px'}}>
