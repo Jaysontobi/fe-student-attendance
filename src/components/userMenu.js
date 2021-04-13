@@ -27,6 +27,7 @@ const UserMenu = () => {
          </Menu.Item>
          <Menu.Item className="dropdown-item">
             <SettingOutlined /> Settings
+            <Link to={'/settings'} className="nav-link" />
          </Menu.Item>
       </Menu>
    );
