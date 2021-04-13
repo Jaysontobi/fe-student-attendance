@@ -659,8 +659,8 @@ const loadUsers = async () => {
 	     lastName: user.lastName
      };
     const advisory = await AdditionalService.getAdvisory(userData);
-    const students = await AdditionalService.getAdvisoryStudents(advisory.gradeLevel);
-    let newList = students.map((user) => {
+    const students = await AdditionalService.getAdvisoryStudents(advisory.data.gradeLevel);
+    let newList = students.data.map((user) => {
       return {
         key: user._id,
         id: user._id,
