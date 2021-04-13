@@ -23,7 +23,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   let [advisoryStudents, setAdvisoryStudents] = useState([]);
   
   let {
-    buildAdvisoryStudentList
+    buildStudentList
   } = UserAction({});
 
   const addAdvisor = async (values, gradeLevel) => {
