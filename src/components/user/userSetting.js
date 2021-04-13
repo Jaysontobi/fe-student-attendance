@@ -15,7 +15,7 @@ const Settings = () => {
       return message.error('All fields are required.', 3);
     };
     
-    user: JSON.parse(sessionStorage.user);
+    let user = JSON.parse(sessionStorage.user);
     let body = {
       idNumber: user.idNumber,
       currentPassword: password,
