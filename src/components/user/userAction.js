@@ -16,7 +16,6 @@ const UserAction = (initial = { searchRequest: {} }) => {
   let [showUserVisible, setShowUserVisible] = useState(false);
   let [selectedUser, setSelectedUser] = useState({});
   let [selectedParent, setSelectedParent] = useState([]);
-  let [advisoryStudents, setAdvisoryStudents] = useState([]);
 
   let [loginCounter, setLoginCounter] = useState(false);
 
@@ -651,16 +650,8 @@ const loadUsers = async () => {
 
   };
   
-  const loadAdvisoryStudents = async () => {
-     let user = JSON.parse(sessionStorage.user);
-     const userData = {
-       firstName: user.firstName,
-	     middleName: user.middleName,
-	     lastName: user.lastName
-     };
-    const advisory = await AdditionalService.getAdvisory(userData);
-    const students = await AdditionalService.getAdvisoryStudents(advisory.data.gradeLevel);
-    let newList = students.data.map((user) => {
+  const buildAdvisoryStudentList = (list) => {
+    let list = list.map((user) => {
       return {
         key: user._id,
         id: user._id,
@@ -682,7 +673,7 @@ const loadUsers = async () => {
           <Button onClick={() => loadUser(user)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
       }
     });
-    setAdvisoryStudents(newList);
+    return list;
   };
   
   useEffect(() => {
@@ -717,8 +708,7 @@ const loadUsers = async () => {
     parentList,
     teacherList,
     getNewGenId,
-    loadAdvisoryStudents,
-    advisoryStudents
+    buildAdvisoryStudentList
   }
 };
 
