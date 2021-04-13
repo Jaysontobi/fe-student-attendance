@@ -143,10 +143,8 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
        let list = buildStudentList(students.data);
        await setAdvisoryStudents(list);
        console.log('YHVH is great', students.data);
-       console.log(advisoryStudents);
        return list;
      } catch (error) {
-       console.log(error);
        return [];
      };
     
