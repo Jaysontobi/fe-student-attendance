@@ -10,20 +10,20 @@ const Settings = () => {
   let error = false;
   let success = false;
   
-  const changePassword = () => {
-    console.log('________');
-    if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
-    return success = true;
-  };
+//   const changePassword = () => {
+//     console.log('________');
+//     if (password === '' || newPassword === '' || confirmPassword === '') return error = true;
+//     return success = true;
+//   };
   
   
   return (
     <Card className="h-82 p-70" style={{textAlign: 'center'}}>
-//      <Row className="mt-15">
-//        <Col lg={{ span: 6, offset: 9 }}>
-//          <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
-//        </Col>
-//      </Row>
+     <Row className="mt-15">
+       <Col lg={{ span: 6, offset: 9 }}>
+         <Typography.Title level={3} className="ml-15">Settings</Typography.Title>
+       </Col>
+     </Row>
 //      <form onSubmit={() => changePassword()}>
 //        <Row className="mt-15">
 //         <Col lg={{ span: 6, offset: 9 }}>
