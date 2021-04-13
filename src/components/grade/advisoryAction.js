@@ -142,9 +142,9 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
      
        const students = await AdditionalService.getAdvisoryStudents(advisory.data.gradeLevel);
        let list = buildStudentList(students.data);
-       setAdvisoryStudents(list);
+       await setAdvisoryStudents(list);
        console.log('YHVH is great', students.data);
-       console.log(list);
+       console.log(advisoryStudents);
      } catch (error) {
        console.log(error);
      };
