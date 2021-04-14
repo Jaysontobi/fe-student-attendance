@@ -3,6 +3,7 @@ import gradesService from './gradesService';
 import userService from '../user/userService';
 import advisoryService from '../grade/advisoryService';
 import auditTrailService from '../auditTrail/auditTrailService';
+import AdditionalService from '../user/additionalService';
 import { Button} from 'antd';
 import moment from 'moment';
 
@@ -828,10 +829,22 @@ const loadGrades1 = async () => {
   }
   
    const loadAdvisoryGrades = async () => {
-    let response = await gradesService.findAllGrades('2');
-    let result = response.data.filter(user => user.gradeLevel === "2" && user.status)
-        let list = result.map((user ) => {
-            return {
+    let user = JSON.parse(sessionStorage.user);
+    const userData = {
+       firstName: user.firstName,
+       lastName: user.lastName,
+       middleName: user.middleName
+    };
+    
+    try {
+       let advisory = await AdditionalService.getAdvisory(userData);
+      
+       if (!advisory) return ;
+      
+       let response = await gradesService.findAllGrades(advisory.data.gradeLevel);
+       let result = response.data.filter(user => user.gradeLevel === advisory.data.gradeLevel && user.status)
+       let list = result.map((user ) => {
+           return {
               key: user._id,
               id: user._id,
               firstName: user.student.firstName,
@@ -844,9 +857,11 @@ const loadGrades1 = async () => {
               action: 
                 <Button onClick={() => loadGrade(user,user.student.idNumber, '2')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
-          })
+         })
       
     setAdvisoryGrades(list);
+    } catch (error) {
+    };
   };
 
   useEffect(() => {
