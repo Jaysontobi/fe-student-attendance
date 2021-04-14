@@ -22,6 +22,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [grade8Details, setGrade8Details] = useState( {list : []});
   let [grade9Details, setGrade9Details] = useState( {list : []});
   let [grade10Details, setGrade10Details] = useState( {list : []});
+  let [advisoryGrades, setAdvisoryGrades] = useState([]);
 
   let [showGradeVisible, setShowGradeVisible] = useState(false);
   let [selectedGrade, setSelectedGrade] = useState({});
@@ -825,6 +826,28 @@ const loadGrades1 = async () => {
             list: newArray
           })
   }
+  
+   const loadAdvisoryGrades = async () => {
+    let response = await gradesService.findAllGrades('2');
+    let result = response.data.filter(user => user.gradeLevel === "2" && user.status)
+        let list = result.map((user ) => {
+            return {
+              key: user._id,
+              id: user._id,
+              firstName: user.student.firstName,
+              lastName: user.student.lastName,
+              middleName: user.student.middleName,
+              idNumber: user.student.idNumber,
+              contactNumber: user.student.contactNumber,
+              email: user.student.email,
+              section: user.student.section,
+              action: 
+                <Button onClick={() => loadGrade(user,user.student.idNumber, '2')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+            }
+          })
+      
+    setAdvisoryGrades(list);
+  };
 
   useEffect(() => {
     loadGrades1();
@@ -840,6 +863,7 @@ const loadGrades1 = async () => {
     loadGrades();
     currentGradeUser();
     getListOfTeacher();
+    loadAdvisoryGrades();
   }, []);
 
 
@@ -871,7 +895,8 @@ const loadGrades1 = async () => {
     setSelectedListOfStudent,
     loading,
     studentAdvisor,
-    filterCurrentGradeUser
+    filterCurrentGradeUser,
+    advisoryGrades
   }
 };
 
