@@ -55,21 +55,9 @@ const AdvisoryGrades = () => {
         <Spin spinning={loading} delay={0}>
     <Row className="mt-15">
       <Col lg={{ span: 13 }}>
-        <Typography.Title level={3} className="ml-15">Grade2 Management</Typography.Title>
+        <Typography.Title level={3} className="ml-15">Advisory Grades Management</Typography.Title>
       </Col>
       <Col lg={{ span: 10 }}>
-      {JSON.parse(sessionStorage.user).role === "Admin" ?       <Button className="right btn-add ml-10" type="save " onClick={() => showTeacher("2")}>
-          <PlusCircleOutlined type="add-circle" /> Add teacher
-             </Button>: null
-             }
-                           {JSON.parse(sessionStorage.user).role === "Admin" ?       <Button className="right ml-10 bg-gray text-white" type="save " onClick={() => showAdvisor("2")}>
-          <PlusCircleOutlined type="add-circle" /> Add Advisor
-             </Button> : null}
-             {JSON.parse(sessionStorage.user).role === "Admin" ?   
-        <Button className="right btn-save" onClick={() => upgradeStudent()}>
-          < RiseOutlined type="minus-circle" /> Upgrade
-             </Button>
-        : null}
       </Col>
     </Row>
     <Row>
