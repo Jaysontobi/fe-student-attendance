@@ -11,6 +11,7 @@ import Parent from "./components/user/parent.js";
 import Teacher from "./components/user/teacher.js";
 import UserSetting from "./components/user/userSetting.js";
 import UserDetail from "./components/userDetails/userDetails.js";
+import AdvisoryGrades from "./components/grade/advisoryGrades";
 import Grade1 from "./components/grade/grade1";
 import Grade2 from "./components/grade/grade2";
 import Grade3 from "./components/grade/grade3";
@@ -140,10 +141,11 @@ const App = () => {
                             <Route path="/settings" component={UserSetting} />
                             <Route path="/admin" component={User} />
                             <Route path="/student" component={ Student } />
-                            <Route path="/advisoryclass" render={(props) => { return (<Student isAdvisory="true"/>)}} />
+//                             <Route path="/advisoryclass" render={(props) => { return (<Student isAdvisory="true"/>)}}
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
+                            <Route path="/advisoryclass" component={AdvisoryGrades} />
                             <Route path="/grade1" component={Grade1} />
                             <Route path="/grade2" component={Grade2} />
                             <Route path="/grade3" component={Grade3} />
