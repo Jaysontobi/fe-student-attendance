@@ -141,7 +141,6 @@ const App = () => {
                             <Route path="/settings" component={UserSetting} />
                             <Route path="/admin" component={User} />
                             <Route path="/student" component={ Student } />
-//                             <Route path="/advisoryclass" render={(props) => { return (<Student isAdvisory="true"/>)}}
                             <Route path="/parent" component={Parent} />
                             <Route path="/teacher" component={Teacher} />
                             <Route path="/dashboard" component={Dashboard}/>
