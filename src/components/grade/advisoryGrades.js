@@ -27,7 +27,8 @@ const AdvisoryGrades = () => {
     selectedGradeUser,
     upgradeStudent,
     setSelectedListOfStudent,
-    loading
+    loading,
+    advisoryGrades
   } = GradeAction({});
 
   let {
@@ -73,7 +74,7 @@ const AdvisoryGrades = () => {
     </Row>
     <Row>
       <Col lg={{ span: "24" }}>
-        <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={grade2Details.list} />
+        <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={advisoryGrades} />
       </Col>
     </Row>
     <Drawer
