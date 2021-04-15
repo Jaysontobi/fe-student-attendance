@@ -76,7 +76,14 @@ const AdvisoryGrades = () => {
               onClose={()=> { setShowGradeVisible(false)}}
               bodyStyle={{ paddingBottom: 80 }}
           >
-             <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"2"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} isAdviser="true"/>
+             <GradeForm
+		upgradeStudent={upgradeStudent} 
+		add={addGrade} update={editGrade} 
+		selectedTeacher={selectedTeacher} 
+		selectedGrade={selectedGrade} 
+		gradeLevel={"2"} 
+		selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} 
+		isAdviser="true"/>
              <StudentGradeTable details={selectedGradeUser ? selectedGradeUser: []}/>
           </Drawer>
 
