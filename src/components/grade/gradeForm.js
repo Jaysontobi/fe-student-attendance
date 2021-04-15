@@ -5,7 +5,7 @@ import { Row, Col, Button, message, Spin, Card } from 'antd';
 import { CheckCircleFilled } from '@ant-design/icons';
 const { Option } = Select;
 
-const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeacher, selectedTeacherAssignedGrade, gradeLevel   }) => {
+const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeacher, selectedTeacherAssignedGrade, gradeLevel, isAdviser = false }) => {
 
    let [loading, setLoading] = useState(false);
 
