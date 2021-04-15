@@ -8,6 +8,7 @@ const { Option } = Select;
 
 const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined }) => {
 
+   selectedTeacher.splice(0, 0, {});
    let [loading, setLoading] = useState(false);
 
    return (
