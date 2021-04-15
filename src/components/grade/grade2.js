@@ -117,7 +117,7 @@ const GradePage = () => {
               onClose={()=> hideAdvisor()}
               bodyStyle={{ paddingBottom: 80 }}
           >
-             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade2} selectedTeacher={availableAdvisors} add={addAdvisor} gradeLevel={"2"}/>
+             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade2} selectedTeacher={selectedTeacher} add={addAdvisor} gradeLevel={"2"}/>
           </Drawer>
     </Spin>
   </Card>
