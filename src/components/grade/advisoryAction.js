@@ -48,7 +48,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   
   const getAvailableAdvisors = async () => {
     let advisors = await advisoryService.getAvailableAdvisors();
-    setAvailableAdvisors(advisors);
+    setAvailableAdvisors(advisors.data);
   };
 
   const getListOfTeacher = async () => {
