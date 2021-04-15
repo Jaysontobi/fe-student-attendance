@@ -37,7 +37,11 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
                   <Button className="btn-save" htmlType="submit">
                      <CheckCircleFilled type="check-circle" /> {values._id ? "Update": "Save"}
                   </Button>
-                  <Button type="danger" ghost>Remove Advisor</Button>
+                 { selectedTeacherAssgined ? (
+                    <Button type="danger" ghost htmlType="button">
+                      <DeleteOutlined /> Remove Advisor
+                    </Button>
+                  ) : ('') }
                </Form>
             </Spin>
          )}
