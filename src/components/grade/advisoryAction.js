@@ -21,6 +21,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   let [showAdvisorVisible, setshowAdvisorVisible] = useState(false);
   let [studentAdvisor, setStudentAdvisor] = useState({});
   let [advisoryStudents, setAdvisoryStudents] = useState([]);
+  let [availableAdvisors, setAvailableAdvisors] = useState([]);
   
   let {
     buildStudentList
@@ -43,6 +44,11 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     } catch (error) {
       console.log(error);
     };
+  };
+  
+  const getAvailableAdvisors = async () => {
+    let advisors = await advisoryService.getAvailableAdvisors();
+    setAvailableAdvisors(advisors);
   };
 
   const getListOfTeacher = async () => {
@@ -169,6 +175,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     getListOfAssignedTeacherGrade9();
     getListOfAssignedTeacherGrade10();
     loadAdvisoryStudents();
+    getAvailableAdvisors();
   }, []);
 
 
@@ -190,7 +197,8 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     selectedAdvisoryAssgined,
     studentAdvisor,
     advisoryStudents,
-    loadAdvisoryStudents
+    loadAdvisoryStudents,
+    availableAdvisors
   }
 };
 
