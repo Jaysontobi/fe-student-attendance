@@ -7,7 +7,7 @@ const { Option } = Select;
 
 
 const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined }) => {
-   console.log('here', selectedTeacher);
+   console.log('here', selectedTeacherAssgined);
 
    let [loading, setLoading] = useState(false);
 
@@ -37,7 +37,7 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
                   <Button className="btn-save" htmlType="submit">
                      <CheckCircleFilled type="check-circle" /> {values._id ? "Update": "Save"}
                   </Button>
-                  <Button type="danger" ghost>danger</Button>
+                  <Button type="danger" ghost>Remove Advisor</Button>
                </Form>
             </Spin>
          )}
