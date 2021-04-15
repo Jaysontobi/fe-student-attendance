@@ -276,9 +276,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Science', 'firstQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "1"}
                            name="Science1"
-                           defaultValue={hasUpdate('Science', 'firstQuarter') ? 
+                           defaultValue={ hasUpdate('Science', 'firstQuarter') ? 
                               autoFillGrade('Science', 'firstQuarter', 'Science1') :
                               values.subjects[2].subjectGrade.firstQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -291,6 +292,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            defaultValue={hasUpdate('Science', 'secondQuarter') ? 
                               autoFillGrade('Science', 'secondQuarter', 'Science2') :
                               values.subjects[2].subjectGrade.secondQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -302,9 +304,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Science', 'thirdQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "3"}
                            name="Science3"
-                           defaultValue={hasUpdate('Science', 'thirdQuarter') ? 
+                           defaultValue={ hasUpdate('Science', 'thirdQuarter') ? 
                              autoFillGrade('Science', 'thirdQuarter', 'Science3') :
-                             values.subjects[2].subjectGrade.thirdQuarter
+                             values.subjects[2].subjectGrade.thirdQuarter    
+                          }
                         />
                      </Form.Item>
                      </Col>
@@ -314,9 +317,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Science', 'fourthQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "4"}
                            name="Science4"
-                           defaultValue={hasUpdate('Science', 'fourthQuarter') ? 
+                           defaultValue={ hasUpdate('Science', 'fourthQuarter') ? 
                              autoFillGrade('Science', 'fourthQuarter', 'Science4') :
                              values.subjects[2].subjectGrade.fourthQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -338,9 +342,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Math', 'firstQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "1"}
                            name="Math1" 
-                           defaultValue={hasUpdate('Math', 'firstQuarter') ? 
+                           defaultValue={ hasUpdate('Math', 'firstQuarter') ? 
                               autoFillGrade('Math', 'firstQuarter', 'Math1'):
                               values.subjects[3].subjectGrade.firstQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -350,9 +355,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Math', 'secondQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "2"}
                            name="Math2"
-                           defaultValue={hasUpdate('Math', 'secondQuarter') ? 
+                           defaultValue={ hasUpdate('Math', 'secondQuarter') ? 
                               autoFillGrade('Math', 'secondQuarter', 'Math2'):
                               values.subjects[3].subjectGrade.secondQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -364,9 +370,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Math', 'thirdQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "3"}
                            name="Math3"
-                           defaultValue={hasUpdate('Math', 'thirdQuarter') ? 
+                           defaultValue={ hasUpdate('Math', 'thirdQuarter') ? 
                               autoFillGrade('Math', 'thirdQuarter', 'Math3'):
                               values.subjects[3].subjectGrade.thirdQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -376,9 +383,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('Math', 'fourthQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "4"}
                            name="Math4"
-                           defaultValue={hasUpdate('Math', 'fourthQuarter') ? 
+                           defaultValue={ hasUpdate('Math', 'fourthQuarter') ? 
                               autoFillGrade('Math', 'fourthQuarter', 'Math4'):
                               values.subjects[3].subjectGrade.fourthQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -403,9 +411,10 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            style={{border: hasUpdate('MAPEH', 'firstQuarter') ? '1px solid red': ''}}
                            disabled={sessionStorage.quarter !== "1"}
                            name="MAPEH1" 
-                           defaultValue={hasUpdate('MAPEH', 'firstQuarter') ? 
+                           defaultValue={ hasUpdate('MAPEH', 'firstQuarter') ? 
                               autoFillGrade('MAPEH', 'firstQuarter', 'MAPEH1'):
-                              values.subjects[4].subjectGrade.firstQuarter}
+                              values.subjects[4].subjectGrade.firstQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -417,7 +426,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH2"
                            defaultValue={hasUpdate('MAPEH', 'secondQuarter') ? 
                               autoFillGrade('MAPEH', 'secondQuarter', 'MAPEH2'):
-                              values.subjects[4].subjectGrade.secondQuarter}
+                              values.subjects[4].subjectGrade.secondQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -431,7 +441,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH3"
                            defaultValue={hasUpdate('MAPEH', 'thirdQuarter') ? 
                               autoFillGrade('MAPEH', 'thirdQuarter', 'MAPEH3'):
-                              values.subjects[4].subjectGrade.thirdQuarter}
+                              values.subjects[4].subjectGrade.thirdQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -443,7 +454,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH4"
                            defaultValue={hasUpdate('MAPEH', 'fourthQuarter') ? 
                               autoFillGrade('MAPEH', 'fourthQuarter', 'MAPEH4'):
-                              values.subjects[4].subjectGrade.fourthQuarter}
+                              values.subjects[4].subjectGrade.fourthQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -467,7 +479,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values1"
                            defaultValue={hasUpdate('Values', 'firstQuarter') ? 
                              autoFillGrade('Values', 'firstQuarter', 'Values1'):
-                             values.subjects[5].subjectGrade.firstQuarter}
+                             values.subjects[5].subjectGrade.firstQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -479,7 +492,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values2"
                            defaultValue={hasUpdate('Values', 'secondQuarter') ? 
                              autoFillGrade('Values', 'secondQuarter', 'Values2'):
-                             values.subjects[5].subjectGrade.secondQuarter}
+                             values.subjects[5].subjectGrade.secondQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -493,7 +507,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values3"
                            defaultValue={hasUpdate('Values', 'thirdQuarter') ? 
                              autoFillGrade('Values', 'thirdQuarter', 'Values3'):
-                             values.subjects[5].subjectGrade.thirdQuarter}
+                             values.subjects[5].subjectGrade.thirdQuarter
+                           }
                         />
                      </Form.Item>
                      </Col>
@@ -505,7 +520,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values4"
                            defaultValue={hasUpdate('Values', 'fourthQuarter') ? 
                              autoFillGrade('Values', 'fourthQuarter', 'Values4'):
-                             values.subjects[5].subjectGrade.fourthQuarter} 
+                             values.subjects[5].subjectGrade.fourthQuarter
+                           } 
                         />
                      </Form.Item>
                      </Col>
