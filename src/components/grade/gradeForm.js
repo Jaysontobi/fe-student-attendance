@@ -77,8 +77,9 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   fourthQuarter:values.Values4
                }
                newValues.Values = Values;
-            }
-            update(newValues)
+            };
+   
+            update(newValues, isAdviser);
          }}
          render={({ values, touched, setFieldValue }) => (
              
