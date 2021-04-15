@@ -7,7 +7,9 @@ const { Option } = Select;
 
 
 const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined }) => {
-   console.log('here', selectedTeacherAssgined);
+  let {
+    deleteAdvisory
+  } = AdvisorAction({});
 
    let [loading, setLoading] = useState(false);
 
@@ -38,7 +40,7 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
                      <CheckCircleFilled type="check-circle" /> {values._id ? "Update": "Save"}
                   </Button>
                  { selectedTeacherAssgined ? (
-                    <Button type="danger" ghost htmlType="button">
+                    <Button type="danger" ghost htmlType="button" onClick={deleteAdvisory(selectedTeacherAssgined._id)}>
                       <DeleteOutlined /> Remove Advisor
                     </Button>
                   ) : ('') }
