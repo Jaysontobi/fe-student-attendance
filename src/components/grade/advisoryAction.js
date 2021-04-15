@@ -160,6 +160,10 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
      };
     
   };
+  
+  const deleteAdvisory = async (id) => {
+    let response = await advisoryService.deleteAdvisory(id);
+  };
 
   useEffect(() => {
     getStudentAdvisor();
@@ -198,7 +202,8 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     studentAdvisor,
     advisoryStudents,
     loadAdvisoryStudents,
-    availableAdvisors
+    availableAdvisors,
+    deleteAdvisory
   }
 };
 
