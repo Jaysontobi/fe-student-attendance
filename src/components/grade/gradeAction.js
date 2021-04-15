@@ -891,7 +891,7 @@ const loadGrades1 = async () => {
               email: user.student.email,
               section: user.student.section,
               action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '2')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+                <Button onClick={() => loadGrade(user,user.student.idNumber, advisory.data.gradeLevel)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
             }
          })
       
