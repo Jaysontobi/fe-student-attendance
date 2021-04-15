@@ -41,7 +41,7 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
                      <CheckCircleFilled type="check-circle" /> {values._id ? "Update": "Save"}
                   </Button>
                  { selectedTeacherAssgined ? (
-                    <Button type="danger" ghost htmlType="button" onClick={deleteAdvisory(selectedTeacherAssgined._id)}>
+                    <Button type="danger" style={{ marginLeft: '10px' }} ghost htmlType="button" onClick={() => deleteAdvisory(selectedTeacherAssgined._id)}>
                       <DeleteOutlined /> Remove Advisor
                     </Button>
                   ) : ('') }
