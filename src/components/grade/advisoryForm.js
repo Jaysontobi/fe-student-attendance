@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Input, DatePicker, Select } from 'formik-antd'
 import { Formik } from 'formik';
 import { Row, Col, Button, message, Spin, Card } from 'antd';
-import { CheckCircleFilled } from '@ant-design/icons';
+import { CheckCircleFilled, DeleteOutlined } from '@ant-design/icons';
 import AdvisorAction from './advisoryAction';
 
 const { Option } = Select;
