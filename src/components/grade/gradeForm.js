@@ -11,7 +11,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
    const hasUpdate = (subjectName='', quarter='') => {
      let subject = selectedGrade.subjects.find(subject => subject.subjectName === subjectName);
       
-    if( subject.recommendedGrade && subject.recommendedGrade[quarter]) return true;
+    if( subject.recommendedGrade && subject.recommendedGrade[quarter] && subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter]) return true;
       
     return false;
    };
