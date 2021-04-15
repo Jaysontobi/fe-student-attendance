@@ -8,6 +8,13 @@ const { Option } = Select;
 const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeacher, selectedTeacherAssignedGrade, gradeLevel, isAdviser = false }) => {
 
    let [loading, setLoading] = useState(false);
+   const hasUpdate = (subjectName='', quarter='') => {
+     let subject = selectedGrade.subjects.find(subject => subject.subjectName === subjectName);
+      
+    if(subject.recommendedGrade[quarter]) return true;
+      
+    return false;
+   };
 
    return (
       <Formik
@@ -108,15 +115,25 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   </Row>
                   <>      
                     <Row gutter={16}>
-                     {
-                     (selectedTeacherAssignedGrade && selectedTeacherAssignedGrade.subjects && selectedTeacherAssignedGrade.subjects != undefined && selectedTeacherAssignedGrade.subjects[0] && selectedTeacherAssignedGrade.subjects[0].teacher && selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
+                     {( isAdviser ||
+                       selectedTeacherAssignedGrade &&
+                       selectedTeacherAssignedGrade.subjects &&
+                       selectedTeacherAssignedGrade.subjects != undefined &&
+                       selectedTeacherAssignedGrade.subjects[0] && 
+                       selectedTeacherAssignedGrade.subjects[0].teacher &&
+                       selectedTeacherAssignedGrade.subjects[0].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
                      ?                      
                      <Col span={12}>
                      <Card title="English" disabled = {true} style={{ width: 300 }}>
                      <Row gutter={16}>
                      <Col span={12}>
                      <Form.Item label="1st Q" name="values">
-                        <Input disabled={sessionStorage.quarter !== "1"} name="English1" defaultValue={values.subjects[0].subjectGrade.firstQuarter}/>
+                        <Input
+                           style={{border: hasUpdate('English', 'firstQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "1"} name="English1" 
+                           defaultValue={hasUpdate('English', 'firstQuarter') ? 
+                              values.subjects[0].recommendedGrade.firstQuarter :
+                              values.subjects[0].subjectGrade.firstQuarter}/>
                      </Form.Item>
                      </Col>
                      <Col span={12}>
