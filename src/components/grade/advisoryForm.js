@@ -7,6 +7,7 @@ const { Option } = Select;
 
 
 const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined }) => {
+   console.log('here', selectedTeacher);
 
    let [loading, setLoading] = useState(false);
 
