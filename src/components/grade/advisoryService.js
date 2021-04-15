@@ -20,6 +20,9 @@ class AdvisoryService extends BaseService {
     return this.axiosInstance.get('/');
   };
 
+  getAvailableAdvisors = () => {
+    return this.axiosInstance.get('/available-advisors');
+  };
 }
 
 export default new AdvisoryService();
