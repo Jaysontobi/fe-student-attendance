@@ -148,7 +148,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
   };
 
-  const editGrade = async values => {
+  const editGrade = async (values, isAdvisory = false) => {
     let result = await gradesService.findyById(values._id);
     let grade = result.data
 
@@ -187,8 +187,14 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         secondQuarter:secondQuarter,
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
-      }
-      grade.subjects[0].subjectGrade = newEnglishGrade;
+      };
+      
+      if(isAdvisory) {
+        grade.subjects[0].subjectGrade = newEnglishGrade;
+        grade.subjects[0].recommendedGrade = {};
+      } else {
+        grade.subjects[0].recommendedGrade = newEnglishGrade;
+      };
     }    
 
     if(values.Filipino) {
@@ -227,7 +233,13 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
       }
-      grade.subjects[1].subjectGrade = newFilipinoGrade;
+      
+      if(isAdvisory) {
+        grade.subjects[1].subjectGrade = newFilipinoGrade;
+        grade.subjects[1].recommendedGrade = {};
+      } else {
+        grade.subjects[1].recommendedGrade = newFilipinoGrade;
+      };
     }
 
     if(values.Science) {
@@ -265,8 +277,14 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         secondQuarter:secondQuarter,
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
-      }
-      grade.subjects[2].subjectGrade = newScienceGrade;
+      };
+      
+      if(isAdvisory) {
+        grade.subjects[2].subjectGrade = newScienceGrade;
+        grade.subjects[2].recommendedGrade = {};
+      } else {
+        grade.subjects[2].recommendedGrade = newScienceGrade;
+      };
     }
 
     if(values.Math) {
@@ -304,8 +322,14 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         secondQuarter:secondQuarter,
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
-      }
-      grade.subjects[3].subjectGrade = newMathGrade;
+      };
+  
+      if(isAdvisory) {
+        grade.subjects[3].subjectGrade = newMathGrade;
+        grade.subjects[3].recommendedGrade = {};
+      } else {
+        grade.subjects[3].recommendedGrade = newMathGrade;
+      };
     }
 
     if(values.MAPEH) {
@@ -343,8 +367,14 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         secondQuarter:secondQuarter,
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
-      }
-      grade.subjects[4].subjectGrade = newMAPEHGrade;
+      };
+      
+      if(isAdvisory) {
+        grade.subjects[4].subjectGrade = newMAPEHGrade;
+        grade.subjects[4].recommendedGrade = {};
+      } else {
+        grade.subjects[4].recommendedGrade = newMAPEHGrade;
+      };
     }
 
     if(values.Values) {
@@ -382,8 +412,14 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         secondQuarter:secondQuarter,
         thirdQuarter:thirdQuarter,
         fourthQuarter:fourthQuarter
-      }
-      grade.subjects[5].subjectGrade = newValuesGrade;
+      };
+      
+      if(isAdvisory) {
+        grade.subjects[5].subjectGrade = newValuesGrade;
+        grade.subjects[5].recommendedGrade = {};
+      } else {
+        grade.subjects[5].recommendedGrade = newValuesGrade;
+      };
     }
 
     let updateResult = await gradesService.update(grade);
