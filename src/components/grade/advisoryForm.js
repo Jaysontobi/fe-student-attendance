@@ -10,7 +10,6 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
 
    selectedTeacher.splice(0, 0, {});
    let [loading, setLoading] = useState(false);
-   let empty = {};
 
    return (
       <Formik
@@ -27,7 +26,7 @@ const TeacherForm = ({ selectedTeacher, add, gradeLevel, selectedTeacherAssgined
          <Col span={24}>
             <Form.Item label="Advisor" name="advisor">
                <Select name="advisor" defaultValue={selectedTeacherAssgined ? selectedTeacherAssgined.teacher.firstName + " " + selectedTeacherAssgined.teacher.lastName : null}>
-                  <Option value={empty}>None</Option>
+                  <Option value=''>None</Option>
                   {selectedTeacher.map(teacher => {
                      return <Option value={teacher._id}>{teacher.firstName + " " + teacher.lastName}</Option>
                   })}
