@@ -36,8 +36,13 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
       gradeLevel: gradeLevel,
       teacher: advisorTeacher.data
     }
-    let response = await advisoryService.add(finalAddValue);
-    window.location.reload();
+    try {
+      let response = await advisoryService.add(finalAddValue);
+      console.log(response);
+       window.location.reload();
+    } catch (error) {
+      console.log(error);
+    };
   };
 
   const getListOfTeacher = async () => {
