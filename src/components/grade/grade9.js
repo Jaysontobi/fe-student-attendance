@@ -44,7 +44,8 @@ const GradePage = () => {
     showAdvisor,
     addAdvisor,
     selectedAdvisoryAssignedGrade9,
-    selectedAdvisoryAssgined
+    selectedAdvisoryAssgined,
+    availableAdvisors
   } = AdvisorAction({});
 
 
@@ -115,7 +116,7 @@ const GradePage = () => {
               onClose={()=> hideAdvisor()}
               bodyStyle={{ paddingBottom: 80 }}
           >
-             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade9} selectedTeacher={selectedTeacher} add={addAdvisor} gradeLevel={"9"}/>
+             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade9} selectedTeacher={availableAdvisors} add={addAdvisor} gradeLevel={"9"}/>
           </Drawer>
           </Spin>
   </Card>
