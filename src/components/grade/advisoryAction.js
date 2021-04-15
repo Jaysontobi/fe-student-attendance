@@ -163,6 +163,7 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
   
   const deleteAdvisory = async (id) => {
     let response = await advisoryService.deleteAdvisory(id);
+    window.location.reload();
   };
 
   useEffect(() => {
