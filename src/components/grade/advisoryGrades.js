@@ -80,7 +80,7 @@ const AdvisoryGrades = () => {
              <StudentGradeTable details={selectedGradeUser ? selectedGradeUser: []}/>
           </Drawer>
 
-          <Drawer
+         {/* <Drawer
               title={
                   <Typography.Title level={4}>
                   Teachers for grade 2
@@ -106,7 +106,7 @@ const AdvisoryGrades = () => {
               bodyStyle={{ paddingBottom: 80 }}
           >
              <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade2} selectedTeacher={selectedTeacher} add={addAdvisor} gradeLevel={"2"}/>
-          </Drawer>
+          </Drawer> */}
     </Spin>
   </Card>
 	
