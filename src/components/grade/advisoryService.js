@@ -24,7 +24,7 @@ class AdvisoryService extends BaseService {
     return this.axiosInstance.get('/available-advisors');
   };
 
-  deleteadvisory = (id) => {
+  deleteAdvisory = (id) => {
     return this.axiosInstance.delete('/delete-advisory/' + id)
   };
 }
