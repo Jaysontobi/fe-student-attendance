@@ -579,7 +579,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       if(values[subject].firstQuarter) {
         firstQuarter = values.Values.firstQuarter
       } else {
-        firstQuarter = subjectGrade.firstQuarter ? subjectGrade.firstQuarter
+        firstQuarter =  subjectGrade.firstQuarter
       }
 
       if(values[subject].secondQuarter) {
