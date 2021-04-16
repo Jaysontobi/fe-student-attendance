@@ -86,34 +86,6 @@ const AdvisoryGrades = () => {
 		isAdviser="true"/>
              <StudentGradeTable details={selectedGradeUser ? selectedGradeUser: []}/>
           </Drawer>
-
-         {/* <Drawer
-              title={
-                  <Typography.Title level={4}>
-                  Teachers for grade 2
-                  </Typography.Title>
-              }
-              width={700}
-              visible={showTeacherVisible}
-              onClose={()=> hideTeacher()}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"2"}/>
-          </Drawer>
-
-          <Drawer
-              title={
-                  <Typography.Title level={4}>
-                  Advisor for grade 2
-                  </Typography.Title>
-              }
-              width={700}
-              visible={showAdvisorVisible}
-              onClose={()=> hideAdvisor()}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade2} selectedTeacher={selectedTeacher} add={addAdvisor} gradeLevel={"2"}/>
-          </Drawer> */}
     </Spin>
   </Card>
 	
