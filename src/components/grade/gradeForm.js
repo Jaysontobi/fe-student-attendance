@@ -9,6 +9,7 @@ const { Panel } = Collapse;
 const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeacher, selectedTeacherAssignedGrade, gradeLevel, isAdviser = false }) => {
 
    let [loading, setLoading] = useState(false);
+   let lowestGrade = 50;
    const hasUpdate = (subjectName='', quarter='') => {
      let subject = selectedGrade.subjects.find(subject => subject.subjectName === subjectName);
       
@@ -25,9 +26,13 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
        MAPEH4: 0
     };
 
-   const autoFillGrade = (subjectName='', quarter='', field='') => {
+   const autoFillGrade = (subjectName='', quarter='', field='', isDefault = false, quarterNum = 0) => {
+      let activeQuarter = sessionStorage.quarter;
       let index = selectedGrade.subjects.findIndex(subject => subject.subjectName === subjectName);
-      let value = selectedGrade.subjects[index].recommendedGrade[quarter];
+      let value = ( selectedGrade.subjects[index] && selectedGrade.subjects[index].recommendedGrade) ? selectedGrade.subjects[index].recommendedGrade[quarter]: null;
+      let dafaultVal = (selectedGrade.subjects[index]) ? selectedGrade.subjects[index].subjectGrade[quarter]: lowestGrade; 
+      dafaultVal = (dafaultVal && dafaultVal >= 50) ? dafaultVal : (activeQuarter === quarterNum ) ? lowestGrade : 0;
+      value = (isDefault) ? dafaultVal : value;
       let holder = {
             [field] : value
       };
@@ -173,7 +178,6 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                }
                newValues.Health = Health;
             };
-   
             update(newValues, isAdviser);
          }}
          render={({ values, touched, setFieldValue }) => (
@@ -221,7 +225,8 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            disabled={sessionStorage.quarter !== "1"} name="English1" 
                            defaultValue={hasUpdate('English', 'firstQuarter') ? 
                               autoFillGrade('English', 'firstQuarter', 'English1'):
-                              values.subjects[0].subjectGrade.firstQuarter}/>
+                              autoFillGrade('English', 'firstQuarter', 'English1', true, '1') }
+                        />
                      </Form.Item>
                      </Col>
                      <Col span={12}>
@@ -232,7 +237,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="English2"
                            defaultValue={hasUpdate('English', 'secondQuarter') ? 
                               autoFillGrade('English', 'secondQuarter', 'English2'):
-                              values.subjects[0].subjectGrade.secondQuarter} />
+                              autoFillGrade('English', 'secondQuarter', 'English2' , true, '2')} />
                      </Form.Item>
                      </Col>
                      </Row>
@@ -245,7 +250,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="English3"
                            defaultValue={hasUpdate('English', 'thirdQuarter') ? 
                               autoFillGrade('English', 'thirdQuarter', 'English3'):
-                              values.subjects[0].subjectGrade.thirdQuarter}/>
+                              autoFillGrade('English', 'thirdQuarter', 'English3', true, '3')}/>
                      </Form.Item>
                      </Col>
                      <Col span={12}>
@@ -256,7 +261,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="English4"
                            defaultValue={hasUpdate('English', 'fourthQuarter') ? 
                               autoFillGrade('English', 'fourthQuarter', 'English4'):
-                              values.subjects[0].subjectGrade.fourthQuarter} />
+                              autoFillGrade('English', 'fourthQuarter', 'English4', true, '4')} />
                      </Form.Item>
                      </Col>
                      </Row>
@@ -279,7 +284,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Filipino1"
                            defaultValue={hasUpdate('Filipino', 'firstQuarter') ? 
                               autoFillGrade('Filipino', 'firstQuarter', 'Filipino1'):
-                              values.subjects[1].subjectGrade.firstQuarter}
+                              autoFillGrade('Filipino', 'firstQuarter', 'Filipino1', true, '1')}
                         />
                      </Form.Item>
                      </Col>
@@ -291,7 +296,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Filipino2"
                            defaultValue={hasUpdate('Filipino', 'secondQuarter') ? 
                               autoFillGrade('Filipino', 'secondQuarter', 'Filipino2'):
-                              values.subjects[1].subjectGrade.secondQuarter}
+                              autoFillGrade('Filipino', 'secondQuarter', 'Filipino2', true, '2')}
                         />
                      </Form.Item>
                      </Col>
@@ -305,7 +310,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Filipino3"
                            defaultValue={hasUpdate('Filipino', 'thirdQuarter') ? 
                               autoFillGrade('Filipino', 'thirdQuarter', 'Filipino3'):
-                              values.subjects[1].subjectGrade.thirdQuarter}
+                              autoFillGrade('Filipino', 'thirdQuarter', 'Filipino3', true, '3') }
                          />
                      </Form.Item>
                      </Col>
@@ -317,7 +322,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Filipino4"
                            defaultValue={hasUpdate('Filipino', 'fourthQuarter') ? 
                               autoFillGrade('Filipino', 'fourthQuarter', 'Filipino4'):
-                              values.subjects[1].subjectGrade.fourthQuarter}
+                              autoFillGrade('Filipino', 'fourthQuarter', 'Filipino4', true, '4') }
                         />
                      </Form.Item>
                      </Col>
@@ -350,7 +355,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Science1"
                            defaultValue={ hasUpdate('Science', 'firstQuarter') ? 
                               autoFillGrade('Science', 'firstQuarter', 'Science1') :
-                              values.subjects[2].subjectGrade.firstQuarter
+                              autoFillGrade('Science', 'firstQuarter', 'Science1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -363,7 +368,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Science2"
                            defaultValue={hasUpdate('Science', 'secondQuarter') ? 
                               autoFillGrade('Science', 'secondQuarter', 'Science2') :
-                              values.subjects[2].subjectGrade.secondQuarter
+                              autoFillGrade('Science', 'secondQuarter', 'Science2', true, '2')
                            }
                         />
                      </Form.Item>
@@ -378,7 +383,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Science3"
                            defaultValue={ hasUpdate('Science', 'thirdQuarter') ? 
                              autoFillGrade('Science', 'thirdQuarter', 'Science3') :
-                             values.subjects[2].subjectGrade.thirdQuarter    
+                             autoFillGrade('Science', 'thirdQuarter', 'Science3', true, '3')   
                           }
                         />
                      </Form.Item>
@@ -391,7 +396,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Science4"
                            defaultValue={ hasUpdate('Science', 'fourthQuarter') ? 
                              autoFillGrade('Science', 'fourthQuarter', 'Science4') :
-                             values.subjects[2].subjectGrade.fourthQuarter
+                             autoFillGrade('Science', 'fourthQuarter', 'Science4', true, '4')
                            }
                         />
                      </Form.Item>
@@ -416,7 +421,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Math1" 
                            defaultValue={ hasUpdate('Math', 'firstQuarter') ? 
                               autoFillGrade('Math', 'firstQuarter', 'Math1'):
-                              values.subjects[3].subjectGrade.firstQuarter
+                              autoFillGrade('Math', 'firstQuarter', 'Math1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -429,7 +434,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Math2"
                            defaultValue={ hasUpdate('Math', 'secondQuarter') ? 
                               autoFillGrade('Math', 'secondQuarter', 'Math2'):
-                              values.subjects[3].subjectGrade.secondQuarter
+                              autoFillGrade('Math', 'secondQuarter', 'Math2', true, '2')
                            }
                         />
                      </Form.Item>
@@ -444,7 +449,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Math3"
                            defaultValue={ hasUpdate('Math', 'thirdQuarter') ? 
                               autoFillGrade('Math', 'thirdQuarter', 'Math3'):
-                              values.subjects[3].subjectGrade.thirdQuarter
+                              autoFillGrade('Math', 'thirdQuarter', 'Math3', true, '3')
                            }
                         />
                      </Form.Item>
@@ -457,7 +462,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Math4"
                            defaultValue={ hasUpdate('Math', 'fourthQuarter') ? 
                               autoFillGrade('Math', 'fourthQuarter', 'Math4'):
-                              values.subjects[3].subjectGrade.fourthQuarter
+                              autoFillGrade('Math', 'fourthQuarter', 'Math4', true, 4)
                            }
                         />
                      </Form.Item>
@@ -485,7 +490,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH1" 
                            defaultValue={ hasUpdate('MAPEH', 'firstQuarter') ? 
                               autoFillGrade('MAPEH', 'firstQuarter', 'MAPEH1'):
-                              values.subjects[4].subjectGrade.firstQuarter
+                              autoFillGrade('MAPEH', 'firstQuarter', 'MAPEH1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -498,7 +503,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH2"
                            defaultValue={hasUpdate('MAPEH', 'secondQuarter') ? 
                               autoFillGrade('MAPEH', 'secondQuarter', 'MAPEH2'):
-                              values.subjects[4].subjectGrade.secondQuarter
+                              autoFillGrade('MAPEH', 'secondQuarter', 'MAPEH2', true, '2')
                            }
                         />
                      </Form.Item>
@@ -513,7 +518,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH3"
                            defaultValue={hasUpdate('MAPEH', 'thirdQuarter') ? 
                               autoFillGrade('MAPEH', 'thirdQuarter', 'MAPEH3'):
-                              values.subjects[4].subjectGrade.thirdQuarter
+                              autoFillGrade('MAPEH', 'thirdQuarter', 'MAPEH3', true, '3')
                            }
                         />
                      </Form.Item>
@@ -526,7 +531,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="MAPEH4"
                            defaultValue={hasUpdate('MAPEH', 'fourthQuarter') ? 
                               autoFillGrade('MAPEH', 'fourthQuarter', 'MAPEH4'):
-                              values.subjects[4].subjectGrade.fourthQuarter
+                              autoFillGrade('MAPEH', 'fourthQuarter', 'MAPEH4', true, '4')
                            }
                         />
                      </Form.Item>
@@ -551,7 +556,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values1"
                            defaultValue={hasUpdate('Values', 'firstQuarter') ? 
                              autoFillGrade('Values', 'firstQuarter', 'Values1'):
-                             values.subjects[5].subjectGrade.firstQuarter
+                             autoFillGrade('Values', 'firstQuarter', 'Values1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -564,7 +569,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values2"
                            defaultValue={hasUpdate('Values', 'secondQuarter') ? 
                              autoFillGrade('Values', 'secondQuarter', 'Values2'):
-                             values.subjects[5].subjectGrade.secondQuarter
+                             autoFillGrade('Values', 'secondQuarter', 'Values2', true, '2')
                            }
                         />
                      </Form.Item>
@@ -579,7 +584,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values3"
                            defaultValue={hasUpdate('Values', 'thirdQuarter') ? 
                              autoFillGrade('Values', 'thirdQuarter', 'Values3'):
-                             values.subjects[5].subjectGrade.thirdQuarter
+                             autoFillGrade('Values', 'thirdQuarter', 'Values3', true, '3')
                            }
                         />
                      </Form.Item>
@@ -592,7 +597,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Values4"
                            defaultValue={hasUpdate('Values', 'fourthQuarter') ? 
                              autoFillGrade('Values', 'fourthQuarter', 'Values4'):
-                             values.subjects[5].subjectGrade.fourthQuarter
+                             autoFillGrade('Values', 'thirdQuarter', 'Values3', true, '4')
                            } 
                         />
                      </Form.Item>
@@ -616,7 +621,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Music1" 
                            defaultValue={ hasUpdate('Music', 'firstQuarter') ? 
                               autoFillGrade('Music', 'firstQuarter', 'Music1'):
-                              getGrade('Music', 'firstQuarter')
+                              autoFillGrade('Music', 'firstQuarter', 'Music1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -629,7 +634,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Music2" 
                            defaultValue={ hasUpdate('Music', 'secondQuarter') ? 
                               autoFillGrade('Music', 'secondQuarter', 'Music2'):
-                              getGrade('Music', 'secondQuarter')
+                              autoFillGrade('Music', 'secondQuarter', 'Music2', true, '2')
                             }
                           />
                      </Form.Item>
@@ -644,7 +649,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Music3" 
                            defaultValue={ hasUpdate('Music', 'thirdQuarter') ? 
                               autoFillGrade('Music', 'thirdQuarter', 'Music3'):
-                              getGrade('Music', 'thirdQuarter')
+                              autoFillGrade('Music', 'thirdQuarter', 'Music3', true, '3')
                             }
                           />
                      </Form.Item>
@@ -657,7 +662,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Music4" 
                            defaultValue={ hasUpdate('Music', 'fourthQuarter') ? 
                               autoFillGrade('Music', 'fourthQuarter', 'Music4'):
-                              getGrade('Music', 'fourthQuarter')
+                              autoFillGrade('Music', 'fourthQuarter', 'Music4', true, '4')
                             }
                           />
                      </Form.Item>
@@ -676,7 +681,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Art1" 
                            defaultValue={ hasUpdate('Art', 'firstQuarter') ? 
                               autoFillGrade('Art', 'firstQuarter', 'Art1'):
-                              getGrade('Art', 'firstQuarter')
+                              autoFillGrade('Art', 'firstQuarter', 'Art1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -689,7 +694,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Art2" 
                            defaultValue={ hasUpdate('Art', 'secondQuarter') ? 
                               autoFillGrade('Art', 'secondQuarter', 'Art2'):
-                              getGrade('Art', 'secondQuarter')
+                              autoFillGrade('Art', 'secondQuarter', 'Art2', true, '2')
                             }
                           />
                      </Form.Item>
@@ -704,7 +709,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Art3" 
                            defaultValue={ hasUpdate('Art', 'thirdQuarter') ? 
                               autoFillGrade('Art', 'thirdQuarter', 'Art3'):
-                              getGrade('Art', 'thirdQuarter')
+                              autoFillGrade('Art', 'thirdQuarter', 'Art3', true, '3')
                             }
                           />
                      </Form.Item>
@@ -717,7 +722,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Art4" 
                            defaultValue={ hasUpdate('Art', 'fourthQuarter') ? 
                               autoFillGrade('Art', 'fourthQuarter', 'Art4'):
-                              getGrade('Art', 'fourthQuarter')
+                              autoFillGrade('Art', 'thirdQuarter', 'Art4', true, '4')
                             }
                           />
                      </Form.Item>
@@ -738,7 +743,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="PE1" 
                            defaultValue={ hasUpdate('PE', 'firstQuarter') ? 
                               autoFillGrade('PE', 'firstQuarter', 'PE1'):
-                              getGrade('PE', 'firstQuarter')
+                              autoFillGrade('PE', 'firstQuarter', 'PE1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -751,7 +756,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="PE2" 
                            defaultValue={ hasUpdate('PE', 'secondQuarter') ? 
                               autoFillGrade('PE', 'secondQuarter', 'PE2'):
-                              getGrade('PE', 'secondQuarter')
+                              autoFillGrade('PE', 'secondQuarter', 'PE2', true, '2')
                             }
                           />
                      </Form.Item>
@@ -766,7 +771,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="PE3" 
                            defaultValue={ hasUpdate('PE', 'thirdQuarter') ? 
                               autoFillGrade('PE', 'thirdQuarter', 'PE3'):
-                              getGrade('PE', 'thirdQuarter')
+                              autoFillGrade('PE', 'thirdQuarter', 'PE3', true, '3')
                             }
                           />
                      </Form.Item>
@@ -779,7 +784,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="PE4" 
                            defaultValue={ hasUpdate('PE', 'fourthQuarter') ? 
                               autoFillGrade('PE', 'fourthQuarter', 'PE4'):
-                              getGrade('PE', 'fourthQuarter')
+                              autoFillGrade('PE', 'fourthQuarter', 'PE4', true, '4')
                             }
                           />
                      </Form.Item>
@@ -798,7 +803,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Health1" 
                            defaultValue={ hasUpdate('Health', 'firstQuarter') ? 
                               autoFillGrade('Health', 'firstQuarter', 'Health1'):
-                              getGrade('Health', 'firstQuarter')
+                              autoFillGrade('Health', 'firstQuarter', 'Health1', true, '1')
                            }
                         />
                      </Form.Item>
@@ -811,7 +816,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Health2" 
                            defaultValue={ hasUpdate('Health', 'secondQuarter') ? 
                               autoFillGrade('Health', 'secondQuarter', 'Health2'):
-                              getGrade('Health', 'secondQuarter')
+                              autoFillGrade('Health', 'secondQuarter', 'Health2', true, '2')
                             }
                           />
                      </Form.Item>
@@ -826,7 +831,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Health3" 
                            defaultValue={ hasUpdate('Health', 'thirdQuarter') ? 
                               autoFillGrade('Health', 'thirdQuarter', 'Health3'):
-                              getGrade('Health', 'thirdQuarter')
+                              autoFillGrade('Health', 'thirdQuarter', 'Health3', true, '3')
                             }
                           />
                      </Form.Item>
@@ -839,7 +844,7 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                            name="Health4" 
                            defaultValue={ hasUpdate('Health', 'fourthQuarter') ? 
                               autoFillGrade('Health', 'fourthQuarter', 'Health4'):
-                              getGrade('Health', 'fourthQuarter')
+                              autoFillGrade('Health', 'fourthQuarter', 'Health4', true, '4')
                             }
                           />
                      </Form.Item>
