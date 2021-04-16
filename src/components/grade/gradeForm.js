@@ -18,6 +18,12 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
    };
 
    let updatesHolder = {};
+   let mapehObj = {
+       MAPEH1: 0,
+       MAPEH2: 0,
+       MAPEH3: 0,
+       MAPEH4: 0
+    };
 
    const autoFillGrade = (subjectName='', quarter='', field='') => {
       let index = selectedGrade.subjects.findIndex(subject => subject.subjectName === subjectName);
@@ -37,6 +43,16 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
       } else {
          return '0';
       };
+   };
+   
+   const getMAPEHGrades = (quarter) => {
+      let q1 = document.getElementbyId('Music' + quarter).value;
+      let q2 = document.getElementbyId('Art' + quarter).value;
+      let q3 = document.getElementbyId('PE' + quarter).value; 
+      let q4 = document.getElementbyId('Health' + quarter).value;
+      let average = (q1 + q2 + q3 + q4) / 4;
+      let key = 'MAPEH' + quarter;
+      mapehObj[key] = average;
    };
     
    return (
@@ -517,245 +533,6 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                      </Col>
                      </Row>
                   </Card>
-    {/*============================================================================ */}
-              {/* <Collapse >
-                 <Panel header="MAPEH Subjects" key="1">
-                   <Card title="Music" disabled = {true} style={{ width: 300 }}>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="1st Q" name="values">
-                        <Input
-                           style={{border: hasUpdate('Music', 'firstQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "1"}
-                           name="Music1" 
-                           defaultValue={ hasUpdate('Music', 'firstQuarter') ? 
-                              autoFillGrade('Music', 'firstQuarter', 'Music1'):
-                              getGrade('Music', 'firstQuarter')
-                           }
-                        />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="2nd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Music', 'secondQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "2"}
-                           name="Music2" 
-                           defaultValue={ hasUpdate('Music', 'secondQuarter') ? 
-                              autoFillGrade('Music', 'secondQuarter', 'Music2'):
-                              getGrade('Music', 'secondQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="3rd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Music', 'thirdQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "3"}
-                           name="Music3" 
-                           defaultValue={ hasUpdate('Music', 'thirdQuarter') ? 
-                              autoFillGrade('Music', 'thirdQuarter', 'Music3'):
-                              getGrade('Music', 'thirdQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="4th Q" name="values">
-                          <Input
-                           style={{border: hasUpdate('Music', 'fourthQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "4"}
-                           name="Music4" 
-                           defaultValue={ hasUpdate('Music', 'fourthQuarter') ? 
-                              autoFillGrade('Music', 'fourthQuarter', 'Music4'):
-                              getGrade('Music', 'fourthQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                  </Card>
-                  <Card title="Art" disabled = {true} style={{ width: 300 }}>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="1st Q" name="values">
-                        <Input
-                           style={{border: hasUpdate('Art', 'firstQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "1"}
-                           name="Art1" 
-                           defaultValue={ hasUpdate('Art', 'firstQuarter') ? 
-                              autoFillGrade('Art', 'firstQuarter', 'Art1'):
-                              getGrade('Art', 'firstQuarter')
-                           }
-                        />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="2nd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Art', 'secondQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "2"}
-                           name="Art2" 
-                           defaultValue={ hasUpdate('Art', 'secondQuarter') ? 
-                              autoFillGrade('Art', 'secondQuarter', 'Art2'):
-                              getGrade('Art', 'secondQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="3rd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Art', 'thirdQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "3"}
-                           name="Art3" 
-                           defaultValue={ hasUpdate('Art', 'thirdQuarter') ? 
-                              autoFillGrade('Art', 'thirdQuarter', 'Art3'):
-                              getGrade('Art', 'thirdQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="4th Q" name="values">
-                          <Input
-                           style={{border: hasUpdate('Art', 'fourthQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "4"}
-                           name="Art4" 
-                           defaultValue={ hasUpdate('Art', 'fourthQuarter') ? 
-                              autoFillGrade('Art', 'fourthQuarter', 'Art4'):
-                              getGrade('Art', 'fourthQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                  </Card>
-                  <Card title="PE" disabled = {true} style={{ width: 300 }}>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="1st Q" name="values">
-                        <Input
-                           style={{border: hasUpdate('PE', 'firstQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "1"}
-                           name="PE1" 
-                           defaultValue={ hasUpdate('PE', 'firstQuarter') ? 
-                              autoFillGrade('PE', 'firstQuarter', 'PE1'):
-                              getGrade('PE', 'firstQuarter')
-                           }
-                        />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="2nd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('PE', 'secondQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "2"}
-                           name="PE2" 
-                           defaultValue={ hasUpdate('PE', 'secondQuarter') ? 
-                              autoFillGrade('PE', 'secondQuarter', 'PE2'):
-                              getGrade('PE', 'secondQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="3rd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('PE', 'thirdQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "3"}
-                           name="PE3" 
-                           defaultValue={ hasUpdate('PE', 'thirdQuarter') ? 
-                              autoFillGrade('PE', 'thirdQuarter', 'PE3'):
-                              getGrade('PE', 'thirdQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="4th Q" name="values">
-                          <Input
-                           style={{border: hasUpdate('PE', 'fourthQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "4"}
-                           name="PE4" 
-                           defaultValue={ hasUpdate('PE', 'fourthQuarter') ? 
-                              autoFillGrade('PE', 'fourthQuarter', 'PE4'):
-                              getGrade('PE', 'fourthQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                  </Card>
-                  <Card title="Health" disabled = {true} style={{ width: 300 }}>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="1st Q" name="values">
-                        <Input
-                           style={{border: hasUpdate('Health', 'firstQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "1"}
-                           name="Health1" 
-                           defaultValue={ hasUpdate('Health', 'firstQuarter') ? 
-                              autoFillGrade('Health', 'firstQuarter', 'Health1'):
-                              getGrade('Health', 'firstQuarter')
-                           }
-                        />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="2nd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Health', 'secondQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "2"}
-                           name="Health2" 
-                           defaultValue={ hasUpdate('Health', 'secondQuarter') ? 
-                              autoFillGrade('Health', 'secondQuarter', 'Health2'):
-                              getGrade('Health', 'secondQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                     <Row gutter={16}>
-                     <Col span={12}>
-                     <Form.Item label="3rd Q" name="values">
-                         <Input
-                           style={{border: hasUpdate('Health', 'thirdQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "3"}
-                           name="Health3" 
-                           defaultValue={ hasUpdate('Health', 'thirdQuarter') ? 
-                              autoFillGrade('Health', 'thirdQuarter', 'Health3'):
-                              getGrade('Health', 'thirdQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     <Col span={12}>
-                     <Form.Item label="4th Q" name="values">
-                          <Input
-                           style={{border: hasUpdate('Health', 'fourthQuarter') ? '1px solid red': ''}}
-                           disabled={sessionStorage.quarter !== "4"}
-                           name="Health4" 
-                           defaultValue={ hasUpdate('Health', 'fourthQuarter') ? 
-                              autoFillGrade('Health', 'fourthQuarter', 'Health4'):
-                              getGrade('Health', 'fourthQuarter')
-                            }
-                          />
-                     </Form.Item>
-                     </Col>
-                     </Row>
-                  </Card>
-                </Panel>
-            </Collapse> */}
-   {/*============================================================================ */}
-
                </Col>:
                      null}
                   {( isAdviser ||
@@ -826,6 +603,252 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   : null}
                      
                   </Row>
+                  {/*============================================================================ */}
+               <Row gutter={16}>
+                 <Col span={12}>
+                   <Card title="Music" disabled = {true} style={{ width: 300 }}>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="1st Q" name="values">
+                        <Input
+                           style={{border: hasUpdate('Music', 'firstQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "1"}
+                           name="Music1" 
+                           defaultValue={ hasUpdate('Music', 'firstQuarter') ? 
+                              autoFillGrade('Music', 'firstQuarter', 'Music1'):
+                              getGrade('Music', 'firstQuarter')
+                           }
+                        />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="2nd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Music', 'secondQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "2"}
+                           name="Music2" 
+                           defaultValue={ hasUpdate('Music', 'secondQuarter') ? 
+                              autoFillGrade('Music', 'secondQuarter', 'Music2'):
+                              getGrade('Music', 'secondQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="3rd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Music', 'thirdQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "3"}
+                           name="Music3" 
+                           defaultValue={ hasUpdate('Music', 'thirdQuarter') ? 
+                              autoFillGrade('Music', 'thirdQuarter', 'Music3'):
+                              getGrade('Music', 'thirdQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="4th Q" name="values">
+                          <Input
+                           style={{border: hasUpdate('Music', 'fourthQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "4"}
+                           name="Music4" 
+                           defaultValue={ hasUpdate('Music', 'fourthQuarter') ? 
+                              autoFillGrade('Music', 'fourthQuarter', 'Music4'):
+                              getGrade('Music', 'fourthQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                  </Card>
+               </Col>
+               <Col span={12}>
+                  <Card title="Art" disabled = {true} style={{ width: 300 }}>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="1st Q" name="values">
+                        <Input
+                           style={{border: hasUpdate('Art', 'firstQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "1"}
+                           name="Art1" 
+                           defaultValue={ hasUpdate('Art', 'firstQuarter') ? 
+                              autoFillGrade('Art', 'firstQuarter', 'Art1'):
+                              getGrade('Art', 'firstQuarter')
+                           }
+                        />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="2nd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Art', 'secondQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "2"}
+                           name="Art2" 
+                           defaultValue={ hasUpdate('Art', 'secondQuarter') ? 
+                              autoFillGrade('Art', 'secondQuarter', 'Art2'):
+                              getGrade('Art', 'secondQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="3rd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Art', 'thirdQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "3"}
+                           name="Art3" 
+                           defaultValue={ hasUpdate('Art', 'thirdQuarter') ? 
+                              autoFillGrade('Art', 'thirdQuarter', 'Art3'):
+                              getGrade('Art', 'thirdQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="4th Q" name="values">
+                          <Input
+                           style={{border: hasUpdate('Art', 'fourthQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "4"}
+                           name="Art4" 
+                           defaultValue={ hasUpdate('Art', 'fourthQuarter') ? 
+                              autoFillGrade('Art', 'fourthQuarter', 'Art4'):
+                              getGrade('Art', 'fourthQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                  </Card>
+               </Col>
+            </Row>
+            <Row gutter={16}>
+               <Col span={12}>
+                  <Card title="PE" disabled = {true} style={{ width: 300 }}>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="1st Q" name="values">
+                        <Input
+                           style={{border: hasUpdate('PE', 'firstQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "1"}
+                           name="PE1" 
+                           defaultValue={ hasUpdate('PE', 'firstQuarter') ? 
+                              autoFillGrade('PE', 'firstQuarter', 'PE1'):
+                              getGrade('PE', 'firstQuarter')
+                           }
+                        />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="2nd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('PE', 'secondQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "2"}
+                           name="PE2" 
+                           defaultValue={ hasUpdate('PE', 'secondQuarter') ? 
+                              autoFillGrade('PE', 'secondQuarter', 'PE2'):
+                              getGrade('PE', 'secondQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="3rd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('PE', 'thirdQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "3"}
+                           name="PE3" 
+                           defaultValue={ hasUpdate('PE', 'thirdQuarter') ? 
+                              autoFillGrade('PE', 'thirdQuarter', 'PE3'):
+                              getGrade('PE', 'thirdQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="4th Q" name="values">
+                          <Input
+                           style={{border: hasUpdate('PE', 'fourthQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "4"}
+                           name="PE4" 
+                           defaultValue={ hasUpdate('PE', 'fourthQuarter') ? 
+                              autoFillGrade('PE', 'fourthQuarter', 'PE4'):
+                              getGrade('PE', 'fourthQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                  </Card>
+               </Col>
+               <Col span={12}>
+                  <Card title="Health" disabled = {true} style={{ width: 300 }}>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="1st Q" name="values">
+                        <Input
+                           style={{border: hasUpdate('Health', 'firstQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "1"}
+                           name="Health1" 
+                           defaultValue={ hasUpdate('Health', 'firstQuarter') ? 
+                              autoFillGrade('Health', 'firstQuarter', 'Health1'):
+                              getGrade('Health', 'firstQuarter')
+                           }
+                        />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="2nd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Health', 'secondQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "2"}
+                           name="Health2" 
+                           defaultValue={ hasUpdate('Health', 'secondQuarter') ? 
+                              autoFillGrade('Health', 'secondQuarter', 'Health2'):
+                              getGrade('Health', 'secondQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                     <Row gutter={16}>
+                     <Col span={12}>
+                     <Form.Item label="3rd Q" name="values">
+                         <Input
+                           style={{border: hasUpdate('Health', 'thirdQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "3"}
+                           name="Health3" 
+                           defaultValue={ hasUpdate('Health', 'thirdQuarter') ? 
+                              autoFillGrade('Health', 'thirdQuarter', 'Health3'):
+                              getGrade('Health', 'thirdQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     <Col span={12}>
+                     <Form.Item label="4th Q" name="values">
+                          <Input
+                           style={{border: hasUpdate('Health', 'fourthQuarter') ? '1px solid red': ''}}
+                           disabled={sessionStorage.quarter !== "4"}
+                           name="Health4" 
+                           defaultValue={ hasUpdate('Health', 'fourthQuarter') ? 
+                              autoFillGrade('Health', 'fourthQuarter', 'Health4'):
+                              getGrade('Health', 'fourthQuarter')
+                            }
+                          />
+                     </Form.Item>
+                     </Col>
+                     </Row>
+                  </Card>
+               </Col>
+            </Row>
+   {/*============================================================================ */}
                   </>
                   <Button className="btn-save" htmlType="submit">
                      <CheckCircleFilled type="check-circle" /> {values._id ? "Update": "Save"}
