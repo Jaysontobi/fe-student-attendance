@@ -58,6 +58,11 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
             let Math = {};
             let MAPEH = {};
             let Values = {};
+            let Music = {};
+            let Art = {};
+            let PE = {};
+            let Health = {};
+
             if(values.English1 || values.English2 || values.English3 || values.English4) {
                English = {
                   firstQuarter:values.English1,
@@ -111,6 +116,46 @@ const Grade1EditForm = ({ upgradeStudent,add,update, selectedGrade, selectedTeac
                   fourthQuarter:values.Values4
                }
                newValues.Values = Values;
+            };
+
+            if(values.Music1 || values.Music2 || values.Music3 || values.Music4) {
+               Music = {
+                  firstQuarter:values.Music1,
+                  secondQuarter:values.Music2,
+                  thirdQuarter:values.Music3,
+                  fourthQuarter:values.Music4
+               }
+               newValues.Music = Music;
+            };
+
+            if(values.Art1 || values.Art2 || values.Art3 || values.Art4) {
+               Art = {
+                  firstQuarter:values.Art1,
+                  secondQuarter:values.Art2,
+                  thirdQuarter:values.Art3,
+                  fourthQuarter:values.Art4
+               }
+               newValues.Art = Art;
+            };
+
+            if(values.PE1 || values.PE2 || values.PE3 || values.PE4) {
+               PE = {
+                  firstQuarter:values.PE1,
+                  secondQuarter:values.PE2,
+                  thirdQuarter:values.PE3,
+                  fourthQuarter:values.PE4
+               }
+               newValues.PE = PE;
+            };
+
+            if(values.Health1 || values.Health2 || values.Health3 || values.Health4) {
+               Health = {
+                  firstQuarter:values.Health1,
+                  secondQuarter:values.Health2,
+                  thirdQuarter:values.Health3,
+                  fourthQuarter:values.Health4
+               }
+               newValues.Health = Health;
             };
    
             update(newValues, isAdviser);
