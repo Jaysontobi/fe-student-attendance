@@ -189,6 +189,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   };
 
   const editGrade = async (values, isAdvisory = false) => {
+    console.log(values);
     let result = await gradesService.findyById(values._id);
     let grade = result.data
 
@@ -471,22 +472,28 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     
     if (values.Music) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Music');
-      let subjectGrades = grade.subjects[subjectIndex];
-      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Music', subjectGrades);
+
+      let newSubject = {
+        schoolYear: grade.subjects[0].schoolYear,
+        subjectName: 'Music',
+        subjectGrade: updatedGrades
+      };
       
       if(isAdvisory) {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+  
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
           grade.subjects[subjectIndex].subjectGrade = updatedGrades;
           grade.subjects[subjectIndex].recommendedGrade = {};
         };
       } else {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
-          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+          grade.subjects[subjectIndex].recommendedGrade = updatedGrades;
         };
       };
     };
@@ -494,66 +501,84 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     
     if (values.Art) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Art');
-      let subjectGrades = grade.subjects[subjectIndex];
-      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Art', subjectGrades);
       
+      let newSubject = {
+        schoolYear: grade.subjects[0].schoolYear,
+        subjectName: 'Art',
+        subjectGrade: updatedGrades
+      };
+
       if(isAdvisory) {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+  
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
           grade.subjects[subjectIndex].subjectGrade = updatedGrades;
           grade.subjects[subjectIndex].recommendedGrade = {};
         };
       } else {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
-          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+          grade.subjects[subjectIndex].recommendedGrade = updatedGrades;
         };
       };
     };
     
     if (values.PE) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'PE');
-      let subjectGrades = grade.subjects[subjectIndex];
-      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'PE', subjectGrades);
       
+      let newSubject = {
+        schoolYear: grade.subjects[0].schoolYear,
+        subjectName: 'PE',
+        subjectGrade: updatedGrades
+      };
+
       if(isAdvisory) {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+  
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
           grade.subjects[subjectIndex].subjectGrade = updatedGrades;
           grade.subjects[subjectIndex].recommendedGrade = {};
         };
       } else {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
-          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+          grade.subjects[subjectIndex].recommendedGrade = updatedGrades;
         };
       };
     };
     
     if (values.Health) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Health');
-      let subjectGrades = grade.subjects[subjectIndex];
-      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Health', subjectGrades);
       
+      let newSubject = {
+        schoolYear: grade.subjects[0].schoolYear,
+        subjectName: 'Health',
+        subjectGrade: updatedGrades
+      };
+
       if(isAdvisory) {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+  
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
           grade.subjects[subjectIndex].subjectGrade = updatedGrades;
           grade.subjects[subjectIndex].recommendedGrade = {};
         };
       } else {
-        if (!subjectGrades) {
-          grade.subjects.push(updatedGrades);
+        if (subjectIndex === -1) {
+          grade.subjects.push(newSubject);
         } else {
-          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+          grade.subjects[subjectIndex].recommendedGrade = updatedGrades;
         };
       };
     };
@@ -577,25 +602,25 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let fourthQuarter = 0;
 
       if(values[subject].firstQuarter) {
-        firstQuarter = values.Values.firstQuarter
+        firstQuarter = values[subject].firstQuarter
       } else {
         firstQuarter =  subjectGrade.firstQuarter
       }
 
       if(values[subject].secondQuarter) {
-        secondQuarter = values.Values.secondQuarter
+        secondQuarter = values[subject].secondQuarter
       } else {
         secondQuarter = subjectGrade.secondQuarter
       }
 
       if(values[subject].thirdQuarter) {
-        thirdQuarter = values.Values.thirdQuarter
+        thirdQuarter = values[subject].thirdQuarter
       } else {
         thirdQuarter = subjectGrade.thirdQuarter
       }
 
       if(values[subject].fourthQuarter) {
-        fourthQuarter = values.Values.fourthQuarter
+        fourthQuarter = values[subject].fourthQuarter
       } else {
         fourthQuarter = subjectGrade.fourthQuarter
       };     
