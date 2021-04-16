@@ -122,6 +122,46 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
               thirdQuarter: 0,
               fourthQuarter: 0
           }
+        },
+        {
+          schoolYear : currentUser.schoolYear,
+            subjectName: "Music",
+              subjectGrade: {
+              firstQuarter: 0,
+              secondQuarter: 0,
+              thirdQuarter: 0,
+              fourthQuarter: 0
+          }
+        },
+        {
+          schoolYear : currentUser.schoolYear,
+            subjectName: "Art",
+              subjectGrade: {
+              firstQuarter: 0,
+              secondQuarter: 0,
+              thirdQuarter: 0,
+              fourthQuarter: 0
+          }
+        },
+        {
+          schoolYear : currentUser.schoolYear,
+            subjectName: "PE",
+              subjectGrade: {
+              firstQuarter: 0,
+              secondQuarter: 0,
+              thirdQuarter: 0,
+              fourthQuarter: 0
+          }
+        },
+        {
+          schoolYear : currentUser.schoolYear,
+            subjectName: "Health",
+              subjectGrade: {
+              firstQuarter: 0,
+              secondQuarter: 0,
+              thirdQuarter: 0,
+              fourthQuarter: 0
+          }
         }]
     }
 
