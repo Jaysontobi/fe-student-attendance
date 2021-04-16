@@ -420,8 +420,104 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       } else {
         grade.subjects[5].recommendedGrade = newValuesGrade;
       };
-    }
+    };
+    
+     const subjectDummy = {
+        firstQuarter: 0,
+        secondQuarter: 0,
+        thirdQuarter: 0,
+        fourthQuarter: 0
+      };
+    
+    if (values.Music) {
+      let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Music');
+      let subjectGrades = grade.subjects[subjectIndex];
+      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let updatedGrades = constructSubjectGrades(values, 'Music', subjectGrades);
+      
+      if(isAdvisory) {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].subjectGrade = updatedGrades;
+          grade.subjects[subjectIndex].recommendedGrade = {};
+        };
+      } else {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+        };
+      };
+    };
 
+    
+    if (values.Art) {
+      let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Art');
+      let subjectGrades = grade.subjects[subjectIndex];
+      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let updatedGrades = constructSubjectGrades(values, 'Art', subjectGrades);
+      
+      if(isAdvisory) {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].subjectGrade = updatedGrades;
+          grade.subjects[subjectIndex].recommendedGrade = {};
+        };
+      } else {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+        };
+      };
+    };
+    
+    if (values.PE) {
+      let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'PE');
+      let subjectGrades = grade.subjects[subjectIndex];
+      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let updatedGrades = constructSubjectGrades(values, 'PE', subjectGrades);
+      
+      if(isAdvisory) {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].subjectGrade = updatedGrades;
+          grade.subjects[subjectIndex].recommendedGrade = {};
+        };
+      } else {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+        };
+      };
+    };
+    
+    if (values.Health) {
+      let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Health');
+      let subjectGrades = grade.subjects[subjectIndex];
+      if (!subjectGrades) { subjectGrades = subjectDummy };
+      let updatedGrades = constructSubjectGrades(values, 'Health', subjectGrades);
+      
+      if(isAdvisory) {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].subjectGrade = updatedGrades;
+          grade.subjects[subjectIndex].recommendedGrade = {};
+        };
+      } else {
+        if (!subjectGrades) {
+          grade.subjects.push(updatedGrades);
+        } else {
+          grade.subjects[subjectIndex].recommendedGrade = newValuesGrade;
+        };
+      };
+    };
+ 
     let updateResult = await gradesService.update(grade);
     //add record  to audit trail
     let loggedDate =  new Date().toISOString();
@@ -433,7 +529,46 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     await auditTrailService.add(userDetails);
     window.location.reload();
   };
+  
+  const constructSubjectGrades = (values, subject='', subjectGrade) => {
+      let firstQuarter = 0;
+      let secondQuarter = 0;
+      let thirdQuarter = 0;
+      let fourthQuarter = 0;
 
+      if(values[subject].firstQuarter) {
+        firstQuarter = values.Values.firstQuarter
+      } else {
+        firstQuarter = subjectGrade.firstQuarter ? subjectGrade.firstQuarter
+      }
+
+      if(values[subject].secondQuarter) {
+        secondQuarter = values.Values.secondQuarter
+      } else {
+        secondQuarter = subjectGrade.secondQuarter
+      }
+
+      if(values[subject].thirdQuarter) {
+        thirdQuarter = values.Values.thirdQuarter
+      } else {
+        thirdQuarter = subjectGrade.thirdQuarter
+      }
+
+      if(values[subject].fourthQuarter) {
+        fourthQuarter = values.Values.fourthQuarter
+      } else {
+        fourthQuarter = subjectGrade.fourthQuarter
+      };     
+
+      let gradesObj = {
+        firstQuarter: firstQuarter,
+        secondQuarter:secondQuarter,
+        thirdQuarter:thirdQuarter,
+        fourthQuarter:fourthQuarter
+      };
+    
+    return gradesObj;
+  };
   const showGrade = () => {
     setSelectedGrade({
         schoolYear: "",
