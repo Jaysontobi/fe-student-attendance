@@ -84,8 +84,7 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewDat
                         </Form.Item>
                      </Col>
                   </Row>
-                  to be remove
-                  {selectedUser.role === "Student" ? (
+                  { role === "Student" ? (
                      <Row gutter={16}>
                         <Col span={12}>
                            <Form.Item label="Grade Level" name="gradeLevel">
@@ -137,12 +136,12 @@ const UserEditForm = ({ add,update, selectedUser, selectedParent, role, isNewDat
                      </Col>
                   </Row>
                   <Row gutter={16}>
-                     <Col span={12}>
+                     <Col span={8}>
                         <Form.Item label="Age" name="age">
                            <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="age" />
                         </Form.Item>
                      </Col>
-                     <Col span={12}>
+                     <Col span={16}>
                         {role === "Student" ? (
                            <Form.Item label="Guardian" name="parentId">
                               <Select
