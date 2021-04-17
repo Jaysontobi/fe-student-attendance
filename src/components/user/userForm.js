@@ -202,7 +202,7 @@ const UserEditForm = ({ add, update, selectedUser, selectedParent, role, isNewDa
               </Col>
               <Col span={12}>
                 <Form.Item label="Password" name="password">
-                  <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="password" />
+                  <Input disabled={JSON.parse(sessionStorage.user).role === "Teacher"} name="password" type="password" />
                 </Form.Item>
               </Col>
             </Row>
