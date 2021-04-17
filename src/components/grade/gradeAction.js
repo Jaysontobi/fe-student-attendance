@@ -4,7 +4,7 @@ import userService from '../user/userService';
 import advisoryService from '../grade/advisoryService';
 import auditTrailService from '../auditTrail/auditTrailService';
 import AdditionalService from '../user/additionalService';
-import { Button} from 'antd';
+import { Button } from 'antd';
 import moment from 'moment';
 
 const Grade1Action = (initial = { searchRequest: {} }) => {
@@ -12,17 +12,17 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [selectedUserGrade, setSelectedUserGrade] = useState([]);
   let [loading, setLoading] = useState(false);
   let [selectedGradeUser, setSelectedGradeUser] = useState([]);
-  let [gradeDetails, setGradeDetails] = useState( {list : []});
-  let [grade1Details, setGrade1Details] = useState( {list : []});
-  let [grade2Details, setGrade2Details] = useState( {list : []});
-  let [grade3Details, setGrade3Details] = useState( {list : []});
-  let [grade4Details, setGrade4Details] = useState( {list : []});
-  let [grade5Details, setGrade5Details] = useState( {list : []});
-  let [grade6Details, setGrade6Details] = useState( {list : []});
-  let [grade7Details, setGrade7Details] = useState( {list : []});
-  let [grade8Details, setGrade8Details] = useState( {list : []});
-  let [grade9Details, setGrade9Details] = useState( {list : []});
-  let [grade10Details, setGrade10Details] = useState( {list : []});
+  let [gradeDetails, setGradeDetails] = useState({ list: [] });
+  let [grade1Details, setGrade1Details] = useState({ list: [] });
+  let [grade2Details, setGrade2Details] = useState({ list: [] });
+  let [grade3Details, setGrade3Details] = useState({ list: [] });
+  let [grade4Details, setGrade4Details] = useState({ list: [] });
+  let [grade5Details, setGrade5Details] = useState({ list: [] });
+  let [grade6Details, setGrade6Details] = useState({ list: [] });
+  let [grade7Details, setGrade7Details] = useState({ list: [] });
+  let [grade8Details, setGrade8Details] = useState({ list: [] });
+  let [grade9Details, setGrade9Details] = useState({ list: [] });
+  let [grade10Details, setGrade10Details] = useState({ list: [] });
   let [advisoryGrades, setAdvisoryGrades] = useState([]);
 
   let [showGradeVisible, setShowGradeVisible] = useState(false);
@@ -35,155 +35,156 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
   const upgradeStudent = async values => {
     let auditTrailObj = {
-    user: JSON.parse(sessionStorage.user),
-    activity : "Upgrade Student",
-    date:new Date()}
+      user: JSON.parse(sessionStorage.user),
+      activity: "Upgrade Student",
+      date: new Date()
+    }
     auditTrailService.add(auditTrailObj)
     let ctr = 0;
     await selectedListOfStudent.map(async student => {
-    setLoading(true)
-    let result = await gradesService.findyById(student.id);
+      setLoading(true)
+      let result = await gradesService.findyById(student.id);
 
-    let userCurrentGrade = (parseInt(result.data.gradeLevel))
+      let userCurrentGrade = (parseInt(result.data.gradeLevel))
 
 
-    if(userCurrentGrade < 10) {
-      let currentUser = result.data
-      let allStudent = await userService.findAllUser();
-      let result1 = allStudent.data.filter(user => user.idNumber === student.idNumber);
-      let currentStudent = result1[0]
-      currentStudent.gradeLevel = (userCurrentGrade + 1).toString()
-      let response = await userService.update(currentStudent)
+      if (userCurrentGrade < 10) {
+        let currentUser = result.data
+        let allStudent = await userService.findAllUser();
+        let result1 = allStudent.data.filter(user => user.idNumber === student.idNumber);
+        let currentStudent = result1[0]
+        currentStudent.gradeLevel = (userCurrentGrade + 1).toString()
+        let response = await userService.update(currentStudent)
 
-      currentUser.status = false;
-      let response1 = await gradesService.update(currentUser)
+        currentUser.status = false;
+        let response1 = await gradesService.update(currentUser)
 
-      let gradeObj = {
-        status: true,
-        student: currentUser.student,
-        gradeLevel: (userCurrentGrade + 1).toString(),
-        section: currentUser.student.section,
-        schoolYear : currentStudent.schoolYear,
-        subjects: [{
+        let gradeObj = {
+          status: true,
+          student: currentUser.student,
+          gradeLevel: (userCurrentGrade + 1).toString(),
+          section: currentUser.student.section,
+          schoolYear: currentStudent.schoolYear,
+          subjects: [{
             subjectName: "English",
             subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Filipino",
             subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Science",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Math",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "MAPEH",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Values",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Music",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Art",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "PE",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        },
-        {
-          schoolYear : currentUser.schoolYear,
+            }
+          },
+          {
+            schoolYear: currentUser.schoolYear,
             subjectName: "Health",
-              subjectGrade: {
+            subjectGrade: {
               firstQuarter: 0,
               secondQuarter: 0,
               thirdQuarter: 0,
               fourthQuarter: 0
-          }
-        }]
-    }
+            }
+          }]
+        }
 
-    let response2 = gradesService.add(gradeObj)
-  
+        let response2 = gradesService.add(gradeObj)
 
-    } else {
-      let currentUser = result.data
-      let allStudent = await userService.findAllUser();
-      let result1 = allStudent.data.filter(user => user.idNumber === student.idNumber);
-      let currentStudent = result1[0]
-      currentStudent.gradeLevel = "Graduate"
-      let response = await userService.update(currentStudent)
 
-      currentUser.status = false;
-      let response1 = await gradesService.update(currentUser)
-    }
-    ctr= ctr+1
-    if(ctr === selectedListOfStudent.length) {
-      setLoading(false)
-      window.location.reload(false)
-    }
+      } else {
+        let currentUser = result.data
+        let allStudent = await userService.findAllUser();
+        let result1 = allStudent.data.filter(user => user.idNumber === student.idNumber);
+        let currentStudent = result1[0]
+        currentStudent.gradeLevel = "Graduate"
+        let response = await userService.update(currentStudent)
+
+        currentUser.status = false;
+        let response1 = await gradesService.update(currentUser)
+      }
+      ctr = ctr + 1
+      if (ctr === selectedListOfStudent.length) {
+        setLoading(false)
+        window.location.reload(false)
+      }
     })
 
   };
@@ -193,89 +194,89 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let result = await gradesService.findyById(values._id);
     let grade = result.data
 
-    if(values.English) {
+    if (values.English) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.English.firstQuarter) {
+      if (values.English.firstQuarter) {
         firstQuarter = values.English.firstQuarter
       } else {
         firstQuarter = grade.subjects[0].subjectGrade.firstQuarter
       }
 
-      if(values.English.secondQuarter) {
+      if (values.English.secondQuarter) {
         secondQuarter = values.English.secondQuarter
       } else {
         secondQuarter = grade.subjects[0].subjectGrade.secondQuarter
       }
 
-      if(values.English.thirdQuarter) {
+      if (values.English.thirdQuarter) {
         thirdQuarter = values.English.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[0].subjectGrade.thirdQuarter
       }
 
-      if(values.English.fourthQuarter) {
+      if (values.English.fourthQuarter) {
         fourthQuarter = values.English.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[0].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newEnglishGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       };
-      
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[0].subjectGrade = newEnglishGrade;
         grade.subjects[0].recommendedGrade = {};
       } else {
         grade.subjects[0].recommendedGrade = newEnglishGrade;
       };
-    }    
+    }
 
-    if(values.Filipino) {
+    if (values.Filipino) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.Filipino.firstQuarter) {
+      if (values.Filipino.firstQuarter) {
         firstQuarter = values.Filipino.firstQuarter
       } else {
         firstQuarter = grade.subjects[1].subjectGrade.firstQuarter
       }
 
-      if(values.Filipino.secondQuarter) {
+      if (values.Filipino.secondQuarter) {
         secondQuarter = values.Filipino.secondQuarter
       } else {
         secondQuarter = grade.subjects[1].subjectGrade.secondQuarter
       }
 
-      if(values.Filipino.thirdQuarter) {
+      if (values.Filipino.thirdQuarter) {
         thirdQuarter = values.Filipino.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[1].subjectGrade.thirdQuarter
       }
 
-      if(values.Filipino.fourthQuarter) {
+      if (values.Filipino.fourthQuarter) {
         fourthQuarter = values.Filipino.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[1].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newFilipinoGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       }
-      
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[1].subjectGrade = newFilipinoGrade;
         grade.subjects[1].recommendedGrade = {};
       } else {
@@ -283,44 +284,44 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     }
 
-    if(values.Science) {
+    if (values.Science) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.Science.firstQuarter) {
+      if (values.Science.firstQuarter) {
         firstQuarter = values.Science.firstQuarter
       } else {
         firstQuarter = grade.subjects[2].subjectGrade.firstQuarter
       }
 
-      if(values.Science.secondQuarter) {
+      if (values.Science.secondQuarter) {
         secondQuarter = values.Science.secondQuarter
       } else {
         secondQuarter = grade.subjects[2].subjectGrade.secondQuarter
       }
 
-      if(values.Science.thirdQuarter) {
+      if (values.Science.thirdQuarter) {
         thirdQuarter = values.Science.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[2].subjectGrade.thirdQuarter
       }
 
-      if(values.Science.fourthQuarter) {
+      if (values.Science.fourthQuarter) {
         fourthQuarter = values.Science.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[2].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newScienceGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       };
-      
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[2].subjectGrade = newScienceGrade;
         grade.subjects[2].recommendedGrade = {};
       } else {
@@ -328,44 +329,44 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     }
 
-    if(values.Math) {
+    if (values.Math) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.Math.firstQuarter) {
+      if (values.Math.firstQuarter) {
         firstQuarter = values.Math.firstQuarter
       } else {
         firstQuarter = grade.Math[3].subjectGrade.firstQuarter
       }
 
-      if(values.Math.secondQuarter) {
+      if (values.Math.secondQuarter) {
         secondQuarter = values.Math.secondQuarter
       } else {
         secondQuarter = grade.subjects[3].subjectGrade.secondQuarter
       }
 
-      if(values.Math.thirdQuarter) {
+      if (values.Math.thirdQuarter) {
         thirdQuarter = values.Math.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[3].subjectGrade.thirdQuarter
       }
 
-      if(values.Math.fourthQuarter) {
+      if (values.Math.fourthQuarter) {
         fourthQuarter = values.Math.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[3].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newMathGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       };
-  
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[3].subjectGrade = newMathGrade;
         grade.subjects[3].recommendedGrade = {};
       } else {
@@ -373,44 +374,44 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     }
 
-    if(values.MAPEH) {
+    if (values.MAPEH) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.MAPEH.firstQuarter) {
+      if (values.MAPEH.firstQuarter) {
         firstQuarter = values.MAPEH.firstQuarter
       } else {
         firstQuarter = grade.subjects[4].subjectGrade.firstQuarter
       }
 
-      if(values.MAPEH.secondQuarter) {
+      if (values.MAPEH.secondQuarter) {
         secondQuarter = values.MAPEH.secondQuarter
       } else {
         secondQuarter = grade.subjects[4].subjectGrade.secondQuarter
       }
 
-      if(values.MAPEH.thirdQuarter) {
+      if (values.MAPEH.thirdQuarter) {
         thirdQuarter = values.MAPEH.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[4].subjectGrade.thirdQuarter
       }
 
-      if(values.MAPEH.fourthQuarter) {
+      if (values.MAPEH.fourthQuarter) {
         fourthQuarter = values.MAPEH.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[4].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newMAPEHGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       };
-      
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[4].subjectGrade = newMAPEHGrade;
         grade.subjects[4].recommendedGrade = {};
       } else {
@@ -418,61 +419,61 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     }
 
-    if(values.Values) {
+    if (values.Values) {
       let firstQuarter = 0;
       let secondQuarter = 0;
       let thirdQuarter = 0;
       let fourthQuarter = 0;
 
-      if(values.Values.firstQuarter) {
+      if (values.Values.firstQuarter) {
         firstQuarter = values.Values.firstQuarter
       } else {
         firstQuarter = grade.subjects[5].subjectGrade.firstQuarter
       }
 
-      if(values.Values.secondQuarter) {
+      if (values.Values.secondQuarter) {
         secondQuarter = values.Values.secondQuarter
       } else {
         secondQuarter = grade.subjects[5].subjectGrade.secondQuarter
       }
 
-      if(values.Values.thirdQuarter) {
+      if (values.Values.thirdQuarter) {
         thirdQuarter = values.Values.thirdQuarter
       } else {
         thirdQuarter = grade.subjects[5].subjectGrade.thirdQuarter
       }
 
-      if(values.Values.fourthQuarter) {
+      if (values.Values.fourthQuarter) {
         fourthQuarter = values.Values.fourthQuarter
       } else {
         fourthQuarter = grade.subjects[5].subjectGrade.fourthQuarter
-      }      
+      }
 
       let newValuesGrade = {
         firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
+        secondQuarter: secondQuarter,
+        thirdQuarter: thirdQuarter,
+        fourthQuarter: fourthQuarter
       };
-      
-      if(isAdvisory) {
+
+      if (isAdvisory) {
         grade.subjects[5].subjectGrade = newValuesGrade;
         grade.subjects[5].recommendedGrade = {};
       } else {
         grade.subjects[5].recommendedGrade = newValuesGrade;
       };
     };
-    
-     const subjectDummy = {
-        firstQuarter: 0,
-        secondQuarter: 0,
-        thirdQuarter: 0,
-        fourthQuarter: 0
-      };
-    
+
+    const subjectDummy = {
+      firstQuarter: 0,
+      secondQuarter: 0,
+      thirdQuarter: 0,
+      fourthQuarter: 0
+    };
+
     if (values.Music) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Music');
-      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
+      let subjectGrades = (subjectIndex !== -1) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Music', subjectGrades);
 
       let newSubject = {
@@ -480,9 +481,9 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         subjectName: 'Music',
         subjectGrade: updatedGrades
       };
-      
-      if(isAdvisory) {
-  
+
+      if (isAdvisory) {
+
         if (subjectIndex === -1) {
           grade.subjects.push(newSubject);
         } else {
@@ -498,20 +499,20 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     };
 
-    
+
     if (values.Art) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Art');
-      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
+      let subjectGrades = (subjectIndex !== -1) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Art', subjectGrades);
-      
+
       let newSubject = {
         schoolYear: grade.subjects[0].schoolYear,
         subjectName: 'Art',
         subjectGrade: updatedGrades
       };
 
-      if(isAdvisory) {
-  
+      if (isAdvisory) {
+
         if (subjectIndex === -1) {
           grade.subjects.push(newSubject);
         } else {
@@ -526,20 +527,20 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         };
       };
     };
-    
+
     if (values.PE) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'PE');
-      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
+      let subjectGrades = (subjectIndex !== -1) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'PE', subjectGrades);
-      
+
       let newSubject = {
         schoolYear: grade.subjects[0].schoolYear,
         subjectName: 'PE',
         subjectGrade: updatedGrades
       };
 
-      if(isAdvisory) {
-  
+      if (isAdvisory) {
+
         if (subjectIndex === -1) {
           grade.subjects.push(newSubject);
         } else {
@@ -554,20 +555,20 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         };
       };
     };
-    
+
     if (values.Health) {
       let subjectIndex = grade.subjects.findIndex(subject => subject.subjectName === 'Health');
-      let subjectGrades = (subjectIndex !== -1 ) ? grade.subjects[subjectIndex] : subjectDummy;
+      let subjectGrades = (subjectIndex !== -1) ? grade.subjects[subjectIndex] : subjectDummy;
       let updatedGrades = constructSubjectGrades(values, 'Health', subjectGrades);
-      
+
       let newSubject = {
         schoolYear: grade.subjects[0].schoolYear,
         subjectName: 'Health',
         subjectGrade: updatedGrades
       };
 
-      if(isAdvisory) {
-  
+      if (isAdvisory) {
+
         if (subjectIndex === -1) {
           grade.subjects.push(newSubject);
         } else {
@@ -582,10 +583,10 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         };
       };
     };
- 
+
     let updateResult = await gradesService.update(grade);
     //add record  to audit trail
-    let loggedDate =  new Date().toISOString();
+    let loggedDate = new Date().toISOString();
     let userDetails = {
       user: JSON.parse(sessionStorage.user),
       activity: 'Teacher has updated student grades',
@@ -594,67 +595,67 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     await auditTrailService.add(userDetails);
     window.location.reload();
   };
-  
-  const constructSubjectGrades = (values, subject='', subjectGrade) => {
-      let firstQuarter = 0;
-      let secondQuarter = 0;
-      let thirdQuarter = 0;
-      let fourthQuarter = 0;
 
-      if(values[subject].firstQuarter) {
-        firstQuarter = values[subject].firstQuarter
-      } else {
-        firstQuarter =  subjectGrade.firstQuarter
-      }
+  const constructSubjectGrades = (values, subject = '', subjectGrade) => {
+    let firstQuarter = 0;
+    let secondQuarter = 0;
+    let thirdQuarter = 0;
+    let fourthQuarter = 0;
 
-      if(values[subject].secondQuarter) {
-        secondQuarter = values[subject].secondQuarter
-      } else {
-        secondQuarter = subjectGrade.secondQuarter
-      }
+    if (values[subject].firstQuarter) {
+      firstQuarter = values[subject].firstQuarter
+    } else {
+      firstQuarter = subjectGrade.firstQuarter
+    }
 
-      if(values[subject].thirdQuarter) {
-        thirdQuarter = values[subject].thirdQuarter
-      } else {
-        thirdQuarter = subjectGrade.thirdQuarter
-      }
+    if (values[subject].secondQuarter) {
+      secondQuarter = values[subject].secondQuarter
+    } else {
+      secondQuarter = subjectGrade.secondQuarter
+    }
 
-      if(values[subject].fourthQuarter) {
-        fourthQuarter = values[subject].fourthQuarter
-      } else {
-        fourthQuarter = subjectGrade.fourthQuarter
-      };     
+    if (values[subject].thirdQuarter) {
+      thirdQuarter = values[subject].thirdQuarter
+    } else {
+      thirdQuarter = subjectGrade.thirdQuarter
+    }
 
-      let gradesObj = {
-        firstQuarter: firstQuarter,
-        secondQuarter:secondQuarter,
-        thirdQuarter:thirdQuarter,
-        fourthQuarter:fourthQuarter
-      };
-    
+    if (values[subject].fourthQuarter) {
+      fourthQuarter = values[subject].fourthQuarter
+    } else {
+      fourthQuarter = subjectGrade.fourthQuarter
+    };
+
+    let gradesObj = {
+      firstQuarter: firstQuarter,
+      secondQuarter: secondQuarter,
+      thirdQuarter: thirdQuarter,
+      fourthQuarter: fourthQuarter
+    };
+
     return gradesObj;
   };
   const showGrade = () => {
     setSelectedGrade({
-        schoolYear: "",
-        subjects: {},
-        grade: "",
-        student: {},
-        gradeLevel: "",
-        section: "",
-      })
+      schoolYear: "",
+      subjects: {},
+      grade: "",
+      student: {},
+      gradeLevel: "",
+      section: "",
+    })
     setShowGradeVisible(true)
   };
 
   const loadGrade = (gradeObj, idNumber, level = '') => {
     getCurrentGradeUser(idNumber, level)
-    setSelectedGrade({...gradeObj});
+    setSelectedGrade({ ...gradeObj });
     setShowGradeVisible(true);
   };
 
   const loadSelectedGrade = async (gradeId) => {
     let response = await gradesService.findyById(gradeId);
-    setSelectedGrade({...response.data});
+    setSelectedGrade({ ...response.data });
     setShowGradeVisible(true);
   };
 
@@ -669,35 +670,19 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let response = await gradesService.findAllGrades();
     let result = [];
     result = response.data.filter(user => user.student.idNumber === JSON.parse(sessionStorage.user).idNumber && user.gradeLevel === gradeLevel)
-    if(result.length >=1 && result[0].subjects && result[0].subjects.length >= 1) {
+    if (result.length >= 1 && result[0].subjects && result[0].subjects.length >= 1) {
       let newArray = result[0].subjects.map((subject) => {
-        let remarks = "";
-        if((subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4 >=75){
-          remarks = "Passed"
-        } else {
-          remarks = "Failed"
-        }
-        return {
-          key: subject._id,
-          id: subject._id,
-          subject: subject.subjectName,
-          Quarter1st: subject.subjectGrade.firstQuarter,
-          Quarter2nd: subject.subjectGrade.secondQuarter,
-          Quarter3rd: subject.subjectGrade.thirdQuarter,
-          Quarter4th: subject.subjectGrade.fourthQuarter,
-          FinalGrade: (subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4,
-          Remarks : remarks
-        }
-      })
-      
+        return buidSubjectRow(subject);
+      });
+
       let response = await advisoryService.findAllAdvisory()
-      let result1=[];
+      let result1 = [];
       result1 = response.data.filter(user => user.gradeLevel === gradeLevel);
-    
+
       setSelectedUser(result[0].student)
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
-   
+
     } else {
       setSelectedUser({})
       setSelectedUserGrade([])
@@ -708,83 +693,103 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   const currentGradeUser = async () => {
     let response = await gradesService.findAllGrades();
     let result = [];
-    if(JSON.parse(sessionStorage.user).gradeLevel === "Graduate") {
+    if (JSON.parse(sessionStorage.user).gradeLevel === "Graduate") {
       result = response.data.filter(user => user.student.idNumber === JSON.parse(sessionStorage.user).idNumber && user.student.gradeLevel === "1")
     } else {
       result = response.data.filter(user => user.student.idNumber === JSON.parse(sessionStorage.user).idNumber && user.student.gradeLevel === JSON.parse(sessionStorage.user).gradeLevel)
     }
-    if(result.length >=1 && result[0].subjects && result[0].subjects.length >= 1) {
+    if (result.length >= 1 && result[0].subjects && result[0].subjects.length >= 1) {
       setSelectedUser(result[0].student)
       let newArray = result[0].subjects.map((subject) => {
-        let remarks = "";
-        if((subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4 >=75){
-          remarks = "Passed"
-        } else {
-          remarks = "Failed"
-        }
-        return {
-          key: subject._id,
-          id: subject._id,
-          subject: subject.subjectName,
-          Quarter1st: subject.subjectGrade.firstQuarter,
-          Quarter2nd: subject.subjectGrade.secondQuarter,
-          Quarter3rd: subject.subjectGrade.thirdQuarter,
-          Quarter4th: subject.subjectGrade.fourthQuarter,
-          FinalGrade: (subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4,
-          Remarks : remarks
-        }
-      })
-      
+        return buidSubjectRow(subject);
+      });
+
       let response = await advisoryService.findAllAdvisory()
-      let result1=[];
-      if(JSON.parse(sessionStorage.user).gradeLevel === "Graduate") {
+      let result1 = [];
+      if (JSON.parse(sessionStorage.user).gradeLevel === "Graduate") {
         result1 = response.data.filter(user => user.gradeLevel === "1");
       } else {
         result1 = response.data.filter(user => user.gradeLevel === JSON.parse(sessionStorage.user).gradeLevel);
       }
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
-   
+
     } else {
       setSelectedUser({})
       setSelectedUserGrade([])
-    }
+    };
 
-  }
+  };
+
+  const buidSubjectRow = (subject) => {
+    let remarks = "";
+    let finalGrade = (subject.subjectGrade.firstQuarter +
+      subject.subjectGrade.secondQuarter +
+      subject.subjectGrade.thirdQuarter +
+      subject.subjectGrade.fourthQuarter) / 4;
+
+    let inComplete = false;
+    let firstQuarter = subject.subjectGrade.firstQuarter;
+    let secondQuarter = subject.subjectGrade.secondQuarter;
+    let thirdQuarter = subject.subjectGrade.thirdQuarter;
+    let fourthQuarter = subject.subjectGrade.fourthQuarter;
+
+    //leave blank all zero grades
+    if (firstQuarter === 0) {
+      firstQuarter = '';
+      inComplete = true;
+    };
+    if (secondQuarter === 0) {
+      secondQuarter = '';
+      inComplete = true;
+    };
+    if (thirdQuarter === 0) {
+      thirdQuarter = '';
+      inComplete = true;
+    };
+    if (fourthQuarter === 0) {
+      fourthQuarter = '';
+      inComplete = true;
+    };
+
+    if (!inComplete && finalGrade >= 75) {
+      remarks = "Passed";
+    } else if (!inComplete && finalGrade < 75){
+      remarks = "Failed";
+    } else {
+      remarks = '';
+    };;
+
+    return {
+      key: subject._id,
+      id: subject._id,
+      subject: subject.subjectName,
+      Quarter1st: firstQuarter,
+      Quarter2nd: secondQuarter,
+      Quarter3rd: thirdQuarter,
+      Quarter4th: fourthQuarter,
+      FinalGrade: (!inComplete) ? finalGrade : '',
+      Remarks: remarks
+    }
+  };
 
   const getCurrentGradeUser = async (idNumber, level = '') => {
     let response = await gradesService.findAllGrades(level);
     let result = response.data.filter(user => user.student.idNumber === idNumber);
-    if(result.length >=1 && result[0].subjects && result[0].subjects.length >= 1) {
+    if (result.length >= 1 && result[0].subjects && result[0].subjects.length >= 1) {
       setSelectedUser(result[0].student);
       let newArray = result[0].subjects.map((subject) => {
-        let remarks = "";
-        if((subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4 >=75){
-          remarks = "Passed"
-        } else {
-          remarks = "Failed"
-        }
-        return {
-          key: subject._id,
-          id: subject._id,
-          subject: subject.subjectName,
-          Quarter1st: subject.subjectGrade.firstQuarter,
-          Quarter2nd: subject.subjectGrade.secondQuarter,
-          Quarter3rd: subject.subjectGrade.thirdQuarter,
-          Quarter4th: subject.subjectGrade.fourthQuarter,
-          FinalGrade: (subject.subjectGrade.firstQuarter + subject.subjectGrade.secondQuarter + subject.subjectGrade.thirdQuarter + subject.subjectGrade.fourthQuarter)/4,
-          Remarks : remarks
-        }
+        return buidSubjectRow(subject);
       });
       setSelectedGradeUser(newArray);
-   
+
     } else {
       setSelectedUser({})
       setSelectedGradeUser([])
     }
 
-    
-   
+
+
 
   }
 
@@ -797,12 +802,145 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let offspring = result.filter(user => user.parent._id === JSON.parse(sessionStorage.user).id);
     await response.data.map((user) => {
       offspring.map((off) => {
-        if(user.student.idNumber === off.idNumber){
+        if (user.student.idNumber === off.idNumber) {
           finalOffspring.push(user)
         }
       });
     });
     newArray = finalOffspring.map((user) => {
+      return {
+        key: user._id,
+        id: user._id,
+        firstName: user.student.firstName,
+        lastName: user.student.lastName,
+        middleName: user.student.middleName,
+        idNumber: user.student.idNumber,
+        contactNumber: user.student.contactNumber,
+        email: user.student.email,
+        section: user.section,
+        gradeLevel: user.gradeLevel,
+        action:
+          <Button onClick={() => loadGrade(user, user.student.idNumber)} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
+      }
+    })
+
+    setGradeDetails({
+      list: newArray
+    })
+  };
+
+  const loadStudentGradesPerLevel = async (level='') => {
+    let response = await gradesService.findAllGrades(level);
+    let result = response.data.filter(user => user.gradeLevel === level && user.status)
+    let newArray = result.map((user) => {
+      return {
+        key: user._id,
+        id: user._id,
+        firstName: user.student.firstName,
+        lastName: user.student.lastName,
+        middleName: user.student.middleName,
+        idNumber: user.student.idNumber,
+        contactNumber: user.student.contactNumber,
+        email: user.student.email,
+        section: user.student.section,
+        action:
+          <Button onClick={() => {
+            setLoading(true);
+            setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 2300);
+            setTimeout(() => { setLoading(false);}, 2500 );
+          }} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
+      }
+    });
+
+    return newArray;
+  };
+
+  const loadGrades1 = async () => {
+    let newArray = await loadStudentGradesPerLevel('1');
+    setGrade1Details({
+      list: newArray
+    })
+  }
+
+  const loadGrades2 = async () => {
+    let newArray = await loadStudentGradesPerLevel('2');
+    setGrade2Details({
+      list: newArray
+    })
+  };
+
+  const loadGrades3 = async () => {
+   let newArray = await loadStudentGradesPerLevel('3');
+   setGrade3Details({
+      list: newArray
+    });
+  };
+
+  const loadGrades4 = async () => {
+    let newArray = await loadStudentGradesPerLevel('4');
+    setGrade4Details({
+       list: newArray
+     });
+  }
+
+  const loadGrades5 = async () => {
+    let newArray = await loadStudentGradesPerLevel('5');
+    setGrade5Details({
+      list: newArray
+    })
+  }
+
+  const loadGrades6 = async () => {
+    let newArray = await loadStudentGradesPerLevel('6');
+    setGrade6Details({
+      list: newArray
+    })
+  }
+
+  const loadGrades7 = async () => {
+    let newArray = await loadStudentGradesPerLevel('7');
+    setGrade7Details({
+      list: newArray
+    })
+  }
+
+  const loadGrades8 = async () => {
+    let newArray = await loadStudentGradesPerLevel('8');
+    setGrade8Details({
+      list: newArray
+    });
+  }
+
+  const loadGrades9 = async () => {
+    let newArray = await loadStudentGradesPerLevel('9');
+    setGrade9Details({
+      list: newArray
+    })
+  }
+
+  const loadGrades10 = async () => {
+    let newArray = await loadStudentGradesPerLevel('10');
+    setGrade10Details({
+      list: newArray
+    })
+  }
+
+  const loadAdvisoryGrades = async () => {
+    let user = JSON.parse(sessionStorage.user);
+    const userData = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      middleName: user.middleName
+    };
+
+    try {
+      let advisory = await AdditionalService.getAdvisory(userData);
+
+      if (!advisory) return;
+
+      let response = await gradesService.findAllGrades(advisory.data.gradeLevel);
+      let result = response.data.filter(user => user.gradeLevel === advisory.data.gradeLevel && user.status)
+      let list = result.map((user) => {
         return {
           key: user._id,
           id: user._id,
@@ -812,290 +950,13 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
           idNumber: user.student.idNumber,
           contactNumber: user.student.contactNumber,
           email: user.student.email,
-          section: user.section,
-          gradeLevel: user.gradeLevel,
-          action: 
-            <Button onClick={() => loadGrade(user,user.student.idNumber)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
+          section: user.student.section,
+          action:
+            <Button onClick={() => loadGrade(user, user.student.idNumber, advisory.data.gradeLevel)} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
         }
       })
-  
-      setGradeDetails({
-        list: newArray
-      })
-  }
 
-const loadGrades1 = async () => {
-    let response = await gradesService.findAllGrades('1');
-    let result = response.data.filter(user => user.gradeLevel === "1" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '1')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade1Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades2 = async () => {
-    let response = await gradesService.findAllGrades('2');
-    let result = response.data.filter(user => user.gradeLevel === "2" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '2')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade2Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades3 = async () => {
-    let response = await gradesService.findAllGrades('3');
-    let result = response.data.filter(user => user.gradeLevel === "3" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '3')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade3Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades4 = async () => {
-    let response = await gradesService.findAllGrades('4');
-    let result = response.data.filter(user => user.gradeLevel === "4" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '4')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade4Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades5 = async () => {
-    let response = await gradesService.findAllGrades('5');
-    let result = response.data.filter(user => user.gradeLevel === "5" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '5')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade5Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades6 = async () => {
-    let response = await gradesService.findAllGrades('6');
-    let result = response.data.filter(user => user.gradeLevel === "6" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '6')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade6Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades7 = async () => {
-    let response = await gradesService.findAllGrades('7');
-    let result = response.data.filter(user => user.gradeLevel === "7" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '7')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade7Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades8 = async () => {
-    let response = await gradesService.findAllGrades('8');
-    let result = response.data.filter(user => user.gradeLevel === "8" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '8')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade8Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades9 = async () => {
-    let response = await gradesService.findAllGrades('9');
-    let result = response.data.filter(user => user.gradeLevel === "9" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '9')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade9Details({
-            list: newArray
-          })
-  }
-
-  const loadGrades10 = async () => {
-    let response = await gradesService.findAllGrades('10');
-    let result = response.data.filter(user => user.gradeLevel === "10" && user.status)
-        let newArray = result.map((user ) => {
-            return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, '10')} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-          })
-      
-          setGrade10Details({
-            list: newArray
-          })
-  }
-  
-   const loadAdvisoryGrades = async () => {
-    let user = JSON.parse(sessionStorage.user);
-    const userData = {
-       firstName: user.firstName,
-       lastName: user.lastName,
-       middleName: user.middleName
-    };
-    
-    try {
-       let advisory = await AdditionalService.getAdvisory(userData);
-      
-       if (!advisory) return ;
-      
-       let response = await gradesService.findAllGrades(advisory.data.gradeLevel);
-       let result = response.data.filter(user => user.gradeLevel === advisory.data.gradeLevel && user.status)
-       let list = result.map((user ) => {
-           return {
-              key: user._id,
-              id: user._id,
-              firstName: user.student.firstName,
-              lastName: user.student.lastName,
-              middleName: user.student.middleName,
-              idNumber: user.student.idNumber,
-              contactNumber: user.student.contactNumber,
-              email: user.student.email,
-              section: user.student.section,
-              action: 
-                <Button onClick={() => loadGrade(user,user.student.idNumber, advisory.data.gradeLevel)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
-            }
-         })
-      
-    setAdvisoryGrades(list);
+      setAdvisoryGrades(list);
     } catch (error) {
     };
   };
@@ -1138,7 +999,7 @@ const loadGrades1 = async () => {
     selectedTeacher,
     gradeDetails,
     selectedUserGrade,
-    showAllGradeVisible, 
+    showAllGradeVisible,
     setShowAllGradeVisible,
     selectedUser,
     selectedGradeUser,
