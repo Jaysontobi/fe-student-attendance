@@ -374,50 +374,50 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     }
 
-    if (values.MAPEH) {
-      let firstQuarter = 0;
-      let secondQuarter = 0;
-      let thirdQuarter = 0;
-      let fourthQuarter = 0;
+    // if (values.MAPEH) {
+    //   let firstQuarter = 0;
+    //   let secondQuarter = 0;
+    //   let thirdQuarter = 0;
+    //   let fourthQuarter = 0;
 
-      if (values.MAPEH.firstQuarter) {
-        firstQuarter = values.MAPEH.firstQuarter
-      } else {
-        firstQuarter = grade.subjects[4].subjectGrade.firstQuarter
-      }
+    //   if (values.MAPEH.firstQuarter) {
+    //     firstQuarter = values.MAPEH.firstQuarter
+    //   } else {
+    //     firstQuarter = grade.subjects[4].subjectGrade.firstQuarter
+    //   }
 
-      if (values.MAPEH.secondQuarter) {
-        secondQuarter = values.MAPEH.secondQuarter
-      } else {
-        secondQuarter = grade.subjects[4].subjectGrade.secondQuarter
-      }
+    //   if (values.MAPEH.secondQuarter) {
+    //     secondQuarter = values.MAPEH.secondQuarter
+    //   } else {
+    //     secondQuarter = grade.subjects[4].subjectGrade.secondQuarter
+    //   }
 
-      if (values.MAPEH.thirdQuarter) {
-        thirdQuarter = values.MAPEH.thirdQuarter
-      } else {
-        thirdQuarter = grade.subjects[4].subjectGrade.thirdQuarter
-      }
+    //   if (values.MAPEH.thirdQuarter) {
+    //     thirdQuarter = values.MAPEH.thirdQuarter
+    //   } else {
+    //     thirdQuarter = grade.subjects[4].subjectGrade.thirdQuarter
+    //   }
 
-      if (values.MAPEH.fourthQuarter) {
-        fourthQuarter = values.MAPEH.fourthQuarter
-      } else {
-        fourthQuarter = grade.subjects[4].subjectGrade.fourthQuarter
-      }
+    //   if (values.MAPEH.fourthQuarter) {
+    //     fourthQuarter = values.MAPEH.fourthQuarter
+    //   } else {
+    //     fourthQuarter = grade.subjects[4].subjectGrade.fourthQuarter
+    //   }
 
-      let newMAPEHGrade = {
-        firstQuarter: firstQuarter,
-        secondQuarter: secondQuarter,
-        thirdQuarter: thirdQuarter,
-        fourthQuarter: fourthQuarter
-      };
+    //   let newMAPEHGrade = {
+    //     firstQuarter: firstQuarter,
+    //     secondQuarter: secondQuarter,
+    //     thirdQuarter: thirdQuarter,
+    //     fourthQuarter: fourthQuarter
+    //   };
 
-      if (isAdvisory) {
-        grade.subjects[4].subjectGrade = newMAPEHGrade;
-        grade.subjects[4].recommendedGrade = {};
-      } else {
-        grade.subjects[4].recommendedGrade = newMAPEHGrade;
-      };
-    }
+    //   if (isAdvisory) {
+    //     grade.subjects[4].subjectGrade = newMAPEHGrade;
+    //     grade.subjects[4].recommendedGrade = {};
+    //   } else {
+    //     grade.subjects[4].recommendedGrade = newMAPEHGrade;
+    //   };
+    // }
 
     if (values.Values) {
       let firstQuarter = 0;
@@ -781,6 +781,11 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let newArray = result[0].subjects.map((subject) => {
         return buidSubjectRow(subject);
       });
+      
+      //remove mapeh
+      let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
+      newArray.splice(mapehIndex, 1);
+
       setSelectedGradeUser(newArray);
 
     } else {

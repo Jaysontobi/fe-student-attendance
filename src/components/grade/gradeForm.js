@@ -477,7 +477,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
 
               </Row>
               <Row gutter={16}>
-                {(isAdviser ||
+                {/* {(isAdviser ||
                   selectedTeacherAssignedGrade.subjects[4] &&
                   selectedTeacherAssignedGrade.subjects[4].teacher &&
                   selectedTeacherAssignedGrade.subjects[4].teacher.idNumber === JSON.parse(sessionStorage.user).idNumber)
@@ -542,7 +542,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                       </Row>
                     </Card>
                   </Col> :
-                  null}
+                  null} */}
                 {(isAdviser ||
                   selectedTeacherAssignedGrade.subjects[5] &&
                   selectedTeacherAssignedGrade.subjects[5].teacher &&
