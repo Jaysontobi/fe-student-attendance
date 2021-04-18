@@ -846,8 +846,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         action:
           <Button onClick={() => {
             setLoading(true);
-            setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 2300);
-            setTimeout(() => { setLoading(false);}, 2500 );
+            setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 3000);
+            setTimeout(() => { setLoading(false);}, 3200 );
           }} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
       }
     });
