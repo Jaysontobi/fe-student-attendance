@@ -224,7 +224,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="1st Q" name="values">
                             <Input
                               style={{ border: hasUpdate('English', 'firstQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                               name="English1"
                               defaultValue={hasUpdate('English', 'firstQuarter') ?
                                 autoFillGrade('English', 'firstQuarter', 'English1') :
@@ -236,7 +236,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="2nd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('English', 'secondQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                               name="English2"
                               defaultValue={hasUpdate('English', 'secondQuarter') ?
                                 autoFillGrade('English', 'secondQuarter', 'English2') :
@@ -249,7 +249,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="3rd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('English', 'thirdQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                               name="English3"
                               defaultValue={hasUpdate('English', 'thirdQuarter') ?
                                 autoFillGrade('English', 'thirdQuarter', 'English3') :
@@ -260,7 +260,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="4th Q" name="values">
                             <Input
                               style={{ border: hasUpdate('English', 'fourthQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                               name="English4"
                               defaultValue={hasUpdate('English', 'fourthQuarter') ?
                                 autoFillGrade('English', 'fourthQuarter', 'English4') :
@@ -283,7 +283,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="1st Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Filipino', 'firstQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                               name="Filipino1"
                               defaultValue={hasUpdate('Filipino', 'firstQuarter') ?
                                 autoFillGrade('Filipino', 'firstQuarter', 'Filipino1') :
@@ -295,7 +295,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="2nd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Filipino', 'secondQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                               name="Filipino2"
                               defaultValue={hasUpdate('Filipino', 'secondQuarter') ?
                                 autoFillGrade('Filipino', 'secondQuarter', 'Filipino2') :
@@ -309,7 +309,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="3rd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Filipino', 'thirdQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                               name="Filipino3"
                               defaultValue={hasUpdate('Filipino', 'thirdQuarter') ?
                                 autoFillGrade('Filipino', 'thirdQuarter', 'Filipino3') :
@@ -321,7 +321,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="4th Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Filipino', 'fourthQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                               name="Filipino4"
                               defaultValue={hasUpdate('Filipino', 'fourthQuarter') ?
                                 autoFillGrade('Filipino', 'fourthQuarter', 'Filipino4') :
@@ -354,7 +354,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="1st Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Science', 'firstQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                               name="Science1"
                               defaultValue={hasUpdate('Science', 'firstQuarter') ?
                                 autoFillGrade('Science', 'firstQuarter', 'Science1') :
@@ -367,7 +367,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="2nd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Science', 'secondQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                               name="Science2"
                               defaultValue={hasUpdate('Science', 'secondQuarter') ?
                                 autoFillGrade('Science', 'secondQuarter', 'Science2') :
@@ -382,7 +382,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="3rd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Science', 'thirdQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                               name="Science3"
                               defaultValue={hasUpdate('Science', 'thirdQuarter') ?
                                 autoFillGrade('Science', 'thirdQuarter', 'Science3') :
@@ -395,7 +395,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="4th Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Science', 'fourthQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                               name="Science4"
                               defaultValue={hasUpdate('Science', 'fourthQuarter') ?
                                 autoFillGrade('Science', 'fourthQuarter', 'Science4') :
@@ -420,7 +420,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="1st Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Math', 'firstQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                               name="Math1"
                               defaultValue={hasUpdate('Math', 'firstQuarter') ?
                                 autoFillGrade('Math', 'firstQuarter', 'Math1') :
@@ -433,7 +433,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="2nd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Math', 'secondQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                               name="Math2"
                               defaultValue={hasUpdate('Math', 'secondQuarter') ?
                                 autoFillGrade('Math', 'secondQuarter', 'Math2') :
@@ -448,7 +448,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="3rd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Math', 'thirdQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                               name="Math3"
                               defaultValue={hasUpdate('Math', 'thirdQuarter') ?
                                 autoFillGrade('Math', 'thirdQuarter', 'Math3') :
@@ -461,7 +461,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="4th Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Math', 'fourthQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                               name="Math4"
                               defaultValue={hasUpdate('Math', 'fourthQuarter') ?
                                 autoFillGrade('Math', 'fourthQuarter', 'Math4') :
@@ -555,7 +555,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="1st Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Values', 'firstQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                               name="Values1"
                               defaultValue={hasUpdate('Values', 'firstQuarter') ?
                                 autoFillGrade('Values', 'firstQuarter', 'Values1') :
@@ -568,7 +568,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="2nd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Values', 'secondQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                               name="Values2"
                               defaultValue={hasUpdate('Values', 'secondQuarter') ?
                                 autoFillGrade('Values', 'secondQuarter', 'Values2') :
@@ -583,7 +583,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="3rd Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Values', 'thirdQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                               name="Values3"
                               defaultValue={hasUpdate('Values', 'thirdQuarter') ?
                                 autoFillGrade('Values', 'thirdQuarter', 'Values3') :
@@ -596,7 +596,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                           <Form.Item label="4th Q" name="values">
                             <Input
                               style={{ border: hasUpdate('Values', 'fourthQuarter') ? '1px solid red' : '' }}
-                              disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                              disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                               name="Values4"
                               defaultValue={hasUpdate('Values', 'fourthQuarter') ?
                                 autoFillGrade('Values', 'fourthQuarter', 'Values4') :
@@ -654,7 +654,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="3rd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Music', 'thirdQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                                   name="Music3"
                                   defaultValue={hasUpdate('Music', 'thirdQuarter') ?
                                     autoFillGrade('Music', 'thirdQuarter', 'Music3') :
@@ -667,7 +667,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="4th Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Music', 'fourthQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                                   name="Music4"
                                   defaultValue={hasUpdate('Music', 'fourthQuarter') ?
                                     autoFillGrade('Music', 'fourthQuarter', 'Music4') :
@@ -686,7 +686,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="1st Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Art', 'firstQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                                   name="Art1"
                                   defaultValue={hasUpdate('Art', 'firstQuarter') ?
                                     autoFillGrade('Art', 'firstQuarter', 'Art1') :
@@ -699,7 +699,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="2nd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Art', 'secondQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                                   name="Art2"
                                   defaultValue={hasUpdate('Art', 'secondQuarter') ?
                                     autoFillGrade('Art', 'secondQuarter', 'Art2') :
@@ -714,7 +714,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="3rd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Art', 'thirdQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                                   name="Art3"
                                   defaultValue={hasUpdate('Art', 'thirdQuarter') ?
                                     autoFillGrade('Art', 'thirdQuarter', 'Art3') :
@@ -727,7 +727,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="4th Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Art', 'fourthQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                                   name="Art4"
                                   defaultValue={hasUpdate('Art', 'fourthQuarter') ?
                                     autoFillGrade('Art', 'fourthQuarter', 'Art4') :
@@ -748,7 +748,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="1st Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('PE', 'firstQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                                   name="PE1"
                                   defaultValue={hasUpdate('PE', 'firstQuarter') ?
                                     autoFillGrade('PE', 'firstQuarter', 'PE1') :
@@ -761,7 +761,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="2nd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('PE', 'secondQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                                   name="PE2"
                                   defaultValue={hasUpdate('PE', 'secondQuarter') ?
                                     autoFillGrade('PE', 'secondQuarter', 'PE2') :
@@ -776,7 +776,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="3rd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('PE', 'thirdQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                                   name="PE3"
                                   defaultValue={hasUpdate('PE', 'thirdQuarter') ?
                                     autoFillGrade('PE', 'thirdQuarter', 'PE3') :
@@ -789,7 +789,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="4th Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('PE', 'fourthQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                                   name="PE4"
                                   defaultValue={hasUpdate('PE', 'fourthQuarter') ?
                                     autoFillGrade('PE', 'fourthQuarter', 'PE4') :
@@ -808,7 +808,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="1st Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Health', 'firstQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "1"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "1"}
                                   name="Health1"
                                   defaultValue={hasUpdate('Health', 'firstQuarter') ?
                                     autoFillGrade('Health', 'firstQuarter', 'Health1') :
@@ -821,7 +821,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="2nd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Health', 'secondQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "2"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "2"}
                                   name="Health2"
                                   defaultValue={hasUpdate('Health', 'secondQuarter') ?
                                     autoFillGrade('Health', 'secondQuarter', 'Health2') :
@@ -836,7 +836,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="3rd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Health', 'thirdQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "3" && userRole !== 'Teacher'}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3" && userRole !== 'Teacher'}
                                   name="Health3"
                                   defaultValue={hasUpdate('Health', 'thirdQuarter') ?
                                     autoFillGrade('Health', 'thirdQuarter', 'Health3') :
@@ -849,7 +849,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="4th Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Health', 'fourthQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole === 'Teacher' || sessionStorage.quarter !== "4"}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "4"}
                                   name="Health4"
                                   defaultValue={hasUpdate('Health', 'fourthQuarter') ?
                                     autoFillGrade('Health', 'fourthQuarter', 'Health4') :
