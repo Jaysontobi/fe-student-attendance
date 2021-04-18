@@ -78,7 +78,7 @@ const GradePage = () => {
              </Button> : null}
             {JSON.parse(sessionStorage.user).role === "Admin" ?
               <Button className="right btn-save" onClick={() => upgradeStudent()}>
-                <RiseOutlined type="minus-circle" /> Upgrade
+                <RiseOutlined type="minus-circle" /> Promote
              </Button>
               : null}
           </Col>
