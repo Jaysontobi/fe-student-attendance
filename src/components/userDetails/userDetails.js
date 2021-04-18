@@ -7,6 +7,9 @@ import UserForm from './userDetailsForm'
 import UserTable from './gradeTable'
 import GradeAction from '../grade/gradeAction'
 import AdvisorAction from '../grade/advisoryAction'
+import AttendanceTable from './attendanceTable';
+import AttendanceAction from './attendanceAction';
+
 const { Option } = Select;
 
 
@@ -14,7 +17,7 @@ const EmployeePage = () => {
 
   let {
     selectedUserGrade,
-    showAllGradeVisible, 
+    showAllGradeVisible,
     setShowAllGradeVisible,
     selectedUser,
     studentAdvisor,
@@ -22,6 +25,14 @@ const EmployeePage = () => {
     loading
   } = GradeAction({});
 
+  let { getAttendance , attendances } = AttendanceAction();
+
+  let loadAttendance = async () => {
+    let user = JSON.parse(sessionStorage.user);
+    await getAttendance(user.idNumber);
+  };
+
+  loadAttendance();
 
   return (
     <Card className="h-82 p-70">
@@ -34,24 +45,24 @@ const EmployeePage = () => {
               <Row>
                 <Col span={12}>
                   <p>
-                    <b>Full Name: </b>{selectedUser.firstName ? selectedUser.firstName + " " + selectedUser.lastName: null}
+                    <b>Full Name: </b>{selectedUser.firstName ? selectedUser.firstName + " " + selectedUser.lastName : null}
                   </p>
                   <p>
                     <b>Grade Level: </b>{JSON.parse(sessionStorage.user).gradeLevel}
                   </p>
                   <p>
-                    <b>Section: </b>{selectedUser ? selectedUser.section: null}
+                    <b>Section: </b>{selectedUser ? selectedUser.section : null}
                   </p>
                 </Col>
                 <Col span={12}>
                   <p>
-                    <b>Advisor Name: </b>{studentAdvisor && studentAdvisor.teacher ? studentAdvisor.teacher.firstName + " " + studentAdvisor.teacher.lastName: null}
+                    <b>Advisor Name: </b>{studentAdvisor && studentAdvisor.teacher ? studentAdvisor.teacher.firstName + " " + studentAdvisor.teacher.lastName : null}
                   </p>
                   <p>
-                    <b>Advisor Contact Number: </b>{studentAdvisor && studentAdvisor.teacher ? studentAdvisor.teacher.contactNumber: null}
+                    <b>Advisor Contact Number: </b>{studentAdvisor && studentAdvisor.teacher ? studentAdvisor.teacher.contactNumber : null}
                   </p>
                   <b>Yr./Lvl: </b>
-                  <Select className="ml-15" placeholder="Select Yr./Level" onChange={(value)=> filterCurrentGradeUser(value) }>
+                  <Select className="ml-15" placeholder="Select Yr./Level" onChange={(value) => filterCurrentGradeUser(value)}>
                     <Option value="1">1</Option>
                     <Option value="2">2</Option>
                     <Option value="3">3</Option>
@@ -68,11 +79,18 @@ const EmployeePage = () => {
             </Card>
           </Col>
           <Col lg={{ span: "24" }}>
-            <UserTable details={selectedUserGrade ? selectedUserGrade: []}/>
+            <UserTable details={selectedUserGrade ? selectedUserGrade : []} />
+          </Col>
+          <Col lg={{ span: "24" }}>
+            <Card className="ml-15" title={
+              <Typography.Title>Attendance Record</Typography.Title>
+            }>
+              <AttendanceTable details={attendances}></AttendanceTable>
+            </Card>
           </Col>
         </Row>
       </Spin>
-    </Card>   
+    </Card>
   );
 }
 

@@ -11,6 +11,8 @@ import GradeTable from './gradeTable'
 import StudentGradeTable from '../userDetails/gradeTable'
 import TeacherAction from './teacherAction';
 import AdvisorAction from './advisoryAction';
+import AttendanceTable from '../userDetails/attendanceTable';
+import AttendanceAction from '../userDetails/attendanceAction';
 
 const GradePage = () => {
 
@@ -49,82 +51,93 @@ const GradePage = () => {
     availableAdvisors
   } = AdvisorAction({});
 
+  let { getAttendance, attendances } = AttendanceAction();
+  let loadAttendance = async () => {
+    if (!selectedGrade.student) return;
+    await getAttendance(selectedGrade.student.idNumber);
+  };
+
+  loadAttendance();
 
   return (
 
     <Card className="h-82 p-70">
-        <Spin spinning={loading} delay={0}>
-    <Row className="mt-15">
-      <Col lg={{ span: 13 }}>
-        <Typography.Title level={3} className="ml-15">Grade1 Management</Typography.Title>
-      </Col>
-      <Col lg={{ span: 10 }}>
-        {JSON.parse(sessionStorage.user).role === "Admin" ?       
-        <Button className="right ml-10 btn-add" type="save " onClick={() => showTeacher("1")}>
-          <PlusCircleOutlined type="minus-circle" /> Add teacher
+      <Spin spinning={loading} delay={0}>
+        <Row className="mt-15">
+          <Col lg={{ span: 13 }}>
+            <Typography.Title level={3} className="ml-15">Grade1 Management</Typography.Title>
+          </Col>
+          <Col lg={{ span: 10 }}>
+            {JSON.parse(sessionStorage.user).role === "Admin" ?
+              <Button className="right ml-10 btn-add" type="save " onClick={() => showTeacher("1")}>
+                <PlusCircleOutlined type="minus-circle" /> Add teacher
              </Button> : null
-        }
-              {JSON.parse(sessionStorage.user).role === "Admin" ?  <Button className="right ml-10 bg-gray text-white" type="save " onClick={() => showAdvisor("1")}>
-          <PlusCircleOutlined type="minus-circle" /> Add Advisor
+            }
+            {JSON.parse(sessionStorage.user).role === "Admin" ? <Button className="right ml-10 bg-gray text-white" type="save " onClick={() => showAdvisor("1")}>
+              <PlusCircleOutlined type="minus-circle" /> Add Advisor
              </Button> : null}
-        {JSON.parse(sessionStorage.user).role === "Admin" ?   
-        <Button className="right btn-save" onClick={() => upgradeStudent()}>
-          <RiseOutlined type="minus-circle" /> Upgrade
+            {JSON.parse(sessionStorage.user).role === "Admin" ?
+              <Button className="right btn-save" onClick={() => upgradeStudent()}>
+                <RiseOutlined type="minus-circle" /> Upgrade
              </Button>
-        : null}
-      </Col>
-    </Row>
-    <Row>
-      <Col lg={{ span: "24" }}>
-        <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={grade1Details.list} />
-      </Col>
-    </Row>
-    <Drawer
-              title={
-                  <Typography.Title level={4}>
-                  Student Info
+              : null}
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={{ span: "24" }}>
+            <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={grade1Details.list} />
+          </Col>
+        </Row>
+        <Drawer
+          title={
+            <Typography.Title level={4}>
+              Student Info
                   </Typography.Title>
-              }
-              width={700}
-              visible={showGradeVisible}
-              onClose={()=> { setShowGradeVisible(false)}}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"1"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade1}/>
-             <StudentGradeTable details={selectedGradeUser ? selectedGradeUser: []}/>
-          </Drawer>
+          }
+          width={950}
+          visible={showGradeVisible}
+          onClose={() => { setShowGradeVisible(false) }}
+          bodyStyle={{ paddingBottom: 80 }}
+        >
+          <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"1"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade1} />
+          <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
+          <Typography.Title level={4} style={{ marginLeft: '20px' }}>
+            Student Attendance
+          </Typography.Title>
+          <AttendanceTable details={attendances} />
+        </Drawer>
 
-          <Drawer
-              title={
-                  <Typography.Title level={4}>
-                  Teachers for grade 1
+        <Drawer
+          title={
+            <Typography.Title level={4}>
+              Teachers for grade 1
                   </Typography.Title>
-              }
-              width={700}
-              visible={showTeacherVisible}
-              onClose={()=> hideTeacher()}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"1"}/>
-          </Drawer>
+          }
+          width={700}
+          visible={showTeacherVisible}
+          onClose={() => hideTeacher()}
+          bodyStyle={{ paddingBottom: 80 }}
+        >
+          <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"1"} />
+        </Drawer>
 
-          <Drawer
-              title={
-                  <Typography.Title level={4}>
-                    Advisor for grade 1
+        <Drawer
+          title={
+            <Typography.Title level={4}>
+              Advisor for grade 1
                   </Typography.Title>
-              }
-              width={500}
-              visible={showAdvisorVisible}
-              onClose={()=> hideAdvisor()}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade1} selectedTeacher={availableAdvisors} add={addAdvisor} gradeLevel={"1"}/>
-          </Drawer>
-          </Spin>
-  </Card>
-	
-      
+          }
+          width={500}
+          visible={showAdvisorVisible}
+          onClose={() => hideAdvisor()}
+          bodyStyle={{ paddingBottom: 80 }}
+        >
+          <AdvisoryForm selectedTeacherAssgined={selectedAdvisoryAssignedGrade1} selectedTeacher={availableAdvisors} add={addAdvisor} gradeLevel={"1"} />
+        </Drawer>
+      </Spin>
+    </Card>
+
+
   );
 }
 
