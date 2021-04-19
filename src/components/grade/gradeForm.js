@@ -836,7 +836,7 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
                               <Form.Item label="3rd Q" name="values">
                                 <Input
                                   style={{ border: hasUpdate('Health', 'thirdQuarter') ? '1px solid red' : '' }}
-                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3" && userRole !== 'Teacher'}
+                                  disabled={userRole !== 'Teacher' || sessionStorage.quarter !== "3"}
                                   name="Health3"
                                   defaultValue={hasUpdate('Health', 'thirdQuarter') ?
                                     autoFillGrade('Health', 'thirdQuarter', 'Health3') :
