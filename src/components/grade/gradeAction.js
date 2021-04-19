@@ -339,7 +339,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       if (values.Math.firstQuarter) {
         firstQuarter = values.Math.firstQuarter
       } else {
-        firstQuarter = grade.Math[3].subjectGrade.firstQuarter
+        firstQuarter = grade.subjects[3].subjectGrade.firstQuarter
       }
 
       if (values.Math.secondQuarter) {
