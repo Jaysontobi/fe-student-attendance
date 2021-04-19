@@ -22,7 +22,8 @@ const EmployeePage = () => {
     selectedUser,
     studentAdvisor,
     filterCurrentGradeUser,
-    loading
+    loading,
+    overAllGrade
   } = GradeAction({});
 
   let { getAttendance , attendances } = AttendanceAction();
@@ -81,6 +82,19 @@ const EmployeePage = () => {
           <Col lg={{ span: "24" }}>
             <UserTable details={selectedUserGrade ? selectedUserGrade : []} />
           </Col>
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+              General Average :
+              { overAllGrade ? (
+                <>
+                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
+                  'red': '' }}>{ overAllGrade.finalGrade }</span>
+                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                  'red': '' }}>{ overAllGrade.remarks }</span>
+                </>
+              ) : ('')}
+            </Typography.Title>
+          </Row>
           <Col lg={{ span: "24" }}>
             <Card className="ml-15" title={
               <Typography.Title>Attendance Record</Typography.Title>

@@ -32,6 +32,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [selectedUser, setSelectedUser] = useState({});
 
   let [selectedListOfStudent, setSelectedListOfStudent] = useState([]);
+  let [overAllGrade, setOverAllGrade] = useState({ finalGrade: '', remarks: '' });
 
   const upgradeStudent = async values => {
     let auditTrailObj = {
@@ -682,7 +683,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       //remove mapeh
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
-
+      
+      buildOverallRemarks(newArray);
       setSelectedUser(result[0].student)
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
@@ -692,7 +694,31 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       setSelectedUserGrade([])
     }
     setLoading(false)
-  }
+  };
+
+  const buildOverallRemarks = async (newArray) => {
+    let finalGradesholder = [];
+
+    newArray.map(subject => { 
+      if (subject.FinalGrade && subject.FinalGrade !== '') finalGradesholder.push(subject.FinalGrade);
+    });
+
+    if (finalGradesholder.length === newArray.length) {
+      let average = finalGradesholder.reduce((a, b) => a + b, 0) / finalGradesholder.length;
+      let remarks = '';
+
+      if (average >= 75) {
+        remarks = 'Passed';
+      } else {
+        remarks = 'Failed';
+      };
+
+      setOverAllGrade({
+        finalGrade: average.toFixed(2),
+        remarks: remarks
+      });
+    };
+  };
 
   const currentGradeUser = async () => {
     let response = await gradesService.findAllGrades();
@@ -720,9 +746,9 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
 
+      buildOverallRemarks(newArray);
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
-
     } else {
       setSelectedUser({})
       setSelectedUserGrade([])
@@ -794,16 +820,13 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       //remove mapeh
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
-
+      
+      buildOverallRemarks(newArray);
       setSelectedGradeUser(newArray);
-
     } else {
       setSelectedUser({})
       setSelectedGradeUser([])
-    }
-
-
-
+    };
 
   }
 
@@ -1022,7 +1045,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     loading,
     studentAdvisor,
     filterCurrentGradeUser,
-    advisoryGrades
+    advisoryGrades,
+    overAllGrade
   }
 };
 

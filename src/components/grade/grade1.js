@@ -29,7 +29,8 @@ const GradePage = () => {
     selectedGradeUser,
     upgradeStudent,
     setSelectedListOfStudent,
-    loading
+    loading,
+    overAllGrade
   } = GradeAction({});
 
   let {
@@ -100,6 +101,19 @@ const GradePage = () => {
           bodyStyle={{ paddingBottom: 80 }}
         >
           <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"1"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade1} />
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+              General Average :
+              { overAllGrade ? (
+                <>
+                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
+                  'red': '' }}>{ overAllGrade.finalGrade }</span>
+                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                  'red': '' }}>{ overAllGrade.remarks }</span>
+                </>
+              ) : ('')}
+            </Typography.Title>
+          </Row>
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Typography.Title level={4} style={{ marginLeft: '20px' }}>
             Student Attendance

@@ -28,7 +28,8 @@ const GradePage = () => {
     selectedGradeUser,
     upgradeStudent,
     setSelectedListOfStudent,
-    loading
+    loading,
+    overAllGrade
   } = GradeAction({});
 
   let {
@@ -55,6 +56,8 @@ const GradePage = () => {
     if (!selectedGrade.student) return;
     await getAttendance(selectedGrade.student.idNumber);
   };
+
+  loadAttendance();
 
   return (
     <Card className="h-82 p-70">
@@ -96,6 +99,19 @@ const GradePage = () => {
         >
           <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"8"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade8} />
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+              General Average :
+              { overAllGrade ? (
+                <>
+                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
+                  'red': '' }}>{ overAllGrade.finalGrade }</span>
+                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                  'red': '' }}>{ overAllGrade.remarks }</span>
+                </>
+              ) : ('')}
+            </Typography.Title>
+          </Row>
           <Typography.Title level={4} style={{marginLeft: '20px'}}>
               Student Attendance
           </Typography.Title>

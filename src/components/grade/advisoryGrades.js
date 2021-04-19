@@ -27,7 +27,8 @@ const AdvisoryGrades = () => {
     upgradeStudent,
     setSelectedListOfStudent,
     loading,
-    advisoryGrades
+    advisoryGrades,
+    overAllGrade
   } = GradeAction({});
 
   let {
@@ -51,44 +52,57 @@ const AdvisoryGrades = () => {
 
   return (
     <Card className="h-82 p-70">
-        <Spin spinning={loading} delay={0}>
-    <Row className="mt-15">
-      <Col lg={{ span: 13 }}>
-        <Typography.Title level={3} className="ml-15">Advisory Grades Management</Typography.Title>
-      </Col>
-      <Col lg={{ span: 10 }}>
-      </Col>
-    </Row>
-    <Row>
-      <Col lg={{ span: "24" }}>
-        <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={advisoryGrades} />
-      </Col>
-    </Row>
-    <Drawer
-              title={
-                  <Typography.Title level={4}>
-                  Student Info
+      <Spin spinning={loading} delay={0}>
+        <Row className="mt-15">
+          <Col lg={{ span: 13 }}>
+            <Typography.Title level={3} className="ml-15">Advisory Grades Management</Typography.Title>
+          </Col>
+          <Col lg={{ span: 10 }}>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={{ span: "24" }}>
+            <GradeTable setSelectedListOfStudent={setSelectedListOfStudent} details={advisoryGrades} />
+          </Col>
+        </Row>
+        <Drawer
+          title={
+            <Typography.Title level={4}>
+              Student Info
                   </Typography.Title>
-              }
-              width={700}
-              visible={showGradeVisible}
-              onClose={()=> { setShowGradeVisible(false)}}
-              bodyStyle={{ paddingBottom: 80 }}
-          >
-             <GradeForm
-		upgradeStudent={upgradeStudent} 
-		add={addGrade} update={editGrade} 
-		selectedTeacher={selectedTeacher} 
-		selectedGrade={selectedGrade} 
-		gradeLevel={"2"} 
-		selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} 
-		isAdviser="true"/>
-             <StudentGradeTable details={selectedGradeUser ? selectedGradeUser: []}/>
-          </Drawer>
-    </Spin>
-  </Card>
-	
-      
+          }
+          width={700}
+          visible={showGradeVisible}
+          onClose={() => { setShowGradeVisible(false) }}
+          bodyStyle={{ paddingBottom: 80 }}
+        >
+          <GradeForm
+            upgradeStudent={upgradeStudent}
+            add={addGrade} update={editGrade}
+            selectedTeacher={selectedTeacher}
+            selectedGrade={selectedGrade}
+            gradeLevel={"2"}
+            selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2}
+            isAdviser="true" />
+          <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+              General Average :
+              { overAllGrade ? (
+                <>
+                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
+                  'red': '' }}>{ overAllGrade.finalGrade }</span>
+                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                  'red': '' }}>{ overAllGrade.remarks }</span>
+                </>
+              ) : ('')}
+            </Typography.Title>
+          </Row>
+        </Drawer>
+      </Spin>
+    </Card>
+
+
   );
 }
 
