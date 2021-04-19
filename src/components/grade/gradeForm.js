@@ -52,15 +52,15 @@ const Grade1EditForm = ({ upgradeStudent, add, update, selectedGrade, selectedTe
     };
   };
 
-  const getMAPEHGrades = (quarter) => {
-    let q1 = document.getElementbyId('Music' + quarter).value;
-    let q2 = document.getElementbyId('Art' + quarter).value;
-    let q3 = document.getElementbyId('PE' + quarter).value;
-    let q4 = document.getElementbyId('Health' + quarter).value;
-    let average = (q1 + q2 + q3 + q4) / 4;
-    let key = 'MAPEH' + quarter;
-    mapehObj[key] = average;
-  };
+  // const getMAPEHGrades = (quarter) => {
+  //   let q1 = document.getElementbyId('Music' + quarter).value;
+  //   let q2 = document.getElementbyId('Art' + quarter).value;
+  //   let q3 = document.getElementbyId('PE' + quarter).value;
+  //   let q4 = document.getElementbyId('Health' + quarter).value;
+  //   let average = (q1 + q2 + q3 + q4) / 4;
+  //   let key = 'MAPEH' + quarter;
+  //   mapehObj[key] = average;
+  // };
 
   return (
     <Formik

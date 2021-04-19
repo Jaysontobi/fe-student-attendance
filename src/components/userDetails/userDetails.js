@@ -32,8 +32,8 @@ const EmployeePage = () => {
     await getAttendance(user.idNumber);
   };
 
-  loadAttendance();
-
+  if (attendances.length  === 0)  loadAttendance();;
+ 
   return (
     <Card className="h-82 p-70">
       <Spin spinning={loading} delay={0}>

@@ -4,6 +4,7 @@ import AttendanceService from './attendanceService';
 const AttendanceAction = () => {
 
   let [ attendances, setattendances ] = useState([]);
+  let [ schoolDays, setSchoolDays ] = useState({});
 
   const getAttendance = async (id) => {
     let attendanceDatas = [];
@@ -26,14 +27,29 @@ const AttendanceAction = () => {
 
     setattendances(attendanceDatas);
     return attendanceDatas;
-  }
+  };
+
+  const getSchoolDays = async () => {
+    let response = await AttendanceService.getSchooldays();
+    setSchoolDays(response.data[0]);
+    return response;
+  };
+
+
+  const saveSchoolDays = async obj => {
+    let response = await AttendanceService.saveSchoolDays(obj);
+    console.log(response);
+  };  
 
   useEffect(() => {
   }, []);
 
   return {
     getAttendance,
-    attendances
+    attendances,
+    getSchoolDays,
+    schoolDays,
+    saveSchoolDays
   }
 };
 

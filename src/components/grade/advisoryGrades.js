@@ -14,7 +14,6 @@ import TeacherAction from './teacherAction';
 
 const AdvisoryGrades = () => {
 
-
   let {
     addGrade,
     showGradeVisible,
