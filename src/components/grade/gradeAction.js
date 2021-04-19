@@ -679,6 +679,10 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let result1 = [];
       result1 = response.data.filter(user => user.gradeLevel === gradeLevel);
 
+      //remove mapeh
+      let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
+      newArray.splice(mapehIndex, 1);
+
       setSelectedUser(result[0].student)
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
@@ -710,7 +714,12 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         result1 = response.data.filter(user => user.gradeLevel === "1");
       } else {
         result1 = response.data.filter(user => user.gradeLevel === JSON.parse(sessionStorage.user).gradeLevel);
-      }
+      };
+
+      //remove mapeh
+      let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
+      newArray.splice(mapehIndex, 1);
+
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
 
