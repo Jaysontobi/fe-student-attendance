@@ -708,7 +708,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let remarks = '';
 
       if (average >= 75) {
-        remarks = 'Passed';
+        remarks = 'Promoted';
       } else {
         remarks = 'Failed';
       };
