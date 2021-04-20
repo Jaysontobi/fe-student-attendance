@@ -10,6 +10,12 @@ import GradeAction from './gradeAction'
 import StudentGradeTable from '../userDetails/gradeTable';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
+import CustomTable from '../shared/customTable';
+import {
+  DESCRIPTOR_TABLE,
+  MARKING_TABLE,
+  OBSERVED_VALUES_HEADER
+} from '../modelTemplate/observedValues';
 
 import GradeTable from './gradeTable'
 import TeacherAction from './teacherAction';
@@ -30,7 +36,8 @@ const GradePage = () => {
     upgradeStudent,
     setSelectedListOfStudent,
     loading,
-    overAllGrade
+    overAllGrade,
+    observedValues
   } = GradeAction({});
 
   let {
@@ -101,22 +108,42 @@ const GradePage = () => {
           <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"2"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} />
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
-            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
               General Average :
-              { overAllGrade ? (
+              {overAllGrade ? (
                 <>
-                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
-                  'red': '' }}>{ overAllGrade.finalGrade }</span>
-                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
-                  'red': '' }}>{ overAllGrade.remarks }</span>
+                  <span style={{
+                    marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ?
+                      'red' : ''
+                  }}>{overAllGrade.finalGrade}</span>
+                  <span style={{
+                    marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                      'red' : ''
+                  }}>{overAllGrade.remarks}</span>
                 </>
               ) : ('')}
             </Typography.Title>
           </Row>
-          <Typography.Title level={4} style={{ marginLeft: '20px' }}>
-            Student Attendance
-          </Typography.Title>
-          <AttendanceTable details={attendances} />
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
+              Student Attendance
+              </Typography.Title>
+            <AttendanceTable details={attendances} />
+          </Row>
+          <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>Learner's Observed Values</Typography.Title>
+            <Col lg={{ span: "24" }} className="mt-15">
+              <CustomTable details={observedValues ? observedValues : []} headers={OBSERVED_VALUES_HEADER}></CustomTable>
+            </Col>
+          </Row>
+          <Row style={{ marginBottom: '35px', marginTop: '5px', textAlign: 'left', width: "100%" }}>
+            <Col lg={{ span: "11" }}>
+              <CustomTable details={DESCRIPTOR_TABLE.body} headers={DESCRIPTOR_TABLE.headers}></CustomTable>
+            </Col>
+            <Col lg={{ span: "11", offset: "1" }}>
+              <CustomTable details={MARKING_TABLE.body} headers={MARKING_TABLE.headers}></CustomTable>
+            </Col>
+          </Row>
         </Drawer>
 
         <Drawer

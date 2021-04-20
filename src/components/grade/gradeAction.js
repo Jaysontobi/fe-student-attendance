@@ -6,6 +6,7 @@ import auditTrailService from '../auditTrail/auditTrailService';
 import AdditionalService from '../user/additionalService';
 import { Button } from 'antd';
 import moment from 'moment';
+import { OBSERVED_VALUES } from '../modelTemplate/observedValues';
 
 const Grade1Action = (initial = { searchRequest: {} }) => {
   let [studentAdvisor, setStudentAdvisor] = useState({});
@@ -33,6 +34,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
   let [selectedListOfStudent, setSelectedListOfStudent] = useState([]);
   let [overAllGrade, setOverAllGrade] = useState({ finalGrade: '', remarks: '' });
+  let [observedValues, setObservedValues] = useState([]);
 
   const upgradeStudent = async values => {
     let auditTrailObj = {
@@ -684,6 +686,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
       
+      buildObservedValues(result[0].observedValues);
       buildOverallRemarks(newArray);
       setSelectedUser(result[0].student)
       setStudentAdvisor(result1[0]);
@@ -720,6 +723,24 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     };
   };
 
+  const buildObservedValues = valuesDatas => {
+    let observedValuesTmp = JSON.parse(JSON.stringify(OBSERVED_VALUES));
+
+    if (valuesDatas) {
+      observedValuesTmp = observedValuesTmp.map( valuesObj => {
+        let newObj = valuesDatas.find(item => item.value === valuesObj.id);
+        if (!newObj) {
+          return valuesObj;
+        } else {
+          valuesObj = Object.assign(valuesObj, newObj.grades);
+          return valuesObj;
+        }
+      });
+    }
+
+    setObservedValues(observedValuesTmp);
+  };
+
   const currentGradeUser = async () => {
     let response = await gradesService.findAllGrades();
     let result = [];
@@ -747,6 +768,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       newArray.splice(mapehIndex, 1);
 
       buildOverallRemarks(newArray);
+      buildObservedValues(result[0].observedValues);
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
     } else {
@@ -820,7 +842,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       //remove mapeh
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
-      
+      buildObservedValues(result[0].observedValues);
       buildOverallRemarks(newArray);
       setSelectedGradeUser(newArray);
     } else {
@@ -1046,7 +1068,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     studentAdvisor,
     filterCurrentGradeUser,
     advisoryGrades,
-    overAllGrade
+    overAllGrade,
+    observedValues
   }
 };
 

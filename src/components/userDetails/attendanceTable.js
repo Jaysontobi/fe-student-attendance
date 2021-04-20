@@ -59,8 +59,7 @@ const AttendanceTable = ({ details }) => {
   ];
 
   return (
-    <Table columns={columns} dataSource={details}
-    />
+    <Table columns={columns} dataSource={details} pagination={false}/>
   );
 }
 
