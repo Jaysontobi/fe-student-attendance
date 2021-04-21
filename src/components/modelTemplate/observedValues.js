@@ -19,40 +19,46 @@ const DEFINITIONS = {
 const OBSERVED_VALUES_HEADER = [
   {
     title: 'Core Values',
-    field: 'values'
+    field: 'values',
+    dataIndex: 'values'
   },
   {
     title: 'Behavior Statements',
     field: 'statement',
-    width: 300
+    dataIndex: 'statement',
+    width: '35%'
   },
   {
     title: 'Q1',
     field: 'q1',
+    dataIndex: 'q1', 
     withCondition: (value) => { if (value === 'NO') return 'red'},
     isSubField: false,
-    isEditable: true
+    editable: true
   },
   {
     title: 'Q2',
     field: 'q2',
+    dataIndex: 'q2',
     withCondition: (value) => { if (value === 'NO') return 'red'},
     isSubField: false,
-    isEditable: true
+    editable: true
   },
   {
     title: 'Q3',
     field: 'q3',
+    dataIndex: 'q3',
     withCondition: (value) => { if (value === 'NO') return 'red'},
     isSubField: false,
-    isEditable: true
+    editable: true
   },
   {
     title: 'Q4',
     field: 'q4',
+    dataIndex: 'q4',
     withCondition: (value) => { if (value === 'NO') return 'red'},
     isSubField: false,
-    isEditable: true
+    editable: true
   }
 ]
 

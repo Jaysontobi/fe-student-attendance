@@ -20,6 +20,10 @@ class GradesService extends BaseService {
     return (level !== '') ? this.axiosInstance.get('/' + level) : this.axiosInstance.get('/');
   };
 
+  addUpdateObservedValues = valuesObj => {
+    return this.axiosInstance.post('/observed-values', valuesObj);
+  };
+
 }
 
 export default new GradesService();

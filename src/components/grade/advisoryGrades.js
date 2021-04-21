@@ -8,6 +8,7 @@ import AdvisorAction from './advisoryAction';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
 import CustomTable from '../shared/customTable';
+import EditableTable from '../shared/editableTable';
 import {
   DESCRIPTOR_TABLE,
   MARKING_TABLE,
@@ -37,7 +38,8 @@ const AdvisoryGrades = () => {
     loading,
     advisoryGrades,
     overAllGrade,
-    observedValues
+    observedValues,
+    addUpdateObservedValues
   } = GradeAction({});
 
   let {
@@ -127,7 +129,7 @@ const AdvisoryGrades = () => {
             <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
               <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>Learner's Observed Values</Typography.Title>
               <Col lg={{ span: "24" }} className="mt-15">
-                <CustomTable details={observedValues ? observedValues : []} headers={OBSERVED_VALUES_HEADER}></CustomTable>
+                <EditableTable details={observedValues ? observedValues : []} headers={OBSERVED_VALUES_HEADER} setData={addUpdateObservedValues}></EditableTable>
               </Col>
             </Row>
             <Row style={{ marginBottom: '35px', marginTop: '5px', textAlign: 'left', width: "100%" }}>

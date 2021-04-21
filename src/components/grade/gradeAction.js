@@ -12,7 +12,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [studentAdvisor, setStudentAdvisor] = useState({});
   let [selectedUserGrade, setSelectedUserGrade] = useState([]);
   let [loading, setLoading] = useState(false);
-  let [selectedGradeUser, setSelectedGradeUser] = useState([]);
+  let [selectedGradeUser, setSelectedGradeUser] = useState([]); //list of grades
   let [gradeDetails, setGradeDetails] = useState({ list: [] });
   let [grade1Details, setGrade1Details] = useState({ list: [] });
   let [grade2Details, setGrade2Details] = useState({ list: [] });
@@ -27,7 +27,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [advisoryGrades, setAdvisoryGrades] = useState([]);
 
   let [showGradeVisible, setShowGradeVisible] = useState(false);
-  let [selectedGrade, setSelectedGrade] = useState({});
+  let [selectedGrade, setSelectedGrade] = useState({}); //student grade record
   let [selectedTeacher, setSelectedTeacher] = useState([]);
   let [showAllGradeVisible, setShowAllGradeVisible] = useState(false);
   let [selectedUser, setSelectedUser] = useState({});
@@ -1020,6 +1020,35 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     };
   };
 
+  const addUpdateObservedValues = async values => {
+    setObservedValues(values);
+    let list = values.map(value => {
+      let valuesObj = {
+        value: value.key,
+        grades : {
+          q1: value.q1,
+          q2: value.q2,
+          q3: value.q3,
+          q4: value.q4
+        }
+      };
+
+      return valuesObj;
+    });
+
+    let paramsObj = {
+      idNumber: selectedGrade.student.idNumber,
+      gradeLevel: selectedGrade.gradeLevel,
+      observedValues: list
+    };
+
+   try {
+     let response = await gradesService.addUpdateObservedValues(paramsObj);
+     return response.data;
+   } catch (error) {
+   };
+  };
+
   useEffect(() => {
     loadGrades1();
     loadGrades2();
@@ -1069,7 +1098,9 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     filterCurrentGradeUser,
     advisoryGrades,
     overAllGrade,
-    observedValues
+    observedValues,
+    setObservedValues,
+    addUpdateObservedValues
   }
 };
 

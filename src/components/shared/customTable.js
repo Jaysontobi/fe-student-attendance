@@ -1,8 +1,7 @@
 import React from 'react';
 import { Table } from 'antd';
-import { Input } from 'antd';
 
-const CustomTable = ({ details = [], headers = [], toEdit = false }) => {
+const CustomTable = ({ details = [], headers = [] }) => {
   const columns = headers.map(head => {
     let headerObj = {
       title: <b>{head.title}</b>,
@@ -13,7 +12,7 @@ const CustomTable = ({ details = [], headers = [], toEdit = false }) => {
           props: {
             style: { color: (head.withCondition) ? head.withCondition(value) : '' }
           },
-          children: (head.isEditable && toEdit) ? <Input value={value}/> : <div>{value}</div>
+          children: <div>{value}</div>
         }
       }
     };
