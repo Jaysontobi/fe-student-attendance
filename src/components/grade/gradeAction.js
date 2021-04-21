@@ -685,7 +685,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       //remove mapeh
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
-      
+
       buildObservedValues(result[0].observedValues);
       buildOverallRemarks(newArray);
       setSelectedUser(result[0].student)
@@ -702,7 +702,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   const buildOverallRemarks = async (newArray) => {
     let finalGradesholder = [];
 
-    newArray.map(subject => { 
+    newArray.map(subject => {
       if (subject.FinalGrade && subject.FinalGrade !== '') finalGradesholder.push(subject.FinalGrade);
     });
 
@@ -727,7 +727,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let observedValuesTmp = JSON.parse(JSON.stringify(OBSERVED_VALUES));
 
     if (valuesDatas) {
-      observedValuesTmp = observedValuesTmp.map( valuesObj => {
+      observedValuesTmp = observedValuesTmp.map(valuesObj => {
         let newObj = valuesDatas.find(item => item.value === valuesObj.id);
         if (!newObj) {
           return valuesObj;
@@ -811,7 +811,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
     if (!inComplete && finalGrade >= 75) {
       remarks = "Passed";
-    } else if (!inComplete && finalGrade < 75){
+    } else if (!inComplete && finalGrade < 75) {
       remarks = "Failed";
     } else {
       remarks = '';
@@ -838,7 +838,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let newArray = result[0].subjects.map((subject) => {
         return buidSubjectRow(subject);
       });
-      
+
       //remove mapeh
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
@@ -888,7 +888,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     })
   };
 
-  const loadStudentGradesPerLevel = async (level='') => {
+  const loadStudentGradesPerLevel = async (level = '') => {
     let response = await gradesService.findAllGrades(level);
     let result = response.data.filter(user => user.gradeLevel === level && user.status)
     let newArray = result.map((user) => {
@@ -906,7 +906,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
           <Button onClick={() => {
             setLoading(true);
             setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 3000);
-            setTimeout(() => { setLoading(false);}, 3200 );
+            setTimeout(() => { setLoading(false); }, 3200);
           }} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
       }
     });
@@ -929,8 +929,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   };
 
   const loadGrades3 = async () => {
-   let newArray = await loadStudentGradesPerLevel('3');
-   setGrade3Details({
+    let newArray = await loadStudentGradesPerLevel('3');
+    setGrade3Details({
       list: newArray
     });
   };
@@ -938,8 +938,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   const loadGrades4 = async () => {
     let newArray = await loadStudentGradesPerLevel('4');
     setGrade4Details({
-       list: newArray
-     });
+      list: newArray
+    });
   }
 
   const loadGrades5 = async () => {
@@ -1025,7 +1025,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let list = values.map(value => {
       let valuesObj = {
         value: value.key,
-        grades : {
+        grades: {
           q1: value.q1,
           q2: value.q2,
           q3: value.q3,
@@ -1042,11 +1042,20 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       observedValues: list
     };
 
-   try {
-     let response = await gradesService.addUpdateObservedValues(paramsObj);
-     return response.data;
-   } catch (error) {
-   };
+    try {
+      let response = await gradesService.addUpdateObservedValues(paramsObj);
+
+      //add record  to audit trail
+      let loggedDate = new Date().toISOString();
+      let userDetails = {
+        user: JSON.parse(sessionStorage.user),
+        activity: 'Advisor teacher has updated student values grades',
+        date: loggedDate
+      };
+      await auditTrailService.add(userDetails);
+      return response.data;
+    } catch (error) {
+    };
   };
 
   useEffect(() => {

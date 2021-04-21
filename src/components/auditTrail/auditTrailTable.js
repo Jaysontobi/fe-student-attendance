@@ -9,14 +9,18 @@ const AuditTrailTable = ({ details }) => {
          dataIndex: 'name',
       },
       {
-        title: 'Activity',
-        dataIndex: 'activity',
-     },
+         title: 'Activity',
+         dataIndex: 'activity',
+      },
+      {
+         title: 'Role',
+         dataIndex: 'role',
+      },
       {
          title: 'Date',
          dataIndex: 'date',
       },
-                            
+
    ];
 
    return (

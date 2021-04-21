@@ -22,13 +22,14 @@ const AuditTrailAction = (initial = { searchRequest: {} }) => {
           id: user._id,
           name: user.user.firstName + " " + user.user.lastName,
           date: moment(user.date).format('MMMM Do YYYY'),
+          role: user.user.role,
           activity: user.activity,
         }
       })
       setAuditTrailDetails({list: newArray})
     };
 
-    const filterAudit = async (date) => {
+    const filterAudit = async ({date, role}) => {
       let datas = [];
       if (date) {
         let response = await auditTrailService.findAllAudit();
@@ -42,12 +43,17 @@ const AuditTrailAction = (initial = { searchRequest: {} }) => {
         datas = response.data;
       };
 
+      if (role) {
+        datas = datas.filter(data => data.user.role === role);
+      };
+
       let newArray = await datas.map((user) => {
         return {
           key: user._id,
           id: user._id,
           name: user.user.firstName + " " + user.user.lastName,
           date: moment(user.date).format("MMMM Do YYYY"),
+          role: user.user.role,
           activity: user.activity
         };
       });
