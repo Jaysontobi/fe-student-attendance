@@ -3,7 +3,7 @@
  */
 
 //declare as LOCAL for local and PRODUCTION for production
-const ENVIRONMENT = 'PRODUCTcdssdION';
+const ENVIRONMENT = 'PRODUCTION';
 
 const LOCAL_BE = 'http://localhost:14000';
 const PRODUCTION_BE = 'https://record.capstone2proj.com';
