@@ -668,11 +668,30 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     setSelectedTeacher(result)
   };
 
-  const filterCurrentGradeUser = async (gradeLevel) => {
-    setLoading(true)
+  const filterCurrentGradeUser = async ({gradeLevel, studentObj}) => {
+    setLoading(true);
     let response = await gradesService.findAllGrades();
     let result = [];
-    result = response.data.filter(user => user.student.idNumber === JSON.parse(sessionStorage.user).idNumber && user.gradeLevel === gradeLevel)
+    let student = (studentObj) ? studentObj : JSON.parse(sessionStorage.user);
+    gradeLevel = (gradeLevel) ? gradeLevel : (studentObj?.gradeLevel) ? studentObj.gradeLevel : student.gradeLevel;
+    result = response.data.filter(user => user.student.idNumber === student.idNumber && user.gradeLevel === gradeLevel);
+
+    //add field for student previous gradeLevel record
+    let gradeRec = [];
+    response.data.map(record => {
+      if (record.student?.idNumber === student.idNumber) {
+        gradeRec.push(record.gradeLevel);
+      };
+    });
+
+    
+    //add field for student previous gradeLevel record
+    student.gradeLevelList = gradeRec; //marker2
+    student.gradeLevel = gradeLevel;
+    setSelectedUser(student);
+    // setSelectedUser(result[0].student);
+    // console.log(result[0].student);
+
     if (result.length >= 1 && result[0].subjects && result[0].subjects.length >= 1) {
       let newArray = result[0].subjects.map((subject) => {
         return buidSubjectRow(subject);
@@ -688,14 +707,12 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
 
       buildObservedValues(result[0].observedValues);
       buildOverallRemarks(newArray);
-      setSelectedUser(result[0].student)
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
-
     } else {
       setSelectedUser({})
-      setSelectedUserGrade([])
-    }
+      setSelectedUserGrade([]);
+    };
     setLoading(false)
   };
 
@@ -881,11 +898,29 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         action:
           <Button onClick={() => loadGrade(user, user.student.idNumber)} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
       }
-    })
+    });
 
+    //filter users with its latest grade level
+    let list = [];
+
+    newArray.map(record => {
+      let recordIndex = list.findIndex( item => item?.idNumber === record.idNumber);
+      if (recordIndex === -1) {
+        list.push(record);
+      } else if (recordIndex !== -1) {
+        //replace record if not latest gardeLevel
+        if(list[recordIndex].gradeLevel < record.gradeLevel) {
+          list.splice(recordIndex, 1, record);
+        };
+      }
+    });
+
+    //marker
     setGradeDetails({
-      list: newArray
-    })
+      list: list
+    });
+
+    filterCurrentGradeUser({studentObj: (list[0]) ? list[0] : null});//marker2
   };
 
   const loadStudentGradesPerLevel = async (level = '') => {
@@ -905,8 +940,8 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         action:
           <Button onClick={() => {
             setLoading(true);
-            setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 3000);
-            setTimeout(() => { setLoading(false); }, 3200);
+            setTimeout(() => { loadGrade(user, user.student.idNumber, level) }, 3500);
+            setTimeout(() => { setLoading(false); }, 3700);
           }} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
       }
     });

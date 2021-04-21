@@ -55,7 +55,7 @@ const App = () => {
 
   const onChangeFunction = async (value) => {
     // console.log(value)
-    let response = await QuarterService.update({_id: sessionStorage._id, quarter : value})
+    let response = await QuarterService.update({ _id: sessionStorage._id, quarter: value })
     sessionStorage.setItem("quarter", value)
     window.location.reload(false)
     // console.log(sessionStorage._id)
@@ -78,7 +78,7 @@ const App = () => {
                       <SiderMenu className="bg-greenSideBar" theme={theme} collapsed={collapsed} />
                     </Content>
                   </Sider>
-                : null}
+                  : null}
                 <Layout>
                   <Header className="bg-white">
                     <a href onClick={() => {
@@ -86,25 +86,25 @@ const App = () => {
                     }}>
                       {/* <Icon className="text-black" type={collapsed ? 'menu-unfold' : 'menu-fold'} /> */}
                     </a>
-                    {JSON.parse(sessionStorage.user).role === "Admin" ?                     <span className="left">
+                    {JSON.parse(sessionStorage.user).role === "Admin" ? <span className="left">
                       Quarter: &nbsp;
                     <Select onChange={
-                      (value)=> 
-                      onChangeFunction(value)
+                        (value) =>
+                          onChangeFunction(value)
                       } defaultValue={sessionStorage.quarter} name="quarter">
-                              <Option value="1">1</Option>
-                              <Option value="2">2</Option>
-                              <Option value="3">3</Option>
-                              <Option value="4">4</Option>
-                           </Select>
+                        <Option value="1">1</Option>
+                        <Option value="2">2</Option>
+                        <Option value="3">3</Option>
+                        <Option value="4">4</Option>
+                      </Select>
                     </span> : null}
 
                     {JSON.parse(sessionStorage.user).role === "Student" || JSON.parse(sessionStorage.user).role === "Parent" ?
                       <span>
-                        <img width={45} src="/logo.png" className="mr-10"/>
+                        <img width={45} src="/logo.png" className="mr-10" />
                         <b className="fs-20">Sto. Niño The Shepherd School</b>
                       </span>
-                    : null}
+                      : null}
 
 
                     <span className="right">
@@ -117,48 +117,50 @@ const App = () => {
                   <Layout>
                     <Content className="pt-30 pb-30">
                       <Switch>
-                      {JSON.parse(sessionStorage.user).role === "Admin" ?  
-                       <Redirect
-                       exact
-                       from="/login"
-                       to="/dashboard"
-                       /> :   
-                       JSON.parse(sessionStorage.user).role === "Parent" ?                      
-                       <Redirect
-                       exact
-                       from="/login"
-                       to="/offspring"
-                       /> :                        JSON.parse(sessionStorage.user).role === "Teacher" ?                      
-                       <Redirect
-                       exact
-                       from="/login"
-                       to="/grade1"
-                       />: <Redirect
-                       exact
-                       from="/login"
-                       to="/"
-                       />}
-                            <Route path="/settings" component={UserSetting} />
-                            <Route path="/admin" component={User} />
-                            <Route path="/student" component={ Student } />
-                            <Route path="/parent" component={Parent} />
-                            <Route path="/teacher" component={Teacher} />
-                            <Route path="/dashboard" component={Dashboard}/>
-                            <Route path="/advisoryclass" component={AdvisoryGrades} />
-                            <Route path="/grade1" component={Grade1} />
-                            <Route path="/grade2" component={Grade2} />
-                            <Route path="/grade3" component={Grade3} />
-                            <Route path="/grade4" component={Grade4} />
-                            <Route path="/grade5" component={Grade5} />
-                            <Route path="/grade6" component={Grade6} />
-                            <Route path="/grade7" component={Grade7} />
-                            <Route path="/grade8" component={Grade8} />
-                            <Route path="/grade9" component={Grade9} />
-                            <Route path="/grade10" component={Grade10} />
-                            <Route path="/offspring" component={Offspring} />
-                            <Route path="/timekeeping" component={Timekeeping}/>
-                            <Route path="/auditTrail" component={AuditTrail}/>
-                            <Route path="/" component={UserDetail} />
+                        {JSON.parse(sessionStorage.user).role === "Admin" ?
+                          <Redirect
+                            exact
+                            from="/login"
+                            to="/dashboard"
+                          /> :
+                          JSON.parse(sessionStorage.user).role === "Parent" ?
+                            <Redirect
+                              exact
+                              from="/login"
+                              to="/offspring"
+                            /> : JSON.parse(sessionStorage.user).role === "Teacher" ?
+                              <Redirect
+                                exact
+                                from="/login"
+                                to="/grade1"
+                              /> : <Redirect
+                                exact
+                                from="/login"
+                                to="/"
+                              />}
+                        <Route path="/settings" component={UserSetting} />
+                        <Route path="/admin" component={User} />
+                        <Route path="/student" component={Student} />
+                        <Route path="/parent" component={Parent} />
+                        <Route path="/teacher" component={Teacher} />
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/advisoryclass" component={AdvisoryGrades} />
+                        <Route path="/grade1" component={Grade1} />
+                        <Route path="/grade2" component={Grade2} />
+                        <Route path="/grade3" component={Grade3} />
+                        <Route path="/grade4" component={Grade4} />
+                        <Route path="/grade5" component={Grade5} />
+                        <Route path="/grade6" component={Grade6} />
+                        <Route path="/grade7" component={Grade7} />
+                        <Route path="/grade8" component={Grade8} />
+                        <Route path="/grade9" component={Grade9} />
+                        <Route path="/grade10" component={Grade10} />
+                        <Route path="/offspring" >
+                          <UserDetail isParent='true'/>
+                        </Route>
+                        <Route path="/timekeeping" component={Timekeeping} />
+                        <Route path="/auditTrail" component={AuditTrail} />
+                        <Route path="/" component={UserDetail} />
                       </Switch>
                     </Content>
                   </Layout>
@@ -168,14 +170,14 @@ const App = () => {
             <Layout>
             </Layout>
           </BrowserRouter>
-                    :
+          :
           <BrowserRouter>
             <Switch>
               <Route exact path="/login" component={Login} />
               <Redirect from="*" to="/login" />
             </Switch>
           </BrowserRouter>
-          }
+      }
     </UserContext.Provider>
   );
 
