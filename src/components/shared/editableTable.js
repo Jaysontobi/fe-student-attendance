@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
 import './custom.css';
-import { Table, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
-const originData = [];
+import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 
-for (let i = 0; i < 100; i++) {
-  originData.push({
-    key: i.toString(),
-    name: `Edrward ${i}`,
-    age: 32,
-    address: `London Park no. ${i}`,
-  });
-}
+const { Option } = Select;
+const markings = ['AO', 'SO', 'RO', 'NO'];
 
 const EditableCell = ({
   editing,
@@ -23,7 +16,15 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  const renderMarkings = () => {
+    return markings.map((mark) => {
+      return <Option value={mark} key={mark} >{mark}</Option>
+    });
+  };
+  const inputNode = <Select style={{width:"65.8px"}}>
+    {renderMarkings()};
+  </Select>
+
   return (
     <td {...restProps}>
       {editing ? (
