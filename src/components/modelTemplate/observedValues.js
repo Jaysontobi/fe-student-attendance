@@ -71,7 +71,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '',
@@ -83,7 +84,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '2. Makatao',
@@ -94,7 +96,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '',
@@ -105,7 +108,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '3. Makakalikasan',
@@ -116,7 +120,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '4. Makabansa',
@@ -127,7 +132,8 @@ let OBSERVED_VALUES = [
     q1: '',
     q2: '',
     q3: '',
-    q4: ''
+    q4: '',
+    dropdownList: ['AO', 'SO', 'RO', 'NO']
   },
   {
     values: '',

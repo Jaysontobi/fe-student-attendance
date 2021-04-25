@@ -30,14 +30,11 @@ import Login from "./components/login/login.js";
 import SiderMenu from "./components/siderMenu"
 import UserMenu from "./components/userMenu"
 import AuditTrail from "./components/auditTrail/auditTrail"
+import Clearance from './components/clearance/clearance';
 
 import { UserContext } from './components/userContext'
 
 const { Option } = Select;
-
-const renderStudents = isAdvisory => {
-  return (<Student />);
-};
 
 const App = () => {
   const { Content, Sider, Header } = Layout;
@@ -160,6 +157,7 @@ const App = () => {
                         </Route>
                         <Route path="/timekeeping" component={Timekeeping} />
                         <Route path="/auditTrail" component={AuditTrail} />
+                        <Route path="/clearance" component={Clearance} />
                         <Route path="/" component={UserDetail} />
                       </Switch>
                     </Content>

@@ -2,11 +2,23 @@ import React, { useState, useEffect } from 'react';
 import gradesService from './gradesService';
 import userService from '../user/userService';
 import advisoryService from '../grade/advisoryService';
+import { notification } from 'antd';
 import auditTrailService from '../auditTrail/auditTrailService';
 import AdditionalService from '../user/additionalService';
 import { Button } from 'antd';
 import moment from 'moment';
 import { OBSERVED_VALUES } from '../modelTemplate/observedValues';
+import ClearanceService from '../clearance/clearanceService';
+
+const renderUnPaidNotif = (studentObj, isParent = false) => {
+  let person = (isParent) ? `${studentObj.lastName}, ${studentObj.firstName} ${studentObj.middleName}` : 'you';
+  notification.info({
+    message: `Notification`,
+    description:
+      `This is to inform you that ${person} have an unsettled payments.`,
+    placement: 'bottomLeft'
+  });
+};
 
 const Grade1Action = (initial = { searchRequest: {} }) => {
   let [studentAdvisor, setStudentAdvisor] = useState({});
@@ -35,6 +47,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
   let [selectedListOfStudent, setSelectedListOfStudent] = useState([]);
   let [overAllGrade, setOverAllGrade] = useState({ finalGrade: '', remarks: '' });
   let [observedValues, setObservedValues] = useState([]);
+  let [showUnpaid, setShowUnpaid] = useState(false);
 
   const upgradeStudent = async values => {
     let auditTrailObj = {
@@ -668,7 +681,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     setSelectedTeacher(result)
   };
 
-  const filterCurrentGradeUser = async ({gradeLevel, studentObj}) => {
+  const filterCurrentGradeUser = async ({ gradeLevel, studentObj }) => {
     setLoading(true);
     let response = await gradesService.findAllGrades();
     let result = [];
@@ -684,7 +697,6 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       };
     });
 
-    
     //add field for student previous gradeLevel record
     student.gradeLevelList = gradeRec; //marker2
     student.gradeLevel = gradeLevel;
@@ -692,9 +704,23 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     // setSelectedUser(result[0].student);
     // console.log(result[0].student);
 
+    //hereEdit
+    let unClearedQuarters = [];
+    let clientUser = JSON.parse(sessionStorage.user);
+
+    if (clientUser.role === 'Student' || clientUser.role === 'Parent') {
+      let responseClearances = await ClearanceService.getClearance(gradeLevel);
+      console.log(gradeLevel);
+      if (responseClearances.data) {
+        let clearance = responseClearances.data.students
+          .find(item => item.idNumber === student.idNumber);
+        Object.entries(clearance).forEach(([key, value]) => { if (key.includes('Quarter') && value === 'pending') unClearedQuarters.push(key) });
+      }
+    };
+
     if (result.length >= 1 && result[0].subjects && result[0].subjects.length >= 1) {
       let newArray = result[0].subjects.map((subject) => {
-        return buidSubjectRow(subject);
+        return buidSubjectRow(subject, unClearedQuarters);
       });
 
       let response = await advisoryService.findAllAdvisory()
@@ -706,20 +732,24 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       newArray.splice(mapehIndex, 1);
 
       buildObservedValues(result[0].observedValues);
-      buildOverallRemarks(newArray);
+      buildOverallRemarks(newArray, unClearedQuarters.length > 0);
       setStudentAdvisor(result1[0]);
       setSelectedUserGrade(newArray);
     } else {
       setSelectedUser({})
       setSelectedUserGrade([]);
     };
-    setLoading(false)
+    setLoading(false);
+
+    if (unClearedQuarters.length > 0) {
+      renderUnPaidNotif(student, clientUser.role === 'Parent');
+    };
   };
 
-  const buildOverallRemarks = async (newArray) => {
+  const buildOverallRemarks = async (newArray, forceHide = false) => {
     let finalGradesholder = [];
 
-    newArray.map(subject => {
+    await newArray.map(subject => {
       if (subject.FinalGrade && subject.FinalGrade !== '') finalGradesholder.push(subject.FinalGrade);
     });
 
@@ -733,10 +763,12 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
         remarks = 'Failed';
       };
 
-      setOverAllGrade({
-        finalGrade: average.toFixed(2),
-        remarks: remarks
-      });
+      setTimeout(() => {
+        setOverAllGrade({
+          finalGrade: !forceHide ? average.toFixed(2) : '',
+          remarks: !forceHide ? remarks : ''
+        });
+      }, 1000);
     };
   };
 
@@ -784,18 +816,24 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       let mapehIndex = newArray.findIndex(topic => topic.subject === 'MAPEH');
       newArray.splice(mapehIndex, 1);
 
-      buildOverallRemarks(newArray);
+      // buildOverallRemarks(newArray);
       buildObservedValues(result[0].observedValues);
       setStudentAdvisor(result1[0]);
-      setSelectedUserGrade(newArray);
+      //setSelectedUserGrade(newArray); //hereEdit2
     } else {
       setSelectedUser({})
-      setSelectedUserGrade([])
+      // setSelectedUserGrade([])
     };
 
   };
 
-  const buidSubjectRow = (subject) => {
+  /**
+   * @description builds the subject row for the table
+   * @param {Object} subject  
+   * @param {string} hiddenQuarter 
+   * @returns updated object with its desired values for showing
+   */
+  const buidSubjectRow = (subject, hiddenQuarters = []) => {
     let remarks = "";
     let finalGrade = (subject.subjectGrade.firstQuarter +
       subject.subjectGrade.secondQuarter +
@@ -803,10 +841,10 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       subject.subjectGrade.fourthQuarter) / 4;
 
     let inComplete = false;
-    let firstQuarter = subject.subjectGrade.firstQuarter;
-    let secondQuarter = subject.subjectGrade.secondQuarter;
-    let thirdQuarter = subject.subjectGrade.thirdQuarter;
-    let fourthQuarter = subject.subjectGrade.fourthQuarter;
+    let firstQuarter = (hiddenQuarters.includes('firstQuarter')) ? 0 : subject.subjectGrade.firstQuarter;
+    let secondQuarter = (hiddenQuarters.includes('secondQuarter')) ? 0 : subject.subjectGrade.secondQuarter;
+    let thirdQuarter = (hiddenQuarters.includes('thirdQuarter')) ? 0 : subject.subjectGrade.thirdQuarter;
+    let fourthQuarter = (hiddenQuarters.includes('fourthQuarter')) ? 0 : subject.subjectGrade.fourthQuarter;
 
     //leave blank all zero grades
     if (firstQuarter === 0) {
@@ -904,12 +942,12 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
     let list = [];
 
     newArray.map(record => {
-      let recordIndex = list.findIndex( item => item?.idNumber === record.idNumber);
+      let recordIndex = list.findIndex(item => item?.idNumber === record.idNumber);
       if (recordIndex === -1) {
         list.push(record);
       } else if (recordIndex !== -1) {
         //replace record if not latest gardeLevel
-        if(list[recordIndex].gradeLevel < record.gradeLevel) {
+        if (list[recordIndex].gradeLevel < record.gradeLevel) {
           list.splice(recordIndex, 1, record);
         };
       }
@@ -920,7 +958,7 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
       list: list
     });
 
-    filterCurrentGradeUser({studentObj: (list[0]) ? list[0] : null});//marker2
+    filterCurrentGradeUser({ studentObj: (list[0]) ? list[0] : null });//marker2
   };
 
   const loadStudentGradesPerLevel = async (level = '') => {

@@ -4,7 +4,6 @@ import './custom.css';
 import { Table, Popconfirm, Form, Typography, Select } from 'antd';
 
 const { Option } = Select;
-const markings = ['AO', 'SO', 'RO', 'NO'];
 
 const EditableCell = ({
   editing,
@@ -16,14 +15,18 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const renderMarkings = () => {
-    return markings.map((mark) => {
+  const renderMarkings = (list=[]) => {
+    return list.map((mark) => {
       return <Option value={mark} key={mark} >{mark}</Option>
     });
   };
-  const inputNode = <Select style={{width:"65.8px"}}>
-    {renderMarkings()};
-  </Select>
+  const inputNode = (list=[]) => {
+    return (
+      <Select style={{ minWidth: "65.8px", maxWidth: "150px" }}>
+        {renderMarkings(list)};
+      </Select>
+    )
+  };
 
   return (
     <td {...restProps}>
@@ -34,7 +37,7 @@ const EditableCell = ({
             margin: 0,
           }}
         >
-          {inputNode}
+          {inputNode(record?.dropdownList)}
         </Form.Item>
       ) : (
         children
@@ -43,7 +46,7 @@ const EditableCell = ({
   );
 };
 
-const EditableTable = ({details=[], headers=[], setData}) => {
+const EditableTable = ({ details = [], headers = [], setData }) => {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
 
@@ -130,7 +133,7 @@ const EditableTable = ({details=[], headers=[], setData}) => {
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
-        style: { color: (col.withCondition) ? col.withCondition(record[col.dataIndex]) : ''}
+        style: { color: (col.withCondition) ? col.withCondition(record[col.dataIndex]) : '' }
       }),
     };
   });

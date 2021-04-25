@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Card, Button, Typography, Icon, Row, Col, Select, Spin } from 'antd';
+import { Drawer, Card, Button, Typography, Icon, Row, Col, Select, Spin, notification } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 
@@ -31,7 +31,7 @@ const EmployeePage = ({ isParent = false }) => {
     filterCurrentGradeUser,
     loading,
     overAllGrade,
-    observedValues
+    observedValues,
   } = GradeAction({});
 
   let { getAttendance, attendances } = AttendanceAction();
@@ -51,7 +51,7 @@ const EmployeePage = ({ isParent = false }) => {
 
   const renderChildrenDropdown = () => {
     return gradeDetails.list.map((child) => {
-      return <Option value={child.idNumber} key={child}>
+      return <Option value={child.idNumber} key={child.idNumber}>
         {child.firstName + " " + child.lastName}
       </Option>
     })
@@ -62,13 +62,6 @@ const EmployeePage = ({ isParent = false }) => {
       return <Option value={level} key={level} >{level}</Option>
     });
   };
-
-  const getDefaultVal = () => {
-    let name = selectedUser.firstName ? selectedUser.firstName + " " + selectedUser.lastName: '';
-    document.getElementById('studentSelect').value = selectedUser.idNumber;
-  };
-
-  // if(selectedUser.firstName) getDefaultVal();
 
   return (
     <Card className="h-82 p-70">
@@ -115,18 +108,6 @@ const EmployeePage = ({ isParent = false }) => {
                     <b>Advisor Contact Number: </b>{studentAdvisor && studentAdvisor.teacher ? studentAdvisor.teacher.contactNumber : null}
                   </p>
                   <b>Yr./Lvl: </b>
-                  {/* <Select className="ml-15" placeholder="Select Yr./Level" onChange={(value) => filterCurrentGradeUser({ gradeLevel: value })}>
-                    <Option value="1">1</Option>
-                    <Option value="2">2</Option>
-                    <Option value="3">3</Option>
-                    <Option value="4">4</Option>
-                    <Option value="5">5</Option>
-                    <Option value="6">6</Option>
-                    <Option value="7">7</Option>
-                    <Option value="8">8</Option>
-                    <Option value="9">9</Option>
-                    <Option value="10">10</Option>
-                  </Select> */}
                   <Select 
                     className="ml-15"
                     value={selectedUser.gradeLevel}
