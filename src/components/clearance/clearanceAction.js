@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import clearanceService from './clearanceService';
 import gradesService from '../grade/gradesService';
-import { CLEARANCE_DROPDOWN } from '../modelTemplate/clearance';
+import { CLEARANCE_DROPDOWN } from '../../constants/clearance';
 
 
 const ClearanceAction = (initial = {}) => {

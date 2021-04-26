@@ -44,8 +44,8 @@ const EmployeePage = ({ isParent = false }) => {
   if (attendances.length === 0) loadAttendance();
 
   const filterChild = async ({idNumber='', gradeLevel=''}) => {
-    let student = (idNumber) ? gradeDetails.list.find(student => student.idNumber === idNumber) : selectedUser;
-    let level = (gradeLevel) ? gradeLevel : student.gradeLevel;
+    let student = (idNumber !=='') ? gradeDetails.list.find(student => student.idNumber === idNumber) : selectedUser;
+    let level = (gradeLevel !=='') ? gradeLevel : student.gradeLevel;
     await filterCurrentGradeUser({ gradeLevel: level, studentObj: student });
   };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Typography, Row, Col, Select, Spin } from 'antd';
 import EditableTable from '../shared/editableTable';
 import ClearanceAction from './clearanceAction';
-import { CLEARANCE_HEADERS } from '../modelTemplate/clearance';
+import { CLEARANCE_HEADERS } from '../../constants/clearance';
 const { Option } = Select;
 
 const ClearancePage = () => {
