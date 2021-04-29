@@ -16,6 +16,10 @@ class AdditionalService extends BaseService {
     return this.axiosInstance.get('/advisory-students/' + level);
   };
 
+  uploadProfile = file => {
+    return this.axiosInstance.post('/upload-profile', file);
+  };
+
 }
 
 export default new AdditionalService();

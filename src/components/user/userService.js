@@ -27,6 +27,10 @@ class UserService extends BaseService {
   updatePassword = (obj) => {
     return this.axiosInstance.post('/update-password', obj);
   };
+  
+  updateProfileImg = (obj) => {
+    return this.axiosInstance.post('/update-profile-img', obj);
+  };
 }
 
 export default new UserService();
