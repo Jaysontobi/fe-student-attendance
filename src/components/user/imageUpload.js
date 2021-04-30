@@ -86,7 +86,8 @@ const UploadImageAction = (initial = {}) => {
     loading,
     uploadSrc,
     processing,
-    setProfileSrc
+    setProfileSrc,
+    setUploadSrc
   }
 };
 

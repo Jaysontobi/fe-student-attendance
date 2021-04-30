@@ -41,7 +41,9 @@ const EmployeePage = ({ isAdvisory }) => {
     beforeUpload,
     uploadSrc,
     loading,
-    processing
+    processing,
+    setProfileSrc,
+    setUploadSrc
   } = UploadImageAction();
 
   const uploadButton = (
@@ -87,7 +89,7 @@ const EmployeePage = ({ isAdvisory }) => {
         }
         width={550}
         visible={showUserVisible}
-        onClose={() => { setShowUserVisible(false) }}
+        onClose={() => { setShowUserVisible(false); setProfileSrc(''); setUploadSrc(''); }}
         bodyStyle={{ paddingBottom: 80 }}
       >
         <div style={{ textAlign: "right", marginRight: "23px" }}>
