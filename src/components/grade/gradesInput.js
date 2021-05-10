@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Form, Input, Button, Space, Table, Row, Col, Card } from 'antd';
+import React from 'react';
+import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { CheckCircleFilled } from '@ant-design/icons';
 
 import GradeInputAction from './gradeInputAction';
 
@@ -29,13 +30,35 @@ const getQuarterNum = (quarter) => {
   };
 };
 
-const GradesInput = ({level=0, grades=[], gradeSubjectTeachers=[], isAdvisor=false}) => {
+const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {} }) => {
 
-  let { updateGrades, setInput, updatedInputs } = GradeInputAction({level, grades});
+  let { updateGrades, setInput, updatedInputs } = GradeInputAction({ level: Number(record.gradeLevel), grades: record.subjects, record });
   const userRole = JSON.parse(sessionStorage.user).role;
 
   const onFinish = async () => {
-    await updateGrades();
+    await updateGrades(isAdviser);
+  };
+
+  const getValue = (subject, quarter) => {
+    if (!isAdviser) {
+      return subject.recommendedGrade[quarter];
+    } else if (isAdviser) {
+      if (subject.recommendedGrade[quarter] && subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter]) {
+        return subject.recommendedGrade[quarter];
+      } else {
+        return subject.subjectGrade[quarter];
+      };
+    }
+  };
+
+  const renderButton = () => {
+    let role = JSON.parse(sessionStorage.user).role;
+    if (role !== 'Teacher') return '';
+    return (
+      <Button className="btn-save" htmlType="submit" style={{ marginTop: '10px' }}>
+        <CheckCircleFilled type="check-circle" /> Update
+      </Button>
+    )
   };
 
   const renderSubjects = () => {
@@ -43,14 +66,14 @@ const GradesInput = ({level=0, grades=[], gradeSubjectTeachers=[], isAdvisor=fal
     let teacherId = JSON.parse(sessionStorage.user).idNumber;
     gradeSubjectTeachers.map(item => {
 
-      if(item.teacher.idNumber === teacherId) teacherSubjects.push(item.subjectName);
+      if (item.teacher.idNumber === teacherId) teacherSubjects.push(item.subjectName);
     });
- 
+
     return (
       <>
         { updatedInputs.map((subject) => {
 
-          if(!teacherSubjects.includes(subject.subjectName)) return '';
+          if (!isAdviser && !teacherSubjects.includes(subject.subjectName)) return '';
 
           return (
             <Col span={12} key={subject.subjectName}>
@@ -61,9 +84,10 @@ const GradesInput = ({level=0, grades=[], gradeSubjectTeachers=[], isAdvisor=fal
                       <Col span={12} key={subject.subjectName + quarter}>
                         <Form.Item label={getQuarterName(quarter)} >
                           <Input
-                            value={!isAdvisor ? subject.recommendedGrade[quarter] : subject.subjectGrade[quarter]}
-                            onChange={(e) => {setInput(e.target.value, subject.subjectName, quarter)}}
+                            value={getValue(subject, quarter)}
+                            onChange={(e) => { setInput(e.target.value, subject.subjectName, quarter, isAdviser) }}
                             disabled={userRole !== 'Teacher' || sessionStorage.quarter !== getQuarterNum(quarter)}
+                            style={{ border: subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter] ? '1px solid red' : '' }}
                           />
                         </Form.Item>
                       </Col>
@@ -80,15 +104,13 @@ const GradesInput = ({level=0, grades=[], gradeSubjectTeachers=[], isAdvisor=fal
   }
 
   return (
-    <Form name="grades_input" onFinish={onFinish} autoComplete="off" style={{ marginLeft: '28px' }}>
+    <Form name="grades_input" onFinish={onFinish} autoComplete="off" style={{ marginLeft: '28px', marginBottom: '30px' }}>
       <Row gutter={16} >
         {updatedInputs.length > 0 ?
           renderSubjects()
           : ''}
       </Row>
-      <Button className="btn-save" htmlType="submit">
-        Submit
-      </Button>
+      {renderButton()}
     </Form>
   );
 }

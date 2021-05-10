@@ -106,8 +106,8 @@ const GradePage = () => {
           onClose={() => { setShowGradeVisible(false) }}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} gradeLevel={"3"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade3} selectedGrade={selectedGrade} />
-          <GradesInput level={2} grades={selectedGrade.subjects} gradeSubjectTeachers={selectedTeacherAssignedGrade2.subjects}/>
+          {/* <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} gradeLevel={"3"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade3} selectedGrade={selectedGrade} /> */}
+          <GradesInput grades={selectedGrade.subjects} gradeSubjectTeachers={selectedTeacherAssignedGrade3?.subjects}/>
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
