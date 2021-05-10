@@ -5,7 +5,6 @@ const G_1_To_3 = [
   'Mathematics',
   'Science',
   'Araling Panlipunan',
-  'TLE',
   'Music',
   'Art',
   'PE',
@@ -18,6 +17,7 @@ const G_4_To_10 = [
   'Mathematics',
   'Science',
   'Araling Panlipunan',
+  'TLE',
   'Music',
   'Art',
   'PE',
@@ -36,7 +36,6 @@ const buildLevelSubjects = (levelNum, schoolYear) => {
 
   let subjects = subjectList.map(topic => {
     return {
-      schoolYear: schoolYear,
       subjectName: topic,
       subjectGrade: quartersObj,
       recommendedGrade: {}

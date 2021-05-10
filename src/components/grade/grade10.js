@@ -18,6 +18,7 @@ import {
   MARKING_TABLE,
   OBSERVED_VALUES_HEADER
 } from '../modelTemplate/observedValues';
+import GradesInput from './gradesInput';
 
 const GradePage = () => {
 
@@ -105,6 +106,7 @@ const GradePage = () => {
           bodyStyle={{ paddingBottom: 80 }}
         >
           <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"10"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade10} />
+          <GradesInput level={2} grades={selectedGrade.subjects} gradeSubjectTeachers={selectedTeacherAssignedGrade2.subjects}/>
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
