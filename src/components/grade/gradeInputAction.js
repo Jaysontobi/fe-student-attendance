@@ -3,7 +3,7 @@ import Subjects from '../modelTemplate/subjects';
 import gradesService from './gradesService';
 import auditTrailService from '../auditTrail/auditTrailService';
 
-const GradeInputAction = ({level= 0, grades=[], record={}}) => {
+const GradeInputAction = ({level= 0, grades=[], record={}, isAdviser=false}) => {
   let [updatedInputs, setUpdatedInputs] = useState([]);
 
   const setInput = async (value='', subject='', quarter='', isAdviser=false) => {
@@ -50,6 +50,7 @@ const GradeInputAction = ({level= 0, grades=[], record={}}) => {
   };
 
   const buildInputArr = () => {
+    let currentQuarter = sessionStorage.quarter;
     let subjectsHolder = Subjects.buildLevelSubjects(level, '');
     let prevRecords = JSON.parse(JSON.stringify(grades));
     let list = [];
@@ -58,12 +59,31 @@ const GradeInputAction = ({level= 0, grades=[], record={}}) => {
       if (recObj) {
         recObj = Object.assign(topic, recObj);
         recObj.recommendedGrade = Object.keys(recObj.recommendedGrade).length > 0 ? recObj.recommendedGrade : JSON.parse(JSON.stringify(recObj.subjectGrade));
+        //setting of 50
+        // if (!isAdviser) {
+        //   Object.keys(recObj.subjectGrade).map(q => {
+        //     if (q === getQuarterNum(currentQuarter) && recObj.subjectGrade[q] === 0 && !recObj.recommendedGrade[q]) recObj.recommendedGrade[q] = 50;
+        //   });
+        // };
         list.push(recObj);
       } else {
         list.push(topic);
-      }
+      };
     });
     setUpdatedInputs(list);
+  };
+
+  const getQuarterNum = (quarter) => {
+    switch (quarter) {
+      case 'secondQuarter':
+        return '2';
+      case 'thirdQuarter':
+        return '3';
+      case 'fourthQuarter':
+        return '4';
+      default:
+        return '1';
+    };
   };
 
   useEffect(() => {
@@ -73,7 +93,8 @@ const GradeInputAction = ({level= 0, grades=[], record={}}) => {
   return {
     updatedInputs,
     updateGrades,
-    setInput
+    setInput,
+    getQuarterNum
   }
 };
 

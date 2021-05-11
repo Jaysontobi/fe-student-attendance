@@ -105,7 +105,11 @@ const GradePage = () => {
           bodyStyle={{ paddingBottom: 80 }}
         >
           {/* <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"8"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade8} /> */}
-          <GradesInput grades={selectedGrade.subjects} gradeSubjectTeachers={selectedTeacherAssignedGrade8?.subjects}/>
+          {showGradeVisible ?
+            <GradesInput
+              record={selectedGrade}
+              gradeSubjectTeachers={selectedTeacherAssignedGrade8?.subjects} />
+            : ''}
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>

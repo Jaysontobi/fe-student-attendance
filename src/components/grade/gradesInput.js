@@ -17,22 +17,22 @@ const getQuarterName = (quarter) => {
   };
 };
 
-const getQuarterNum = (quarter) => {
-  switch (quarter) {
-    case 'secondQuarter':
-      return '2';
-    case 'thirdQuarter':
-      return '3';
-    case 'fourthQuarter':
-      return '4';
-    default:
-      return '1';
-  };
-};
+// const getQuarterNum = (quarter) => {
+//   switch (quarter) {
+//     case 'secondQuarter':
+//       return '2';
+//     case 'thirdQuarter':
+//       return '3';
+//     case 'fourthQuarter':
+//       return '4';
+//     default:
+//       return '1';
+//   };
+// };
 
 const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {} }) => {
 
-  let { updateGrades, setInput, updatedInputs } = GradeInputAction({ level: Number(record.gradeLevel), grades: record.subjects, record });
+  let { updateGrades, setInput, updatedInputs, getQuarterNum } = GradeInputAction({ level: Number(record.gradeLevel), grades: record.subjects, record, isAdviser });
   const userRole = JSON.parse(sessionStorage.user).role;
 
   const onFinish = async () => {
@@ -40,15 +40,24 @@ const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {}
   };
 
   const getValue = (subject, quarter) => {
+    // let isActive = sessionStorage.quarter === getQuarterNum(quarter);
+    let rating = 0;
+    let lowestRating = 50;
     if (!isAdviser) {
-      return subject.recommendedGrade[quarter];
+      rating = subject.recommendedGrade[quarter] ? subject.recommendedGrade[quarter]: 0;
+      
+      // rating = lowestRating;
+      // if (isActive && rating === 0) {
+      //   setInput(rating, subject.subjectName, quarter)
+      // };
     } else if (isAdviser) {
       if (subject.recommendedGrade[quarter] && subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter]) {
-        return subject.recommendedGrade[quarter];
+        rating = subject.recommendedGrade[quarter];
       } else {
-        return subject.subjectGrade[quarter];
+        rating = subject.subjectGrade[quarter];
       };
     }
+    return rating;
   };
 
   const renderButton = () => {
@@ -87,7 +96,7 @@ const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {}
                             value={getValue(subject, quarter)}
                             onChange={(e) => { setInput(e.target.value, subject.subjectName, quarter, isAdviser) }}
                             disabled={userRole !== 'Teacher' || sessionStorage.quarter !== getQuarterNum(quarter)}
-                            style={{ border: subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter] ? '1px solid red' : '' }}
+                            style={{ border: subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter] && subject.subjectGrade[quarter] !== 0 ? '1px solid red' : '' }}
                           />
                         </Form.Item>
                       </Col>
