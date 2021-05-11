@@ -22,7 +22,9 @@ const EmployeePage = ({ isAdvisory }) => {
     selectedUser,
     editUser,
     selectedParent,
-    filterStudent
+    filterStudent,
+    setSelectedUser,
+    loadStudent
   } = UserAction({});
 
   let {
@@ -38,7 +40,6 @@ const EmployeePage = ({ isAdvisory }) => {
     handleChange,
     saveUpload,
     profileSrc,
-    beforeUpload,
     uploadSrc,
     loading,
     processing,
@@ -47,13 +48,15 @@ const EmployeePage = ({ isAdvisory }) => {
   } = UploadImageAction();
 
   const uploadButton = (
-    <div>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
+    <div style={{ height: "110px" }}>
+      <div style={{ border: "0.5px dashed grey", height: "100px", width: "100px", textAlign: "center", float: "right" }}>
+        {loading ? <LoadingOutlined style={{ marginTop: '20px' }} /> : <PlusOutlined style={{ marginTop: '20px' }} />}
+        <div style={{ marginTop: 8 }}>Upload</div>
+      </div>
     </div>
   );
 
-  if ( showUserVisible && selectedUser && selectedUser.profileImgSrc) { profileSrc = selectedUser.profileImgSrc};
+  if (showUserVisible && selectedUser && selectedUser.profileImgSrc) { profileSrc = selectedUser.profileImgSrc };
 
   return (
     <Card className="h-82 p-70">
@@ -89,28 +92,27 @@ const EmployeePage = ({ isAdvisory }) => {
         }
         width={550}
         visible={showUserVisible}
-        onClose={() => { setShowUserVisible(false); setProfileSrc(''); setUploadSrc(''); }}
+        onClose={() => { setShowUserVisible(false); setProfileSrc(''); setUploadSrc(''); loadStudent() }}
         bodyStyle={{ paddingBottom: 80 }}
       >
-        <div style={{ textAlign: "right", marginRight: "23px" }}>
-          <Upload
-            name="avatar"
-            listType="picture-card"
-            className="avatar-uploader"
-            showUploadList={false}
-            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-            beforeUpload={beforeUpload}
-            onChange={(info) => handleChange(info)}
-          >
-            {(uploadSrc || profileSrc) ? <img src={uploadSrc !== '' ? uploadSrc : profileSrc} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-          </Upload>
-          {uploadSrc ?
-            <Button
-              onClick={() => { saveUpload(selectedUser.idNumber) }}
-              style={{ marginRight: "7px" }}
-              icon={processing ? <LoadingOutlined /> : <UploadOutlined />}
-            >Save</Button> : ''}
-        </div>
+        {
+          showUserVisible ? (
+            <form style={{ textAlign: "right", marginRight: "23px" }}>
+              {(uploadSrc || profileSrc) ? <img src={uploadSrc !== '' ? uploadSrc : profileSrc} alt="avatar" style={{ width: '100px', height: '100px' }} /> : uploadButton}
+              <div style={{ textAlign: 'right', marginTop: '5px', marginBottom: '5px' }} >
+                <input style={{ width: '85px', marginRight: '5px' }} id="profileImgInput" type="file" onChange={(e) => handleChange(e)} />
+              </div>
+              <div>
+                {uploadSrc ?
+                  <Button
+                    onClick={async () => { let updates = await saveUpload(selectedUser.idNumber); setSelectedUser(updates) }}
+                    style={{ marginRight: "7px" }}
+                    icon={processing ? <LoadingOutlined /> : <UploadOutlined />}
+                  >Save</Button> : ''}
+              </div>
+            </form>
+          ) : ('')
+        }
         <UserForm add={addUser} update={editUser} selectedUser={selectedUser} selectedParent={selectedParent} role='Student' isNewData="false" />
       </Drawer>
     </Card>

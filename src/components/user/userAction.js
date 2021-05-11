@@ -534,6 +534,7 @@ const UserAction = (initial = { searchRequest: {} }) => {
         password: user.password,
         gradeLevel: user.gradeLevel,
         section: user.section,
+        profileImgSrc: (user.profileImgSrc) ? user.profileImgSrc : '',
         action: 
           <Button onClick={() => loadUser(user)} key={"VIEW_"+user._id}>View User&nbsp; </Button>,
       }
@@ -709,7 +710,9 @@ const loadUsers = async () => {
     parentList,
     teacherList,
     getNewGenId,
-    buildStudentList
+    buildStudentList,
+    setSelectedUser,
+    loadStudent
   }
 };
 
