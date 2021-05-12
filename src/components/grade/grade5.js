@@ -13,6 +13,7 @@ import TeacherAction from './teacherAction';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
 import CustomTable from '../shared/customTable';
+import TeacherSubjectAssigment from './teacherSubjectAssigment';
 import {
   DESCRIPTOR_TABLE,
   MARKING_TABLE,
@@ -46,7 +47,8 @@ const GradePage = () => {
     showTeacher,
     add,
     selectedTeacherAssignedGrade5,
-    selectedTeacherAssgined
+    selectedTeacherAssgined,
+    updateSubjectTeacher
   } = TeacherAction({});
 
   let {
@@ -162,7 +164,12 @@ const GradePage = () => {
           onClose={() => hideTeacher()}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"5"} />
+          {/* <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"5"} /> */}
+          <TeacherSubjectAssigment
+            teacherList={selectedTeacher}
+            subjectAssignedTeachers={selectedTeacherAssgined}
+            level={5}
+            submit={updateSubjectTeacher} />
         </Drawer>
 
         <Drawer

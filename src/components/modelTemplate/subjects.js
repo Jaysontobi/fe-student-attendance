@@ -45,4 +45,9 @@ const buildLevelSubjects = (levelNum, schoolYear) => {
   return subjects;
 };
 
-export default { buildLevelSubjects };
+const getSubjects = levelNum => {
+  let subjectList = (levelNum > 3) ? G_4_To_10 : G_1_To_3;
+  return subjectList;
+};
+
+export default { buildLevelSubjects,  getSubjects};

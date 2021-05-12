@@ -17,19 +17,6 @@ const getQuarterName = (quarter) => {
   };
 };
 
-// const getQuarterNum = (quarter) => {
-//   switch (quarter) {
-//     case 'secondQuarter':
-//       return '2';
-//     case 'thirdQuarter':
-//       return '3';
-//     case 'fourthQuarter':
-//       return '4';
-//     default:
-//       return '1';
-//   };
-// };
-
 const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {} }) => {
 
   let { updateGrades, setInput, updatedInputs, getQuarterNum } = GradeInputAction({ level: Number(record.gradeLevel), grades: record.subjects, record, isAdviser });

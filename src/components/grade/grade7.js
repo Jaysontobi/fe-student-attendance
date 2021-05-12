@@ -12,6 +12,7 @@ import GradeTable from './gradeTable'
 import TeacherAction from './teacherAction';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
+import TeacherSubjectAssigment from './teacherSubjectAssigment';
 import CustomTable from '../shared/customTable';
 import {
   DESCRIPTOR_TABLE,
@@ -46,7 +47,8 @@ const GradePage = () => {
     showTeacher,
     add,
     selectedTeacherAssignedGrade7,
-    selectedTeacherAssgined
+    selectedTeacherAssgined,
+    updateSubjectTeacher
   } = TeacherAction({});
 
   let {
@@ -162,7 +164,12 @@ const GradePage = () => {
           onClose={() => hideTeacher()}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"7"} />
+          {/* <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"7"} /> */}
+          <TeacherSubjectAssigment 
+            teacherList={selectedTeacher}
+            subjectAssignedTeachers={selectedTeacherAssgined} 
+            level={7}
+            submit={updateSubjectTeacher}/>
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
