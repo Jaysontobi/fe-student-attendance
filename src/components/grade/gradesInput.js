@@ -19,7 +19,16 @@ const getQuarterName = (quarter) => {
 
 const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {} }) => {
 
-  let { updateGrades, setInput, updatedInputs, getQuarterNum } = GradeInputAction({ level: Number(record.gradeLevel), grades: record.subjects, record, isAdviser });
+  let { 
+    updateGrades, 
+    setInput,
+    updatedInputs,
+    getQuarterNum
+  } = GradeInputAction({ 
+      level: Number(record.gradeLevel),
+      grades: record.subjects, record,
+      teacherSubjects: gradeSubjectTeachers
+    });
   const userRole = JSON.parse(sessionStorage.user).role;
 
   const onFinish = async () => {
@@ -29,14 +38,9 @@ const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {}
   const getValue = (subject, quarter) => {
     // let isActive = sessionStorage.quarter === getQuarterNum(quarter);
     let rating = 0;
-    let lowestRating = 50;
+
     if (!isAdviser) {
       rating = subject.recommendedGrade[quarter] ? subject.recommendedGrade[quarter]: 0;
-      
-      // rating = lowestRating;
-      // if (isActive && rating === 0) {
-      //   setInput(rating, subject.subjectName, quarter)
-      // };
     } else if (isAdviser) {
       if (subject.recommendedGrade[quarter] && subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter]) {
         rating = subject.recommendedGrade[quarter];
@@ -81,9 +85,16 @@ const GradesInput = ({ gradeSubjectTeachers = [], isAdviser = false, record = {}
                         <Form.Item label={getQuarterName(quarter)} >
                           <Input
                             value={getValue(subject, quarter)}
-                            onChange={(e) => { setInput(e.target.value, subject.subjectName, quarter, isAdviser) }}
-                            disabled={userRole !== 'Teacher' || sessionStorage.quarter !== getQuarterNum(quarter)}
-                            style={{ border: subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter] && subject.subjectGrade[quarter] !== 0 ? '1px solid red' : '' }}
+                            onChange={(e) => { 
+                              setInput(e.target.value, subject.subjectName, quarter, isAdviser) 
+                            }}
+                            disabled={
+                              userRole !== 'Teacher' ||
+                              sessionStorage.quarter !== getQuarterNum(quarter)}
+                            style={{ border: 
+                              subject.recommendedGrade[quarter] !== subject.subjectGrade[quarter] ? 
+                              '1px solid red' : '' 
+                            }}
                           />
                         </Form.Item>
                       </Col>

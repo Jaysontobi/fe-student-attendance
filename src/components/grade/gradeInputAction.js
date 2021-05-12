@@ -3,7 +3,7 @@ import Subjects from '../modelTemplate/subjects';
 import gradesService from './gradesService';
 import auditTrailService from '../auditTrail/auditTrailService';
 
-const GradeInputAction = ({level= 0, grades=[], record={}, isAdviser=false}) => {
+const GradeInputAction = ({level= 0, grades=[], record={}, isAdviser=false, teacherSubjects=[]}) => {
   let [updatedInputs, setUpdatedInputs] = useState([]);
 
   const setInput = async (value='', subject='', quarter='', isAdviser=false) => {
@@ -24,7 +24,6 @@ const GradeInputAction = ({level= 0, grades=[], record={}, isAdviser=false}) => 
   };
 
   const updateGrades = async(isAdviser=false) => {
-
     let updatedSubjectsRec = [];
     //remove inputs in recommended if advisor
     if (isAdviser) {
@@ -49,27 +48,49 @@ const GradeInputAction = ({level= 0, grades=[], record={}, isAdviser=false}) => 
     window.location.reload();
   };
 
+  const getQuarterName = (quarter) => {
+    switch (quarter) {
+      case '2':
+        return 'secondQuarter';
+      case '3':
+        return 'thirdQuarter';
+      case '4':
+        return 'fourthQuarter';
+      default:
+        return 'firstQuarter';
+    };
+  };
+
   const buildInputArr = () => {
-    let currentQuarter = sessionStorage.quarter;
+    let activeQuarter = getQuarterName(sessionStorage.quarter);
     let subjectsHolder = Subjects.buildLevelSubjects(level, '');
+    let editingSubjects = [];
+    let teacherId = JSON.parse(sessionStorage.user).idNumber;
     let prevRecords = JSON.parse(JSON.stringify(grades));
+    teacherSubjects.map(item => {
+      if (item.teacher.idNumber === teacherId) editingSubjects.push(item.subjectName);
+    });
+
     let list = [];
     subjectsHolder.map(topic => {
       let recObj = prevRecords.find(prevRec => prevRec.subjectName === topic.subjectName);
       if (recObj) {
         recObj = Object.assign(topic, recObj);
-        recObj.recommendedGrade = Object.keys(recObj.recommendedGrade).length > 0 ? recObj.recommendedGrade : JSON.parse(JSON.stringify(recObj.subjectGrade));
+        recObj.recommendedGrade = Object.keys(recObj.recommendedGrade).length > 0 ? 
+          recObj.recommendedGrade : 
+          JSON.parse(JSON.stringify(recObj.subjectGrade));
+
         //setting of 50
-        // if (!isAdviser) {
-        //   Object.keys(recObj.subjectGrade).map(q => {
-        //     if (q === getQuarterNum(currentQuarter) && recObj.subjectGrade[q] === 0 && !recObj.recommendedGrade[q]) recObj.recommendedGrade[q] = 50;
-        //   });
-        // };
+        if (!isAdviser && editingSubjects.includes(topic.subjectName) && recObj.recommendedGrade[activeQuarter] === 0) {
+          recObj.recommendedGrade[activeQuarter] = 50;
+        };
+
         list.push(recObj);
       } else {
         list.push(topic);
       };
     });
+
     setUpdatedInputs(list);
   };
 
