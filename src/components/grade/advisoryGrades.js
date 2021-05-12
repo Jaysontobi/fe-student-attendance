@@ -20,6 +20,7 @@ import StudentGradeTable from '../userDetails/gradeTable'
 
 import GradeTable from './gradeTable'
 import TeacherAction from './teacherAction';
+import GradesInput from './gradesInput';
 
 const AdvisoryGrades = () => {
 
@@ -94,14 +95,18 @@ const AdvisoryGrades = () => {
           onClose={() => { setShowGradeVisible(false) }}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <GradeForm
+          {/* <GradeForm
             upgradeStudent={upgradeStudent}
             add={addGrade} update={editGrade}
             selectedTeacher={selectedTeacher}
             selectedGrade={selectedGrade}
             gradeLevel={"2"}
             selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2}
-            isAdviser="true" />
+            isAdviser="true" /> */}
+          <GradesInput 
+            record={selectedGrade}
+            gradeSubjectTeachers={[]}
+            isAdviser="true"/>
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>

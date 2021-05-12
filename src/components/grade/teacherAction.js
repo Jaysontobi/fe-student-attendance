@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import userService from '../user/userService';
 import teacherService from '../grade/teacherService';
+import Subjects from '../modelTemplate/subjects';
 const TeacherAction = (initial = { searchRequest: {} }) => {
-  let [selectedTeacher, setSelectedTeacher] = useState([]);
-  let [selectedTeacherAssgined, setSelectedTeacherAssgined] = useState({});
+  let [selectedTeacher, setSelectedTeacher] = useState([]); //list of all teachers
+  let [selectedTeacherAssgined, setSelectedTeacherAssgined] = useState([]); //subject assigned teachers
   let [selectedTeacherAssignedGrade1, setSelectedTeacherAssignedGrade1] = useState([]);
   let [selectedTeacherAssignedGrade2, setSelectedTeacherAssignedGrade2] = useState([]);
   let [selectedTeacherAssignedGrade3, setSelectedTeacherAssignedGrade3] = useState([]);
@@ -53,6 +54,26 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     }
     let response = teacherService.add(finalAddValue)
     window.location.reload()
+  };
+
+  const updateSubjectTeacher = async (teacherList, level) => {
+    console.log(teacherList);
+    //adding a filter to cleanup data(removal of unwanted subjects) prior saving;
+    let list = Subjects.getSubjects(level);
+    let updatedList = [];
+    teacherList.map(topic => {
+      if(list.includes(topic.subjectName)) {
+        updatedList.push(topic);
+      };
+    });
+
+    //proceed to saving
+    let params = {
+      gradeLevel: level.toString(),
+      subjects: updatedList
+    };
+
+    await teacherService.add(params)
   };
 
   const getListOfTeacher = async () => {
@@ -167,7 +188,8 @@ const TeacherAction = (initial = { searchRequest: {} }) => {
     selectedTeacherAssignedGrade8,
     selectedTeacherAssignedGrade9,
     selectedTeacherAssignedGrade10,
-    selectedTeacherAssgined
+    selectedTeacherAssgined,
+    updateSubjectTeacher
   }
 };
 

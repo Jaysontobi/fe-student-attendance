@@ -835,16 +835,21 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
    */
   const buidSubjectRow = (subject, hiddenQuarters = []) => {
     let remarks = "";
-    let finalGrade = (subject.subjectGrade.firstQuarter +
-      subject.subjectGrade.secondQuarter +
-      subject.subjectGrade.thirdQuarter +
-      subject.subjectGrade.fourthQuarter) / 4;
-
     let inComplete = false;
-    let firstQuarter = (hiddenQuarters.includes('firstQuarter')) ? 0 : subject.subjectGrade.firstQuarter;
-    let secondQuarter = (hiddenQuarters.includes('secondQuarter')) ? 0 : subject.subjectGrade.secondQuarter;
-    let thirdQuarter = (hiddenQuarters.includes('thirdQuarter')) ? 0 : subject.subjectGrade.thirdQuarter;
-    let fourthQuarter = (hiddenQuarters.includes('fourthQuarter')) ? 0 : subject.subjectGrade.fourthQuarter;
+    let recordObj = {
+      firstQuarter: 0,
+      secondQuarter: 0,
+      thirdQuarter: 0,
+      fourthQuarter: 0
+    };
+
+    recordObj = Object.assign(recordObj, subject.subjectGrade);
+    let firstQuarter = (hiddenQuarters.includes('firstQuarter')) ? 0 : recordObj.firstQuarter;
+    let secondQuarter = (hiddenQuarters.includes('secondQuarter')) ? 0 : recordObj.secondQuarter;
+    let thirdQuarter = (hiddenQuarters.includes('thirdQuarter')) ? 0 : recordObj.thirdQuarter;
+    let fourthQuarter = (hiddenQuarters.includes('fourthQuarter')) ? 0 : recordObj.fourthQuarter;
+
+    let finalGrade = (firstQuarter + secondQuarter + thirdQuarter + fourthQuarter) / 4;
 
     //leave blank all zero grades
     if (firstQuarter === 0) {
@@ -1084,7 +1089,11 @@ const Grade1Action = (initial = { searchRequest: {} }) => {
           email: user.student.email,
           section: user.student.section,
           action:
-            <Button onClick={() => loadGrade(user, user.student.idNumber, advisory.data.gradeLevel)} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
+            <Button onClick={() => {
+              setLoading(true);
+              setTimeout(() => { loadGrade(user, user.student.idNumber, advisory.data.gradeLevel) }, 3000);
+              setTimeout(() => { setLoading(false); }, 3700);
+            }} key={"VIEW_" + user._id}>View User&nbsp; </Button>,
         }
       })
 

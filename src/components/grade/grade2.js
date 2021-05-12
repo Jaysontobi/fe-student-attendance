@@ -11,6 +11,8 @@ import StudentGradeTable from '../userDetails/gradeTable';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
 import CustomTable from '../shared/customTable';
+import TeacherSubjectAssigment from './teacherSubjectAssigment';
+
 import {
   DESCRIPTOR_TABLE,
   MARKING_TABLE,
@@ -19,6 +21,7 @@ import {
 
 import GradeTable from './gradeTable'
 import TeacherAction from './teacherAction';
+import GradesInput from './gradesInput';
 
 const GradePage = () => {
 
@@ -46,7 +49,8 @@ const GradePage = () => {
     showTeacher,
     add,
     selectedTeacherAssignedGrade2,
-    selectedTeacherAssgined
+    selectedTeacherAssgined,
+    updateSubjectTeacher
   } = TeacherAction({});
 
   let {
@@ -105,7 +109,12 @@ const GradePage = () => {
           onClose={() => { setShowGradeVisible(false) }}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"2"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} />
+          {/* <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"2"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade2} /> */}
+          {showGradeVisible ?
+            <GradesInput
+              record={selectedGrade}
+              gradeSubjectTeachers={selectedTeacherAssignedGrade2?.subjects} />
+            : ''}
           <StudentGradeTable details={selectedGradeUser ? selectedGradeUser : []} />
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
             <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
@@ -157,7 +166,12 @@ const GradePage = () => {
           onClose={() => hideTeacher()}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"2"} />
+          {/* <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"2"} /> */}
+          <TeacherSubjectAssigment 
+            teacherList={selectedTeacher}
+            subjectAssignedTeachers={selectedTeacherAssgined} 
+            level={2}
+            submit={updateSubjectTeacher}/>
         </Drawer>
 
         <Drawer

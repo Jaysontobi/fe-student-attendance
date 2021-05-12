@@ -14,11 +14,13 @@ import AdvisorAction from './advisoryAction';
 import AttendanceTable from '../userDetails/attendanceTable';
 import AttendanceAction from '../userDetails/attendanceAction';
 import CustomTable from '../shared/customTable';
+import TeacherSubjectAssigment from './teacherSubjectAssigment';
 import {
   DESCRIPTOR_TABLE,
   MARKING_TABLE,
   OBSERVED_VALUES_HEADER
 } from '../modelTemplate/observedValues';
+import GradesInput from './gradesInput';
 
 const GradePage = () => {
 
@@ -46,7 +48,8 @@ const GradePage = () => {
     showTeacher,
     add,
     selectedTeacherAssignedGrade1,
-    selectedTeacherAssgined
+    selectedTeacherAssgined,
+    updateSubjectTeacher
   } = TeacherAction({});
 
   let {
@@ -107,16 +110,25 @@ const GradePage = () => {
           onClose={() => { setShowGradeVisible(false) }}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"1"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade1} />
+          {/* <GradeForm upgradeStudent={upgradeStudent} add={addGrade} update={editGrade} selectedTeacher={selectedTeacher} selectedGrade={selectedGrade} gradeLevel={"1"} selectedTeacherAssignedGrade={selectedTeacherAssignedGrade1} /> */}
+          {showGradeVisible ?
+            <GradesInput
+              record={selectedGrade}
+              gradeSubjectTeachers={selectedTeacherAssignedGrade1?.subjects} />
+            : ''}
           <Row style={{ marginBottom: '35px', marginTop: '15px', textAlign: 'left' }}>
-            <Typography.Title level={5} style={{ marginLeft: '20px' }}  lg={{ span: "24" }}>
+            <Typography.Title level={5} style={{ marginLeft: '20px' }} lg={{ span: "24" }}>
               General Average :
-              { overAllGrade ? (
+              {overAllGrade ? (
                 <>
-                 <span style={{marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ? 
-                  'red': '' }}>{ overAllGrade.finalGrade }</span>
-                 <span style={{marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
-                  'red': '' }}>{ overAllGrade.remarks }</span>
+                  <span style={{
+                    marginLeft: '15px', color: (overAllGrade.finalGrade < 75) ?
+                      'red' : ''
+                  }}>{overAllGrade.finalGrade}</span>
+                  <span style={{
+                    marginLeft: '10px', color: (overAllGrade.finalGrade < 75) ?
+                      'red' : ''
+                  }}>{overAllGrade.remarks}</span>
                 </>
               ) : ('')}
             </Typography.Title>
@@ -171,7 +183,12 @@ const GradePage = () => {
           onClose={() => hideTeacher()}
           bodyStyle={{ paddingBottom: 80 }}
         >
-          <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"1"} />
+          {/* <TeacherForm selectedTeacherAssgined={selectedTeacherAssgined} add={add} selectedTeacher={selectedTeacher} gradeLevel={"1"} /> */}
+          <TeacherSubjectAssigment 
+            teacherList={selectedTeacher}
+            subjectAssignedTeachers={selectedTeacherAssgined} 
+            level={1}
+            submit={updateSubjectTeacher}/>
         </Drawer>
 
         <Drawer
