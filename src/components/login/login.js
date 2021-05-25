@@ -93,12 +93,12 @@ const Login = () => {
                     <img className="center w-90P" src="./about.jpg"/><br/>
                 </div>
                 <Typography className="text-center">
-                    In 1987 St. Niño the shepherd school was established by Mrs. Garcia Villaafuerte, it is the school's aim<br/>
+                    In 1986 St. Niño the Shepherd Learning Center was established by Mrs. Susan Catipon Garcia, it is the school's aim<br/>
                     that each student reaches his/her full potential academically but also personally, socially, emotionally<br/>
-                    physically and spiritually in preparation for becoming responsible cetizens of the future. This is achieved <br/>
+                    physically and spiritually in preparation for becoming responsible citizens of the future. This is achieved <br/>
                     by giving pupils equal access to a program of education that is tailored to meet their individual needs. <br/>
                     And giving them access to a wide range of extra-curricular activities. Central to the school's vision is the<br/>
-                    belief that students must be taught respect for themselves, for others and for the invironment in which they live. 
+                    belief that students must be taught respect for themselves, for others and for the environment in which they live. 
                 </Typography>
             </Content> : null}
            
